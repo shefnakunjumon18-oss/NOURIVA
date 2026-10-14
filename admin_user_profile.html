@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Admin • User Profile</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family: 'Inter', system-ui, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #172033,
+                    #111827
+                );
+
+            color: white;
+
+            min-height: 100vh;
+
+        }
+
+
+        .glass {
+
+            background:
+                rgba(255,255,255,0.055);
+
+            backdrop-filter:
+                blur(24px);
+
+            -webkit-backdrop-filter:
+                blur(24px);
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            border-radius:
+                24px;
+
+        }
+
+
+        .avatar {
+
+            width: 130px;
+
+            height: 130px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border:
+                4px solid
+                rgba(249,115,22,0.35);
+
+            box-shadow:
+                0 15px 40px
+                rgba(249,115,22,0.18);
+
+        }
+
+
+        .avatar-letter {
+
+            width: 130px;
+
+            height: 130px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 52px;
+
+            font-weight: 800;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f97316,
+                    #ea580c
+                );
+
+            border:
+                4px solid
+                rgba(249,115,22,0.25);
+
+            box-shadow:
+                0 15px 40px
+                rgba(249,115,22,0.18);
+
+        }
+
+
+        .info-card {
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            border-radius:
+                18px;
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .info-card:hover {
+
+            background:
+                rgba(255,255,255,0.075);
+
+            transform:
+                translateY(-3px);
+
+        }
+
+
+        .info-label {
+
+            font-size:
+                11px;
+
+            text-transform:
+                uppercase;
+
+            letter-spacing:
+                0.15em;
+
+            color:
+                rgba(255,255,255,0.45);
+
+            margin-bottom:
+                7px;
+
+        }
+
+
+        .info-value {
+
+            font-size:
+                15px;
+
+            font-weight:
+                600;
+
+            color:
+                rgba(255,255,255,0.90);
+
+        }
+
+
+        .back-btn {
+
+            transition:
+                all 0.3s ease;
+
+        }
+
+
+        .back-btn:hover {
+
+            transform:
+                translateX(-4px);
+
+            color:
+                #fb923c;
+
+        }
+
+
+        .premium {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                7px 13px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(16,185,129,0.12);
+
+            border:
+                1px solid
+                rgba(52,211,153,0.20);
+
+            color:
+                #6ee7b7;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .standard {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            padding:
+                7px 13px;
+
+            border-radius:
+                999px;
+
+            background:
+                rgba(148,163,184,0.10);
+
+            border:
+                1px solid
+                rgba(148,163,184,0.15);
+
+            color:
+                #cbd5e1;
+
+            font-size:
+                12px;
+
+            font-weight:
+                600;
+
+        }
+
+
+        .fade {
+
+            animation:
+                fadeIn 0.6s ease forwards;
+
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(20px);
+
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ======================================
+         HEADER
+    ======================================= -->
+
+    <header
+        class="glass rounded-none border-b border-white/10">
+
+        <div
+            class="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
+
+
+            <a
+                href="/admin_users"
+                class="back-btn flex items-center gap-3 text-white/70 font-medium">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Users
+
+            </a>
+
+
+            <div
+                class="flex items-center gap-3">
+
+
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-orange-500 flex items-center justify-center">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                </div>
+
+
+                <span
+                    class="font-bold text-lg">
+
+                    Admin
+                    <span class="text-orange-400">
+                        Panel
+                    </span>
+
+                </span>
+
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ======================================
+         MAIN
+    ======================================= -->
+
+    <main
+        class="max-w-5xl mx-auto px-6 py-12">
+
+
+        <div
+            class="fade space-y-8">
+
+
+            <!-- =================================
+                 PROFILE HEADER
+            ================================== -->
+
+            <section
+                class="glass p-8 md:p-10">
+
+
+                <div
+                    class="flex flex-col md:flex-row items-center md:items-start gap-8">
+
+
+                    <!-- PHOTO -->
+
+                    <div>
+
+                        {% if user.photo %}
+
+                            <img
+                                src="{{ url_for('static', filename='uploads/' ~ user.photo) }}"
+                                alt="{{ user.username }}"
+                                class="avatar">
+
+                        {% else %}
+
+                            <div
+                                class="avatar-letter">
+
+                                {{ (user.username or 'U')[0]|upper }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <!-- NAME -->
+
+                    <div
+                        class="flex-1 text-center md:text-left">
+
+
+                        <div
+                            class="text-xs uppercase tracking-[0.25em] text-orange-400 font-bold mb-3">
+
+                            User Profile
+
+                        </div>
+
+
+                        <h1
+                            class="text-4xl md:text-5xl font-extrabold">
+
+                            {{ user.username }}
+
+                        </h1>
+
+
+                        <p
+                            class="text-white/55 mt-3">
+
+                            {{ user.email }}
+
+                        </p>
+
+
+                        <div
+                            class="mt-5">
+
+
+                            {% if user.premium == 1 %}
+
+                                <span class="premium">
+
+                                    <i class="fa-solid fa-crown"></i>
+
+                                    Premium Member
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="standard">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                    Standard Member
+
+                                </span>
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================
+                 PERSONAL INFORMATION
+            ================================== -->
+
+            <section
+                class="glass p-8">
+
+
+                <div
+                    class="flex items-center gap-3 mb-7">
+
+
+                    <div
+                        class="w-10 h-10 rounded-xl bg-orange-500/15 text-orange-400 flex items-center justify-center">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2
+                            class="text-xl font-bold">
+
+                            Personal Information
+
+                        </h2>
+
+
+                        <p
+                            class="text-sm text-white/45">
+
+                            User details saved in the system
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+                    <!-- USERNAME -->
+
+                    <div
+                        class="info-card p-5">
+
+                        <div class="info-label">
+                            Username
+                        </div>
+
+                        <div class="info-value">
+                            {{ user.username or 'Not provided' }}
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div
+                        class="info-card p-5">
+
+                        <div class="info-label">
+                            Email
+                        </div>
+
+                        <div class="info-value">
+                            {{ user.email or 'Not provided' }}
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div
+                        class="info-card p-5">
+
+                        <div class="info-label">
+                            Phone
+                        </div>
+
+                        <div class="info-value">
+                            {{ user.phone or 'Not provided' }}
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- AGE -->
+
+                    <div
+                        class="info-card p-5">
+
+                        <div class="info-label">
+                            Age
+                        </div>
+
+                        <div class="info-value">
+
+                            {% if user.age %}
+                                {{ user.age }} years
+                            {% else %}
+                                Not provided
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- GENDER -->
+
+                    <div
+                        class="info-card p-5">
+
+                        <div class="info-label">
+                            Gender
+                        </div>
+
+                        <div class="info-value">
+                            {{ user.gender or 'Not provided' }}
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- FITNESS GOAL -->
+
+                    <div
+                        class="info-card p-5">
+
+                        <div class="info-label">
+                            Fitness Goal
+                        </div>
+
+                        <div class="info-value">
+
+                            {{ user.fitness_goal or 'Not provided' }}
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================
+                 BIO
+            ================================== -->
+
+            <section
+                class="glass p-8">
+
+
+                <div
+                    class="flex items-center gap-3 mb-6">
+
+
+                    <div
+                        class="w-10 h-10 rounded-xl bg-orange-500/15 text-orange-400 flex items-center justify-center">
+
+                        <i class="fa-solid fa-align-left"></i>
+
+                    </div>
+
+
+                    <h2
+                        class="text-xl font-bold">
+
+                        About User
+
+                    </h2>
+
+
+                </div>
+
+
+                <div
+                    class="info-card p-6">
+
+
+                    {% if user.bio %}
+
+                        <p
+                            class="text-white/70 leading-8">
+
+                            {{ user.bio }}
+
+                        </p>
+
+                    {% else %}
+
+                        <p
+                            class="text-white/35 italic">
+
+                            No bio has been added by this user.
+
+                        </p>
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================
+                 TRAINER
+            ================================== -->
+
+            <section
+                class="glass p-8">
+
+
+                <div
+                    class="flex items-center gap-3 mb-6">
+
+
+                    <div
+                        class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+
+                        <i class="fa-solid fa-dumbbell"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h2
+                            class="text-xl font-bold">
+
+                            Trainer Assignment
+
+                        </h2>
+
+
+                        <p
+                            class="text-sm text-white/45">
+
+                            Current trainer connected to this user
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                {% if trainer %}
+
+                    <div
+                        class="info-card p-6 flex items-center gap-5">
+
+
+                        {% if trainer.photo %}
+
+                            <img
+                                src="{{ url_for('static', filename='uploads/' ~ trainer.photo) }}"
+                                alt="{{ trainer.name }}"
+                                class="w-16 h-16 rounded-full object-cover border-2 border-emerald-400/30">
+
+                        {% else %}
+
+                            <div
+                                class="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center text-2xl font-bold">
+
+                                {{ (trainer.name or 'T')[0]|upper }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        <div>
+
+                            <p
+                                class="font-bold text-lg">
+
+                                {{ trainer.name }}
+
+                            </p>
+
+
+                            <p
+                                class="text-white/45 text-sm">
+
+                                {{ trainer.specialization or 'Trainer' }}
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                {% else %}
+
+                    <div
+                        class="info-card p-6 text-center">
+
+
+                        <i
+                            class="fa-solid fa-user-slash text-3xl text-white/25 mb-3">
+                        </i>
+
+
+                        <p
+                            class="text-white/45">
+
+                            No trainer is currently assigned to this user.
+
+                        </p>
+
+
+                    </div>
+
+                {% endif %}
+
+
+            </section>
+
+
+
+            <!-- =================================
+                 FOOTER ACTION
+            ================================== -->
+
+            <div
+                class="flex justify-center pb-10">
+
+
+                <a
+                    href="/admin_users"
+                    class="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 px-7 py-4 rounded-xl font-bold transition shadow-lg">
+
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to All Users
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>

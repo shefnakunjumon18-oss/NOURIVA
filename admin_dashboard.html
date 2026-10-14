@@ -1,0 +1,645 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Admin Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #fffaf0;
+            --dark-green: #194b3b;
+            --forest: #245c46;
+            --green: #3f8965;
+            --sage: #77a96b;
+            --light-sage: #e4edcf;
+            --muted: #687f70;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-green);
+            background:
+                radial-gradient(
+                    circle at 5% 95%,
+                    #e4edcf 0,
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 95% 5%,
+                    #e8efd7 0,
+                    transparent 28%
+                ),
+                var(--cream);
+        }
+
+        /* HEADER */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 250, 240, 0.92);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid #e5eadc;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            color: white;
+            background: linear-gradient(135deg, #77a96b, #245c46);
+            box-shadow: 0 8px 20px rgba(36, 92, 70, 0.18);
+            font-size: 22px;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--dark-green);
+        }
+
+        .logout-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 12px 20px;
+            color: white;
+            background: linear-gradient(135deg, #3f8965, #205c45);
+            border-radius: 13px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 16px rgba(36, 92, 70, 0.15);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(36, 92, 70, 0.24);
+        }
+
+        /* INTRO */
+
+        .welcome-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(38px, 5vw, 58px);
+            line-height: 1.12;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            color: var(--dark-green);
+        }
+
+        .welcome-title span {
+            color: #6fa75d;
+        }
+
+        .welcome-text {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .welcome-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 15px;
+            margin-bottom: 20px;
+            border-radius: 30px;
+            background: var(--light-sage);
+            color: #52784e;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* DASHBOARD CARDS */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .admin-card {
+            position: relative;
+            min-height: 255px;
+            padding: 27px 21px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+            color: var(--dark-green);
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.76);
+            border: 1px solid #e3e9dc;
+            border-radius: 24px;
+            box-shadow: 0 8px 28px rgba(39, 83, 56, 0.045);
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+            animation: fadeUp 0.65s ease both;
+        }
+
+        .admin-card::before {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            top: -75px;
+            right: -70px;
+            border-radius: 50%;
+            background: #e4edcf;
+            opacity: 0.55;
+            transition: transform 0.35s ease;
+        }
+
+        .admin-card:hover {
+            transform: translateY(-8px);
+            border-color: #8bb78a;
+            box-shadow: 0 22px 42px rgba(36, 92, 70, 0.13);
+        }
+
+        .admin-card:hover::before {
+            transform: scale(1.5);
+        }
+
+        .card-icon {
+            position: relative;
+            z-index: 1;
+            width: 76px;
+            height: 76px;
+            margin-bottom: 19px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 23px;
+            background: linear-gradient(145deg, #eef4df, #e0ebd1);
+            box-shadow: inset 0 0 0 1px rgba(63, 137, 101, 0.07);
+            transition: transform 0.3s ease;
+        }
+
+        .admin-card:hover .card-icon {
+            transform: scale(1.08) rotate(-3deg);
+        }
+
+        .card-emoji {
+            font-size: 35px;
+            line-height: 1;
+        }
+
+        .card-title {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 10px;
+            font-size: 18px;
+            line-height: 1.4;
+            font-weight: 800;
+            color: #194b3b;
+        }
+
+        .card-description {
+            position: relative;
+            z-index: 1;
+            max-width: 210px;
+            color: #758578;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .card-arrow {
+            position: relative;
+            z-index: 1;
+            margin-top: auto;
+            padding-top: 15px;
+            color: #4c875c;
+            font-size: 12px;
+            font-weight: 700;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.25s ease;
+        }
+
+        .admin-card:hover .card-arrow {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pending-badge {
+            position: absolute;
+            z-index: 2;
+            top: 12px;
+            right: 12px;
+            padding: 6px 9px;
+            border-radius: 20px;
+            background: #fff0d9;
+            color: #9a5b20;
+            font-size: 10px;
+            font-weight: 800;
+            box-shadow: 0 3px 8px rgba(100, 70, 30, 0.08);
+        }
+
+        /* STATISTICS */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            padding: 25px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.75);
+            border: 1px solid #e3e9dc;
+            border-radius: 22px;
+            box-shadow: 0 8px 25px rgba(39, 83, 56, 0.04);
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .stat-emoji {
+            margin-bottom: 10px;
+            font-size: 27px;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 37px;
+            line-height: 1.3;
+            font-weight: 800;
+            color: var(--dark-green);
+        }
+
+        .stat-label {
+            margin-top: 7px;
+            color: #758578;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 45px;
+            padding: 25px 15px;
+            border-top: 1px solid #e5eadc;
+            color: #879486;
+            font-size: 11px;
+            text-align: center;
+            line-height: 1.9;
+        }
+
+        /* ANIMATION */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 1050px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .admin-card {
+                min-height: 245px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 15px;
+            }
+
+            .admin-card {
+                min-height: 235px;
+                padding: 23px 14px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome-title {
+                font-size: 40px;
+            }
+
+            .brand-name {
+                font-size: 22px;
+            }
+
+            .header-user {
+                display: none;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-card {
+                min-height: 220px;
+            }
+
+            .brand-name {
+                font-size: 19px;
+            }
+
+            .brand-icon {
+                width: 42px;
+                height: 42px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+            <a href="/admin_dashboard"
+               class="flex items-center gap-3 no-underline">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div>
+                    <div class="brand-name">NOURIVA</div>
+                    <div class="text-xs font-semibold"
+                         style="color:#789078;">
+                        ADMIN WORKSPACE
+                    </div>
+                </div>
+            </a>
+
+            <div class="flex items-center gap-5">
+
+                <span class="header-user text-sm"
+                      style="color:#718273;">
+                    <i class="fa-solid fa-circle-user mr-2"
+                       style="color:#4c875c;"></i>
+                    Logged in as Admin
+                </span>
+
+                <a href="/admin_login" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 py-12 px-6">
+
+        <div class="max-w-6xl mx-auto space-y-10">
+
+            <!-- WELCOME -->
+            <section class="text-center"
+                     style="animation:fadeUp 0.7s ease both;">
+
+                <div class="welcome-pill">
+                    <i class="fa-solid fa-leaf"></i>
+                    NOURIVA • Administration
+                </div>
+
+                <h1 class="welcome-title">
+                    Admin <span>Dashboard</span>
+                </h1>
+
+                <p class="welcome-text mt-4">
+                    Your workspace to manage users, trainers, reviews and approvals.
+                    <br class="hidden md:block">
+                    📍 Kanayannur, Kerala
+                    <span class="mx-1">•</span>
+                    📅 {{ current_date or 'Today' }}
+                </p>
+
+            </section>
+
+            <!-- DASHBOARD CARDS -->
+            <section class="dashboard-grid">
+
+                <!-- MANAGE USERS -->
+                <a href="/admin_users"
+                   class="admin-card"
+                   style="animation-delay:0.05s;">
+
+                    <div class="card-icon">
+                        <span class="card-emoji">👥</span>
+                    </div>
+
+                    <h2 class="card-title">Manage Users</h2>
+
+                    <p class="card-description">
+                        View, edit or remove user accounts
+                    </p>
+
+                    <span class="card-arrow">
+                        Open Users <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+
+                </a>
+
+                <!-- MANAGE TRAINERS -->
+                <a href="/admin_trainers_list"
+                   class="admin-card"
+                   style="animation-delay:0.1s;">
+
+                    <div class="card-icon">
+                        <span class="card-emoji">🏋️</span>
+                    </div>
+
+                    <h2 class="card-title">Manage Trainers</h2>
+
+                    <p class="card-description">
+                        Edit trainer profiles and manage status
+                    </p>
+
+                    <span class="card-arrow">
+                        Open Trainers <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+
+                </a>
+
+                <!-- MANAGE REVIEWS -->
+                <a href="/admin_reviews"
+                   class="admin-card"
+                   style="animation-delay:0.15s;">
+
+                    <div class="card-icon">
+                        <span class="card-emoji">⭐</span>
+                    </div>
+
+                    <h2 class="card-title">Manage Reviews</h2>
+
+                    <p class="card-description">
+                        Read and moderate user feedback
+                    </p>
+
+                    <span class="card-arrow">
+                        View Reviews <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+
+                </a>
+
+                <!-- APPROVE TRAINERS -->
+                <a href="/admin_trainers"
+                   class="admin-card"
+                   style="animation-delay:0.2s;">
+
+                    {% if pending_count is defined and pending_count > 0 %}
+                    <span class="pending-badge">
+                        🔔 {{ pending_count }} Pending
+                    </span>
+                    {% endif %}
+
+                    <div class="card-icon">
+                        <span class="card-emoji">✅</span>
+                    </div>
+
+                    <h2 class="card-title">Approve Trainers</h2>
+
+                    <p class="card-description">
+                        Review and approve new trainer applications
+                    </p>
+
+                    <span class="card-arrow">
+                        Review Applications
+                        <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+
+                </a>
+
+                <!-- TRAINER PAYOUTS -->
+                <a href="{{ url_for('admin_payouts') }}"
+                   class="admin-card"
+                   style="animation-delay:0.25s;">
+
+                    <div class="card-icon">
+                        <span class="card-emoji">💰</span>
+                    </div>
+
+                    <h2 class="card-title">Trainer Payouts</h2>
+
+                    <p class="card-description">
+                        Record payments and view payout history
+                    </p>
+
+                    <span class="card-arrow">
+                        Open Payouts <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </span>
+
+                </a>
+
+            </section>
+
+            <!-- STATISTICS -->
+            <section class="stats-grid">
+
+                {% if total_users is defined %}
+                <div class="stat-card" style="animation-delay:0.1s;">
+
+                    <div class="stat-emoji">👥</div>
+
+                    <p class="stat-number">
+                        {{ total_users }}
+                    </p>
+
+                    <p class="stat-label">Total Users</p>
+
+                </div>
+                {% endif %}
+
+                {% if total_trainers is defined %}
+                <div class="stat-card" style="animation-delay:0.2s;">
+
+                    <div class="stat-emoji">🏋️</div>
+
+                    <p class="stat-number">
+                        {{ total_trainers }}
+                    </p>
+
+                    <p class="stat-label">Registered Trainers</p>
+
+                </div>
+                {% endif %}
+
+                {% if avg_platform_rating is defined %}
+                <div class="stat-card" style="animation-delay:0.3s;">
+
+                    <div class="stat-emoji">⭐</div>
+
+                    <p class="stat-number">
+                        {{ "%.1f"|format(avg_platform_rating) }}
+                    </p>
+
+                    <p class="stat-label">Platform Average Rating</p>
+
+                </div>
+                {% endif %}
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>🌿 NOURIVA • AI Health & Fitness • Admin Workspace</p>
+        <p>Protected Area • Unauthorized access prohibited 🔒</p>
+    </footer>
+
+</body>
+</html>

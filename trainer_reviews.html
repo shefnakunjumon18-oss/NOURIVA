@@ -1,0 +1,710 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Trainer Reviews</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 85% 8%,
+                    rgba(34, 197, 94, 0.12),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 20% 90%,
+                    rgba(16, 185, 129, 0.07),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #031b13 0%,
+                    #06271b 45%,
+                    #03140e 100%
+                );
+        }
+
+        .glass {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.065),
+                rgba(255, 255, 255, 0.025)
+            );
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.16);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        /* HEADER */
+        .topbar {
+            background: rgba(2, 20, 14, 0.88);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .logo-box {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #22c55e,
+                #10b981
+            );
+
+            box-shadow: 0 10px 28px rgba(34, 197, 94, 0.22);
+        }
+
+        .brand-title {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-subtitle {
+            margin-top: 2px;
+            color: #6ee7b7;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 11px 15px;
+            border-radius: 11px;
+
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #86efac;
+            background: rgba(34, 197, 94, 0.09);
+        }
+
+        .logout-link:hover {
+            color: #fca5a5;
+            background: rgba(239, 68, 68, 0.08);
+        }
+
+        /* PAGE INTRO */
+        .eyebrow {
+            color: #34d399;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+        }
+
+        .title-accent {
+            color: #6ee7b7;
+        }
+
+        .description {
+            color: rgba(255, 255, 255, 0.52);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* ANIMATION */
+        .fade-in {
+            animation: fadeInUp 0.65s ease both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* REVIEW CARDS */
+        .review-card {
+            position: relative;
+            overflow: hidden;
+
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.065),
+                rgba(255, 255, 255, 0.025)
+            );
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .review-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+
+            background: linear-gradient(
+                90deg,
+                #22c55e,
+                #10b981,
+                transparent
+            );
+
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(52, 211, 153, 0.28);
+            box-shadow: 0 22px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        .review-card:hover::before {
+            opacity: 1;
+        }
+
+        .avatar-placeholder {
+            width: 54px;
+            height: 54px;
+            flex-shrink: 0;
+            border-radius: 16px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #22c55e,
+                #059669
+            );
+
+            color: white;
+            font-size: 21px;
+            font-weight: 800;
+
+            box-shadow: 0 8px 20px rgba(34, 197, 94, 0.16);
+        }
+
+        .stars {
+            color: #facc15;
+            letter-spacing: 2px;
+        }
+
+        .feedback-text {
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 14px;
+            line-height: 1.9;
+            overflow-wrap: anywhere;
+        }
+
+        .review-date {
+            color: rgba(255, 255, 255, 0.38);
+            font-size: 11px;
+        }
+
+        /* RATING SUMMARY */
+        .stat-card {
+            padding: 24px;
+            border-radius: 20px;
+
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(52, 211, 153, 0.2);
+        }
+
+        .stat-icon {
+            width: 38px;
+            height: 38px;
+            margin: 0 auto 14px;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+        }
+
+        .stat-number {
+            color: #6ee7b7;
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .stat-label {
+            margin-top: 5px;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* EMPTY STATE */
+        .empty-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 25px;
+            border-radius: 26px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(34, 197, 94, 0.09);
+            border: 1px solid rgba(52, 211, 153, 0.15);
+
+            color: #4ade80;
+            font-size: 34px;
+        }
+
+        .empty-stars {
+            color: #facc15;
+            font-size: 30px;
+            letter-spacing: 4px;
+        }
+
+        /* BUTTONS */
+        .primary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            padding: 14px 22px;
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #22c55e,
+                #10b981
+            );
+
+            color: white;
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none;
+
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.18);
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 32px rgba(34, 197, 94, 0.28);
+        }
+
+        .secondary-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+
+            transition: color 0.3s ease;
+        }
+
+        .secondary-link:hover {
+            color: #86efac;
+        }
+
+        .footer {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+        }
+
+        @media (max-width: 640px) {
+            .page-title {
+                letter-spacing: -0.8px;
+            }
+
+            .review-card {
+                border-radius: 18px;
+            }
+
+            .empty-stars {
+                font-size: 23px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- HEADER -->
+    <header class="topbar sticky top-0 z-50">
+
+        <div class="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between gap-4">
+
+            <!-- LOGO -->
+            <a href="/trainer_dashboard"
+               class="flex items-center gap-3 no-underline">
+
+                <div class="logo-box">
+                    <i class="fa-solid fa-leaf text-white text-xl"></i>
+                </div>
+
+                <div>
+                    <div class="brand-title">NOURIVA</div>
+                    <div class="brand-subtitle">TRAINER HUB</div>
+                </div>
+
+            </a>
+
+            <!-- NAVIGATION -->
+            <nav class="flex items-center gap-1 sm:gap-3">
+
+                <a href="/trainer_dashboard" class="nav-link">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="hidden sm:inline">Trainer Home</span>
+                    <span class="sm:hidden">Home</span>
+                </a>
+
+                <a href="/logout" class="nav-link logout-link">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 px-4 py-8 sm:px-6 md:py-12">
+
+        <div class="max-w-6xl mx-auto space-y-9">
+
+            <!-- PAGE INTRO -->
+            <section class="fade-in">
+
+                <p class="eyebrow mb-3">Trainer Hub / Feedback</p>
+
+                <h1 class="page-title">
+                    Trainer <span class="title-accent">Reviews</span>
+                </h1>
+
+                <p class="description mt-4 max-w-2xl">
+                    Real feedback from your clients. Explore their experiences
+                    and see how you're helping them progress on their fitness journey.
+                </p>
+
+                <div class="mt-5 flex items-center gap-2 text-xs text-emerald-300/80">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <span>Client feedback and ratings</span>
+                </div>
+
+            </section>
+
+            {% if reviews %}
+
+            <!-- REVIEW SECTION HEADER -->
+            <section class="flex items-center justify-between gap-4 fade-in">
+
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold">
+                        <i class="fa-solid fa-comments text-emerald-400 mr-2"></i>
+                        Client Feedback
+                    </h2>
+
+                    <p class="text-sm text-white/40 mt-2">
+                        Read what clients have shared.
+                    </p>
+                </div>
+
+                <span class="text-xs font-bold text-emerald-300 bg-emerald-400/10 border border-emerald-400/15 rounded-full px-4 py-2 whitespace-nowrap">
+                    {{ reviews|length }} reviews
+                </span>
+
+            </section>
+
+            <!-- REVIEWS GRID -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                {% for r in reviews %}
+
+                <article class="review-card p-5 sm:p-7 fade-in"
+                         style="animation-delay: 0.1s;"
+
+                    <!-- CLIENT NAME AND RATING -->
+                    <div class="flex items-center gap-4 mb-6">
+
+                        <div class="avatar-placeholder">
+                            {{ (r.user or 'U')[0]|upper }}
+                        </div>
+
+                        <div class="min-w-0 flex-1">
+
+                            <h3 class="text-lg font-extrabold text-white break-words">
+                                {{ r.user }}
+                            </h3>
+
+                            <p class="text-xs text-white/40 mt-1">
+                                Client feedback
+                            </p>
+
+                            <div class="stars text-xl mt-2"
+                                 aria-label="{{ r.rating }} out of 5 stars">
+
+                                {% for i in range(r.rating) %}★{% endfor %}
+                                {% for i in range(5 - r.rating) %}☆{% endfor %}
+
+                            </div>
+
+                        </div>
+
+                        <div class="hidden sm:flex w-10 h-10 rounded-xl bg-emerald-400/10 items-center justify-center text-emerald-300">
+                            <i class="fa-solid fa-quote-right"></i>
+                        </div>
+
+                    </div>
+
+                    <!-- FEEDBACK -->
+                    <div class="border-t border-white/10 pt-5">
+
+                        <p class="feedback-text">
+                            “{{ r.feedback }}”
+                        </p>
+
+                    </div>
+
+                    <!-- DATE -->
+                    <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between gap-3">
+
+                        <span class="review-date">
+                            <i class="fa-regular fa-calendar-days mr-2 text-emerald-400"></i>
+                            March 2026
+                        </span>
+
+                        <span class="text-xs text-emerald-300/80 font-semibold">
+                            <i class="fa-solid fa-circle-check mr-1"></i>
+                            Review
+                        </span>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            </section>
+
+            <!-- SUMMARY STATISTICS -->
+            <section class="glass rounded-3xl p-5 sm:p-8 fade-in">
+
+                <div class="flex items-center gap-3 mb-7">
+
+                    <div class="w-10 h-10 rounded-xl bg-emerald-400/10 flex items-center justify-center text-emerald-400">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+
+                    <div>
+                        <h2 class="text-lg font-extrabold">Review Overview</h2>
+                        <p class="text-xs text-white/40 mt-1">
+                            Your client feedback at a glance
+                        </p>
+                    </div>
+
+                </div>
+
+                {% set total = reviews | sum(attribute='rating') %}
+                {% set avg = total / reviews|length if reviews else 0 %}
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                    <!-- TOTAL REVIEWS -->
+                    <div class="stat-card text-center">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+
+                        <p class="stat-number">
+                            {{ reviews|length }}
+                        </p>
+
+                        <p class="stat-label">Total Reviews</p>
+
+                    </div>
+
+                    <!-- AVERAGE RATING -->
+                    <div class="stat-card text-center">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+
+                        <p class="stat-number">
+                            {{ "%.1f"|format(avg) }}
+                        </p>
+
+                        <p class="stat-label">Average Rating out of 5</p>
+
+                        <div class="stars mt-3 text-lg">
+                            {% for i in range(avg|round(0, 'floor')|int) %}★{% endfor %}
+                            {% for i in range(5 - (avg|round(0, 'floor')|int)) %}☆{% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            {% else %}
+
+            <!-- NO REVIEWS STATE -->
+            <section class="glass rounded-3xl p-7 sm:p-12 md:p-16 text-center fade-in">
+
+                <div class="empty-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <div class="empty-stars mb-6">
+                    ★★★★★
+                </div>
+
+                <p class="eyebrow mb-3">Your feedback space</p>
+
+                <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">
+                    No Reviews Yet
+                </h2>
+
+                <p class="description max-w-xl mx-auto mb-8">
+                    There are no reviews to display yet. Once clients share
+                    their experiences, their feedback and ratings will appear here.
+                </p>
+
+                <a href="/available_trainers" class="primary-btn">
+                    <i class="fa-solid fa-users"></i>
+                    View Available Trainers
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </a>
+
+            </section>
+
+            {% endif %}
+
+            <!-- NAVIGATION LINKS -->
+            <section class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-3">
+
+                <a href="/trainer_dashboard" class="secondary-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Trainer Dashboard
+                </a>
+
+                <span class="hidden sm:block text-white/15">|</span>
+
+                <a href="/available_trainers" class="secondary-link">
+                    <i class="fa-solid fa-users"></i>
+                    See All Trainers
+                </a>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 mt-auto py-6 px-4 text-center">
+
+        <div class="flex items-center justify-center gap-2 mb-2">
+
+            <i class="fa-solid fa-leaf text-emerald-400"></i>
+
+            <span class="text-sm font-extrabold tracking-wide">
+                NOURIVA
+            </span>
+
+        </div>
+
+        <p class="footer">
+            TRAINER HUB · Supporting your clients' fitness journey
+        </p>
+
+    </footer>
+
+</body>
+</html>

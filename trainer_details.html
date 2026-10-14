@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ trainer.name }} • NOURIVA</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            font-family: 'Inter', sans-serif;
+
+            color: #164e3b;
+
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(181, 214, 116, 0.25),
+                    transparent 25%
+                ),
+
+                radial-gradient(
+                    circle at 90% 30%,
+                    rgba(207, 229, 173, 0.35),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #fbfdf1 0%,
+                    #f1f7df 45%,
+                    #eef6dc 100%
+                );
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           DECORATIVE LEAVES
+        ===================================================== */
+
+        .leaf {
+            position: fixed;
+
+            pointer-events: none;
+
+            z-index: 0;
+
+            opacity: 0.45;
+        }
+
+        .leaf-one {
+            top: 130px;
+            left: -40px;
+
+            font-size: 150px;
+
+            color: #a8c96f;
+
+            transform: rotate(-25deg);
+
+            animation: leafMove 7s ease-in-out infinite;
+        }
+
+        .leaf-two {
+            right: -40px;
+            bottom: 80px;
+
+            font-size: 170px;
+
+            color: #a9c978;
+
+            transform: rotate(25deg);
+
+            animation: leafMoveReverse 9s ease-in-out infinite;
+        }
+
+        @keyframes leafMove {
+
+            0%,100% {
+                transform: rotate(-25deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(-18deg) translateY(-15px);
+            }
+
+        }
+
+        @keyframes leafMoveReverse {
+
+            0%,100% {
+                transform: rotate(25deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(18deg) translateY(15px);
+            }
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            position: sticky;
+
+            top: 0;
+
+            z-index: 50;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #0d5b45,
+                    #12654c,
+                    #0c5a43
+                );
+
+            border-radius: 0 0 30px 30px;
+
+            box-shadow:
+                0 12px 35px rgba(21, 83, 59, 0.20);
+        }
+
+        .nav-inner {
+            max-width: 1450px;
+
+            margin: auto;
+
+            padding: 15px 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 17px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: rgba(255,255,255,0.10);
+
+            color: white;
+
+            font-size: 32px;
+
+            transition: 0.3s ease;
+        }
+
+        .brand:hover .brand-icon {
+            transform: rotate(-8deg) scale(1.08);
+        }
+
+        .brand-name {
+            color: white;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 30px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+        }
+
+        .brand-subtitle {
+            display: block;
+
+            color: #e8f1d2;
+
+            font-size: 8px;
+
+            font-weight: 600;
+
+            letter-spacing: 3.5px;
+
+            margin-top: -3px;
+        }
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d7ec9c;
+
+            transform: translateY(-2px);
+        }
+
+        .logout {
+            color: #ffe0d8 !important;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main-container {
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 55px 25px 70px;
+        }
+
+
+        /* =====================================================
+           TOP LABEL
+        ===================================================== */
+
+        .page-label {
+            width: fit-content;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 10px 20px;
+
+            border-radius: 30px;
+
+            background: #e3efc7;
+
+            color: #32644c;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.5px;
+
+            box-shadow:
+                0 8px 20px rgba(78,126,61,0.08);
+        }
+
+        .page-label i {
+            color: #4b8f3c;
+        }
+
+
+        /* =====================================================
+           MAIN PROFILE CARD
+        ===================================================== */
+
+        .trainer-card {
+            margin-top: 35px;
+
+            background:
+                rgba(255,255,255,0.88);
+
+            border: 1px solid #d4e3bd;
+
+            border-radius: 35px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 25px 70px rgba(57,102,60,0.14);
+
+            backdrop-filter: blur(15px);
+
+            animation: cardAppear 0.8s ease forwards;
+        }
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+
+                transform: translateY(35px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* =====================================================
+           PROFILE AREA
+        ===================================================== */
+
+        .profile-area {
+            display: grid;
+
+            grid-template-columns: 370px 1fr;
+        }
+
+
+        /* =====================================================
+           TRAINER PHOTO / LETTER
+        ===================================================== */
+
+        .trainer-photo {
+            min-height: 520px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78b83a,
+                    #12634b
+                );
+        }
+
+        .trainer-photo img {
+            width: 100%;
+
+            height: 100%;
+
+            min-height: 520px;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        /* First letter fallback */
+
+        .letter-avatar {
+            width: 100%;
+
+            height: 100%;
+
+            min-height: 520px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
+
+            background:
+                radial-gradient(
+                    circle at 30% 20%,
+                    rgba(255,255,255,0.25),
+                    transparent 25%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #79b83b,
+                    #12634b
+                );
+
+            color: white;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 190px;
+
+            font-weight: 800;
+
+            text-shadow:
+                0 15px 35px rgba(0,0,0,0.18);
+        }
+
+        .letter-avatar::after {
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+
+            height: 280px;
+
+            border: 1px solid rgba(255,255,255,0.20);
+
+            border-radius: 50%;
+        }
+
+
+        /* Certified badge */
+
+        .certified-badge {
+            position: absolute;
+
+            left: 25px;
+
+            bottom: 25px;
+
+            padding: 11px 17px;
+
+            border-radius: 25px;
+
+            background: rgba(255,255,255,0.92);
+
+            color: #176247;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.12);
+        }
+
+        .certified-badge i {
+            color: #72a62e;
+        }
+
+
+        /* =====================================================
+           PROFILE INFORMATION
+        ===================================================== */
+
+        .profile-info {
+            padding: 48px;
+        }
+
+        .trainer-name {
+            margin: 0;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: clamp(42px, 5vw, 62px);
+
+            line-height: 1;
+
+            font-weight: 800;
+
+            color: #0d4f3c;
+        }
+
+        .specialization {
+            margin-top: 13px;
+
+            color: #70a72e;
+
+            font-size: 20px;
+
+            font-weight: 700;
+        }
+
+
+        /* Rating */
+
+        .rating-row {
+            margin-top: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .stars {
+            color: #e3a52b;
+
+            font-size: 20px;
+
+            letter-spacing: 2px;
+        }
+
+        .rating-text {
+            color: #728078;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           INFO CARDS
+        ===================================================== */
+
+        .info-grid {
+            margin-top: 32px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 14px;
+        }
+
+        .info-box {
+            padding: 17px;
+
+            border-radius: 17px;
+
+            background: #f4f8e9;
+
+            border: 1px solid #e1ebce;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            transition: 0.3s ease;
+        }
+
+        .info-box:hover {
+            transform: translateY(-3px);
+
+            background: #edf5dc;
+
+            box-shadow:
+                0 8px 20px rgba(60,100,50,0.08);
+        }
+
+        .info-icon {
+            width: 45px;
+
+            height: 45px;
+
+            flex-shrink: 0;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78b83a,
+                    #12634b
+                );
+
+            color: white;
+
+            font-size: 18px;
+        }
+
+        .info-title {
+            color: #879189;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+
+            font-weight: 700;
+        }
+
+        .info-value {
+            margin-top: 3px;
+
+            color: #315a4a;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            word-break: break-word;
+        }
+
+
+        /* =====================================================
+           ABOUT
+        ===================================================== */
+
+        .about {
+            margin-top: 28px;
+
+            padding: 23px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7faed,
+                    #edf5dc
+                );
+
+            border: 1px solid #dfe9ca;
+        }
+
+        .about-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #15513e;
+
+            font-size: 18px;
+
+            font-weight: 800;
+
+            margin-bottom: 10px;
+        }
+
+        .about-title i {
+            color: #72a62e;
+        }
+
+        .about-text {
+            color: #64766c;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           BUTTONS
+        ===================================================== */
+
+        .actions {
+            margin-top: 30px;
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+        }
+
+        .action-btn {
+            flex: 1;
+
+            min-width: 150px;
+
+            padding: 16px 20px;
+
+            border-radius: 18px;
+
+            border: none;
+
+            text-decoration: none;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.35s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-4px);
+        }
+
+
+        /* Chat */
+
+        .chat-btn {
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #70a72e,
+                    #12634b
+                );
+
+            box-shadow:
+                0 10px 22px rgba(38,104,60,0.20);
+        }
+
+        .chat-btn:hover {
+            box-shadow:
+                0 16px 30px rgba(38,104,60,0.28);
+        }
+
+
+        /* Book */
+
+        .book-btn {
+            color: #176247;
+
+            background: #e4f0c9;
+
+            border: 1px solid #cddfac;
+        }
+
+        .book-btn:hover {
+            background: #d9ebba;
+        }
+
+
+        /* Cancel */
+
+        .cancel-btn {
+            color: #a5483e;
+
+            background: #fff2ef;
+
+            border: 1px solid #f0cfc8;
+        }
+
+        .cancel-btn:hover {
+            background: #ffe8e3;
+        }
+
+
+        /* =====================================================
+           REVIEWS
+        ===================================================== */
+
+        .reviews-section {
+            margin-top: 30px;
+
+            padding: 38px;
+
+            background:
+                rgba(255,255,255,0.78);
+
+            border: 1px solid #d6e3c2;
+
+            border-radius: 28px;
+
+            box-shadow:
+                0 18px 50px rgba(55,100,55,0.08);
+        }
+
+        .section-title {
+            text-align: center;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 38px;
+
+            color: #14513e;
+
+            margin: 0;
+        }
+
+        .section-subtitle {
+            text-align: center;
+
+            margin-top: 7px;
+
+            color: #78857d;
+
+            font-size: 14px;
+        }
+
+        .reviews-grid {
+            margin-top: 28px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .review-card {
+            padding: 22px;
+
+            border-radius: 20px;
+
+            background: #f6f9ed;
+
+            border: 1px solid #dfe9ca;
+
+            transition: 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 12px 25px rgba(55,100,55,0.08);
+        }
+
+        .review-user {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .review-avatar {
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78b83a,
+                    #12634b
+                );
+
+            color: white;
+
+            font-weight: 800;
+
+            font-size: 17px;
+        }
+
+        .review-name {
+            color: #315a4a;
+
+            font-weight: 800;
+
+            font-size: 14px;
+        }
+
+        .review-stars {
+            margin-top: 2px;
+
+            color: #e3a52b;
+
+            font-size: 14px;
+        }
+
+        .review-text {
+            margin-top: 15px;
+
+            color: #65766c;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+
+            font-style: italic;
+        }
+
+
+        /* No reviews */
+
+        .no-reviews {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #758179;
+        }
+
+        .no-reviews-icon {
+            font-size: 45px;
+
+            color: #c5d99b;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* =====================================================
+           REVIEW FORM
+        ===================================================== */
+
+        .review-form {
+            margin-top: 35px;
+
+            padding-top: 30px;
+
+            border-top: 1px solid #dce7c9;
+        }
+
+        .review-form-title {
+            text-align: center;
+
+            color: #15513e;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            max-width: 650px;
+
+            margin: auto;
+        }
+
+        .form-label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #496557;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border-radius: 14px;
+
+            border: 1px solid #d6e3c2;
+
+            background: #f8faef;
+
+            color: #315a4a;
+
+            font-family: 'Inter', sans-serif;
+
+            outline: none;
+
+            transition: 0.3s ease;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: #78b83a;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(120,184,58,0.10);
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-textarea {
+            resize: vertical;
+
+            min-height: 120px;
+        }
+
+        .submit-review {
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6da92d,
+                    #12634b
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: 0.35s ease;
+        }
+
+        .submit-review:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 14px 28px rgba(38,104,60,0.22);
+        }
+
+
+        /* =====================================================
+           BACK
+        ===================================================== */
+
+        .back-link {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            margin-top: 30px;
+
+            color: #2d714e;
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            transition: 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #72a62e;
+
+            transform: translateX(-3px);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            position: relative;
+
+            z-index: 2;
+
+            background: #e8f0d8;
+
+            border-top: 1px solid #d1dfbc;
+
+            padding: 20px;
+
+            text-align: center;
+
+            color: #718071;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .profile-area {
+                grid-template-columns: 1fr;
+            }
+
+            .trainer-photo {
+                min-height: 350px;
+            }
+
+            .trainer-photo img,
+            .letter-avatar {
+                min-height: 350px;
+            }
+
+            .letter-avatar {
+                font-size: 140px;
+            }
+
+            .profile-info {
+                padding: 35px;
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .nav-inner {
+                padding: 13px 18px;
+            }
+
+            .brand-name {
+                font-size: 24px;
+            }
+
+            .brand-icon {
+                width: 47px;
+
+                height: 47px;
+
+                font-size: 27px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+            .nav-links a i {
+                display: none;
+            }
+
+            .main-container {
+                padding: 35px 14px 50px;
+            }
+
+            .trainer-name {
+                font-size: 42px;
+            }
+
+            .specialization {
+                font-size: 17px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reviews-section {
+                padding: 25px 18px;
+            }
+
+            .section-title {
+                font-size: 31px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .profile-info {
+                padding: 25px 20px;
+            }
+
+            .trainer-name {
+                font-size: 36px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                width: 100%;
+            }
+
+            .trainer-photo {
+                min-height: 300px;
+            }
+
+            .trainer-photo img,
+            .letter-avatar {
+                min-height: 300px;
+            }
+
+            .letter-avatar {
+                font-size: 110px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         DECORATIVE LEAVES
+    ====================================================== -->
+
+    <div class="leaf leaf-one">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+    <div class="leaf leaf-two">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-inner">
+
+
+            <a href="/dashboard" class="brand">
+
+                <div class="brand-icon">
+
+                    <i class="fa-solid fa-leaf"></i>
+
+                </div>
+
+                <div>
+
+                    <div class="brand-name">
+                        NOURIVA
+                    </div>
+
+                    <span class="brand-subtitle">
+                        AI HEALTH • FOOD • FITNESS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+
+                <a href="/trainer">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Trainer Home
+
+                </a>
+
+
+                <a href="/dashboard">
+
+                    <i class="fa-solid fa-table-cells-large"></i>
+
+                    Dashboard
+
+                </a>
+
+
+                <a href="/logout" class="logout">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-container">
+
+
+        <div class="page-label">
+
+            <i class="fa-solid fa-user-check"></i>
+
+            YOUR PERSONAL TRAINER
+
+        </div>
+
+
+        <!-- =================================================
+             TRAINER PROFILE
+        ================================================== -->
+
+        <section class="trainer-card">
+
+
+            <div class="profile-area">
+
+
+                <!-- =================================================
+                     TRAINER PHOTO
+                ================================================== -->
+
+                <div class="trainer-photo">
+
+
+                    {% if trainer.photo %}
+
+
+                        <img
+                            src="{{ url_for('static', filename='uploads/' + trainer.photo) }}"
+                            alt="{{ trainer.name }}"
+                        >
+
+
+                    {% else %}
+
+
+                        <div class="letter-avatar">
+
+                            {{ (trainer.name or 'T')[0]|upper }}
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                    <div class="certified-badge">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        CERTIFIED TRAINER
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     TRAINER INFORMATION
+                ================================================== -->
+
+                <div class="profile-info">
+
+
+                    <h1 class="trainer-name">
+
+                        {{ trainer.name }}
+
+                    </h1>
+
+
+                    <div class="specialization">
+
+                        {{ trainer.specialization or
+                           'Certified Fitness & Nutrition Trainer' }}
+
+                    </div>
+
+
+                    <!-- Rating -->
+
+                    <div class="rating-row">
+
+                        <div class="stars">
+
+                            ★★★★★
+
+                        </div>
+
+                        <span class="rating-text">
+
+                            Trusted wellness guidance
+
+                        </span>
+
+                    </div>
+
+
+                    <!-- =================================================
+                         INFORMATION BOXES
+                    ================================================== -->
+
+                    <div class="info-grid">
+
+
+                        {% if trainer.experience %}
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+
+                                <i class="fa-solid fa-award"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="info-title">
+                                    Experience
+                                </div>
+
+                                <div class="info-value">
+
+                                    {{ trainer.experience }} years
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {% endif %}
+
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+
+                                <i class="fa-solid fa-phone"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="info-title">
+                                    Contact
+                                </div>
+
+                                <div class="info-value">
+
+                                    {{ trainer.phone or 'Available via chat' }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="info-title">
+                                    Email
+                                </div>
+
+                                <div class="info-value">
+
+                                    {{ trainer.email }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        {% if trainer.certificate_name %}
+
+                        <div class="info-box">
+
+                            <div class="info-icon">
+
+                                <i class="fa-solid fa-certificate"></i>
+
+                            </div>
+
+                            <div>
+
+                                <div class="info-title">
+                                    Certification
+                                </div>
+
+                                <div class="info-value">
+
+                                    {{ trainer.certificate_name }}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                    <!-- =================================================
+                         ABOUT
+                    ================================================== -->
+
+                    <div class="about">
+
+
+                        <div class="about-title">
+
+                            <i class="fa-solid fa-heart-pulse"></i>
+
+                            About Your Trainer
+
+                        </div>
+
+
+                        <div class="about-text">
+
+                            {{ trainer.bio or
+                            'Passionate certified trainer dedicated to helping clients achieve sustainable fitness goals through personalized nutrition and exercise plans, with a special focus on healthy living.' }}
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- =================================================
+                         ACTION BUTTONS
+                    ================================================== -->
+
+                    <div class="actions">
+
+
+                        
+                        
+                        <!-- START CHAT -->
+
+                        <a href="/chat/{{ trainer.id }}"
+                           class="action-btn chat-btn relative">
+
+                            <i class="fa-solid fa-comment-dots"></i>
+
+                            Start Chat
+
+                            <span
+                                class="user-unread-badge"
+                                id="user-unread-{{ trainer.id }}"
+                                style="
+                                    display: none;
+                                    background: #ef4444;
+                                    color: white;
+                                    border-radius: 999px;
+                                    min-width: 22px;
+                                    height: 22px;
+                                    padding: 0 6px;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 11px;
+                                    font-weight: 800;
+                                    margin-left: 5px;
+                                ">
+                            </span>
+
+                        </a>
+
+                        <!-- BOOK SESSION -->
+
+                        <a href="/book_trainer/{{ trainer.id }}"
+                           class="action-btn book-btn">
+
+                            <i class="fa-solid fa-calendar-plus"></i>
+
+                            Book Session
+
+                        </a>
+
+
+                        <!-- CANCEL TRAINER -->
+
+                        <form action="/cancel_trainer"
+                              method="POST"
+                              style="flex:1;min-width:150px;">
+
+                            <button type="submit"
+                                    onclick="return confirm('Are you sure you want to cancel this trainer and choose another trainer?');"
+                                    class="action-btn cancel-btn"
+                                    style="width:100%;">
+
+                                <i class="fa-solid fa-user-xmark"></i>
+
+                                Cancel Trainer
+
+                            </button>
+
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             REVIEWS
+        ====================================================== -->
+
+        <section class="reviews-section">
+
+
+            <h2 class="section-title">
+
+                Client Reviews
+
+            </h2>
+
+
+            <p class="section-subtitle">
+
+                See what others say about their experience
+
+            </p>
+
+
+            {% if reviews %}
+
+
+                <div class="reviews-grid">
+
+
+                    {% for r in reviews %}
+
+
+                        <div class="review-card">
+
+
+                            <div class="review-user">
+
+
+                                <div class="review-avatar">
+
+                                    {{ (r.user or 'U')[0]|upper }}
+
+                                </div>
+
+
+                                <div>
+
+                                    <div class="review-name">
+
+                                        {{ r.user }}
+
+                                    </div>
+
+
+                                    <div class="review-stars">
+
+                                        {% for i in range(r.rating) %}
+                                            ★
+                                        {% endfor %}
+
+                                        {% for i in range(5 - r.rating) %}
+                                            ☆
+                                        {% endfor %}
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="review-text">
+
+                                "{{ r.feedback }}"
+
+                            </div>
+
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="no-reviews">
+
+                    <div class="no-reviews-icon">
+
+                        <i class="fa-regular fa-star"></i>
+
+                    </div>
+
+                    <strong>
+                        No reviews yet
+                    </strong>
+
+                    <p>
+                        Be the first to share your experience with {{ trainer.name }}.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 REVIEW FORM
+            ================================================== -->
+
+            {% if not user_reviewed %}
+
+
+                <div class="review-form">
+
+
+                    <div class="review-form-title">
+
+                        Share Your Experience
+
+                    </div>
+
+
+                    <div class="form-container">
+
+
+                        <form method="POST"
+                              action="/add_review/{{ trainer.id }}">
+
+
+                            <div class="form-group">
+
+
+                                <label class="form-label">
+
+                                    Your Rating
+
+                                </label>
+
+
+                                <select name="rating"
+                                        required
+                                        class="form-select">
+
+                                    <option value="">
+                                        Select Rating
+                                    </option>
+
+                                    <option value="5">
+                                        ★★★★★ - Excellent
+                                    </option>
+
+                                    <option value="4">
+                                        ★★★★☆ - Very Good
+                                    </option>
+
+                                    <option value="3">
+                                        ★★★☆☆ - Good
+                                    </option>
+
+                                    <option value="2">
+                                        ★★☆☆☆ - Fair
+                                    </option>
+
+                                    <option value="1">
+                                        ★☆☆☆☆ - Poor
+                                    </option>
+
+                                </select>
+
+
+                            </div>
+
+
+                            <div class="form-group">
+
+
+                                <label class="form-label">
+
+                                    Your Feedback
+
+                                </label>
+
+
+                                <textarea
+                                    name="feedback"
+                                    rows="5"
+                                    required
+                                    placeholder="Tell us about your experience..."
+                                    class="form-textarea"></textarea>
+
+
+                            </div>
+
+
+                            <button type="submit"
+                                    class="submit-review">
+
+                                <i class="fa-solid fa-star"></i>
+
+                                Submit Your Review
+
+                            </button>
+
+
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+        <!-- =====================================================
+             BACK
+        ====================================================== -->
+
+        <a href="/trainer"
+           class="back-link">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Trainer Dashboard
+
+        </a>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <p>
+
+            NOURIVA • Your Personal Trainer •
+
+            AI Health • Food • Fitness
+
+        </p>
+
+    </footer>
+
+
+<script>
+    async function updateUserUnreadCounts() {
+        try {
+            const response = await fetch("/user_unread_counts", {
+                method: "GET",
+                cache: "no-store"
+            });
+
+            if (!response.ok) return;
+
+            const counts = await response.json();
+
+            document.querySelectorAll(".user-unread-badge").forEach(badge => {
+                const trainerId = badge.id.replace("user-unread-", "");
+                const unreadCount = Number(counts[trainerId] || 0);
+
+                if (unreadCount > 0) {
+                    badge.textContent = unreadCount;
+                    badge.style.display = "inline-flex";
+                } else {
+                    badge.textContent = "";
+                    badge.style.display = "none";
+                }
+            });
+        } catch (error) {
+            console.error("Unable to update user unread counts:", error);
+        }
+    }
+
+    updateUserUnreadCounts();
+    setInterval(updateUserUnreadCounts, 5000);
+</script>
+
+
+
+</body>
+
+</html>

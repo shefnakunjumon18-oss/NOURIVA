@@ -1,0 +1,828 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOURIVA | Trainer Chat</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --bg: #061b14;
+            --panel: #0b291f;
+            --panel2: #103729;
+            --green: #17c77b;
+            --light-green: #78eab0;
+            --text: #f1fff6;
+            --muted: #8da99a;
+            --border: rgba(255,255,255,.09);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(ellipse at top right, #164a32 0%, transparent 42%),
+                var(--bg);
+        }
+
+        button, input {
+            font: inherit;
+        }
+
+        .page {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 5%;
+        }
+
+        /* TOP HEADER */
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 5px 0 22px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-icon {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #29df91, #07975d);
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 5px 20px #17c77b30;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -.5px;
+        }
+
+        .brand-subtitle {
+            display: block;
+            margin-top: 4px;
+            color: var(--light-green);
+            font-size: 9px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .secure-label {
+            padding: 11px 15px;
+            border-radius: 12px;
+            border: 1px solid #23523a;
+            background: #103425;
+            color: #86efb6;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .back-button {
+            padding: 11px 15px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #123526;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .back-button:hover {
+            background: #1a4a33;
+        }
+
+        .page-heading {
+            margin: 0 0 20px;
+        }
+
+        .eyebrow {
+            color: var(--light-green);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .page-heading h1 {
+            margin: 0;
+            font-size: clamp(23px, 3vw, 31px);
+            letter-spacing: -1px;
+        }
+
+        .page-heading p {
+            margin: 8px 0 0;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* MAIN CHAT */
+        .chat-card {
+            flex: 1;
+            min-height: 480px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background: rgba(8, 36, 26, .96);
+            box-shadow: 0 20px 60px #00000020;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 17px 24px;
+            background: linear-gradient(120deg, #123e2b, #0b2a1e);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .person {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .person-details {
+            min-width: 0;
+        }
+
+        .person-name {
+            font-size: 15px;
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .person-status {
+            margin-top: 6px;
+            color: #8fb5a0;
+            font-size: 11px;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background: #35dc8a;
+        }
+
+        /* PROFILE PHOTOS AND INITIALS */
+        .avatar {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #2bd58b;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #28d88b, #087b4e);
+            color: white;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .avatar img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .message-avatar {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            font-size: 13px;
+            align-self: flex-end;
+        }
+
+        .message-avatar.trainer-avatar {
+            background: linear-gradient(135deg, #1dbb79, #087b4e);
+        }
+
+        .message-avatar.client-avatar {
+            background: linear-gradient(135deg, #497d61, #244c37);
+            border-color: #507e62;
+        }
+
+        /* CHAT HISTORY */
+        .chat-box {
+            flex: 1;
+            min-height: 320px;
+            max-height: calc(100vh - 340px);
+            overflow-y: auto;
+            padding: 28px clamp(15px, 4vw, 55px);
+            scroll-behavior: smooth;
+        }
+
+        .chat-box::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb {
+            background: #285440;
+            border-radius: 10px;
+        }
+
+        .date-divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 0 0 28px;
+            color: #729782;
+            font-size: 10px;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+        }
+
+        .date-divider::before,
+        .date-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .message-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            margin-bottom: 23px;
+        }
+
+        .message-row.sent {
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: min(75%, 600px);
+            min-width: 0;
+        }
+
+        .message-row.sent .message-content {
+            align-items: flex-end;
+        }
+
+        .sender-name {
+            margin: 0 4px 7px;
+            color: #91b6a0;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* BUBBLE SIZE FOLLOWS MESSAGE CONTENT */
+        .bubble {
+            display: inline-block;
+            width: fit-content;
+            max-width: 100%;
+            padding: 11px 15px;
+            border: 1px solid #234635;
+            border-radius: 16px 16px 16px 4px;
+            background: #153a2a;
+            color: #edfff4;
+            font-size: 13px;
+            line-height: 1.7;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .message-row.sent .bubble {
+            border-color: #20c77d;
+            border-radius: 16px 16px 4px 16px;
+            background: linear-gradient(135deg, #16b978, #078e58);
+            color: white;
+        }
+
+        .message-time {
+            margin: 6px 4px 0;
+            color: #739582;
+            font-size: 9px;
+        }
+
+        .chat-image {
+            display: block;
+            max-width: min(100%, 300px);
+            max-height: 260px;
+            object-fit: contain;
+            margin-top: 10px;
+            border-radius: 12px;
+            border: 1px solid #ffffff20;
+        }
+
+        .file-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 100%;
+            margin-top: 10px;
+            padding: 10px 12px;
+            border: 1px solid #2b6246;
+            border-radius: 10px;
+            background: #0b2a1e;
+            color: #a9f4c8;
+            font-size: 11px;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .file-link:hover {
+            background: #194832;
+        }
+
+        .empty-state {
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .empty-icon {
+            width: 62px;
+            height: 62px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            border-radius: 20px;
+            background: #143e2b;
+            color: #76eeb0;
+            font-size: 27px;
+        }
+
+        .empty-state strong {
+            color: white;
+            font-size: 16px;
+        }
+
+        .empty-state p {
+            max-width: 290px;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* MESSAGE COMPOSER */
+        .composer {
+            padding: 16px clamp(12px, 3vw, 30px) 18px;
+            border-top: 1px solid var(--border);
+            background: #08251b;
+        }
+
+        .attachment-preview {
+            display: none;
+            margin-bottom: 10px;
+            padding: 9px 12px;
+            border-radius: 10px;
+            background: #163d2b;
+            color: #a9f4c8;
+            font-size: 11px;
+            overflow-wrap: anywhere;
+        }
+
+        .input-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px;
+            border: 1px solid #28513c;
+            border-radius: 15px;
+            background: #123729;
+        }
+
+        .input-row:focus-within {
+            border-color: #20c77b;
+            box-shadow: 0 0 0 3px #17c77b15;
+        }
+
+        .attach-label {
+            width: 41px;
+            height: 41px;
+            min-width: 41px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: #204b35;
+            color: #86efb6;
+            font-size: 23px;
+            cursor: pointer;
+        }
+
+        .attach-label:hover {
+            background: #286343;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        #messageInput {
+            flex: 1;
+            min-width: 0;
+            padding: 11px 3px;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: white;
+            font-size: 13px;
+        }
+
+        #messageInput::placeholder {
+            color: #799a87;
+        }
+
+        .send-button {
+            min-height: 41px;
+            padding: 0 18px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #1bd487, #0caf6b);
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .send-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px #10bb7635;
+        }
+
+        .composer-note {
+            margin: 9px 3px 0;
+            color: #719581;
+            font-size: 10px;
+        }
+
+        .footer {
+            padding-top: 16px;
+            text-align: center;
+            color: #638575;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 650px) {
+            .page {
+                padding: 12px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .brand-name {
+                font-size: 17px;
+            }
+
+            .brand-icon {
+                width: 37px;
+                height: 37px;
+            }
+
+            .secure-label {
+                display: none;
+            }
+
+            .back-button {
+                padding: 10px;
+                font-size: 11px;
+            }
+
+            .page-heading h1 {
+                font-size: 24px;
+            }
+
+            .chat-card {
+                min-height: 65vh;
+                border-radius: 16px;
+            }
+
+            .chat-header {
+                padding: 14px;
+            }
+
+            .chat-box {
+                max-height: none;
+                min-height: 300px;
+                padding: 20px 12px;
+            }
+
+            .message-content {
+                max-width: 82%;
+            }
+
+            .avatar {
+                width: 39px;
+                height: 39px;
+                min-width: 39px;
+            }
+
+            .message-avatar {
+                width: 30px;
+                height: 30px;
+                min-width: 30px;
+            }
+
+            .composer {
+                padding: 11px;
+            }
+
+            .input-row {
+                gap: 7px;
+            }
+
+            .send-button {
+                padding: 0 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="page">
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">✦</div>
+            <div>
+                <div class="brand-name">NOURIVA</div>
+                <span class="brand-subtitle">HEALTH · FOOD · FITNESS</span>
+            </div>
+        </div>
+
+        <div class="top-actions">
+            <div class="secure-label">✦ &nbsp; PRIVATE CHAT</div>
+            <a class="back-button"
+               href="{{ url_for('trainer_dashboard') }}">← Dashboard</a>
+        </div>
+    </header>
+
+    <div class="page-heading">
+        <div class="eyebrow">TRAINER WORKSPACE</div>
+        <h1>Your Conversation</h1>
+        <p>Connect with your client and support their wellness journey.</p>
+    </div>
+
+    <main class="chat-card">
+
+        <!-- CLIENT HEADER -->
+        <div class="chat-header">
+            <div class="person">
+
+                <div class="avatar">
+                    {% if client.photo %}
+                        <img
+                            src="{{ url_for('static', filename='uploads/' ~ client.photo) }}"
+                            alt="{{ client.username }} profile"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <span style="display:none;">{{ (client.username or 'C')[0]|upper }}</span>
+                    {% else %}
+                        {{ (client.username or 'C')[0]|upper }}
+                    {% endif %}
+                </div>
+
+                <div class="person-details">
+                    <div class="person-name">{{ client.username }}</div>
+                    <div class="person-status">
+                        <span class="status-dot"></span>
+                        Client conversation
+                    </div>
+                </div>
+            </div>
+
+            <div class="secure-label">Client</div>
+        </div>
+
+        <!-- MESSAGES -->
+        <div class="chat-box" id="chatBox">
+
+            <div class="date-divider">Conversation</div>
+
+            {% if messages %}
+
+                {% for m in messages %}
+
+                    {% if m.sender == "trainer" %}
+
+                        <!-- TRAINER MESSAGE: RIGHT SIDE -->
+                        <div class="message-row sent">
+
+                            <div class="message-content">
+                                <div class="sender-name">
+                                    You · {{ trainer.name }}
+                                </div>
+
+                                <div class="bubble">{{ m.message or '' }}{% if m.file %}
+                                    {% set ext = m.file.rsplit('.', 1)[-1].lower() %}
+
+                                    {% if ext in ['png', 'jpg', 'jpeg', 'gif', 'webp'] %}
+                                        <a href="{{ url_for('static', filename='uploads/' ~ m.file) }}"
+                                           target="_blank" rel="noopener noreferrer">
+                                            <img class="chat-image"
+                                                 src="{{ url_for('static', filename='uploads/' ~ m.file) }}"
+                                                 alt="Shared image">
+                                        </a>
+                                    {% else %}
+                                        <a class="file-link"
+                                           href="{{ url_for('static', filename='uploads/' ~ m.file) }}"
+                                           target="_blank" rel="noopener noreferrer">
+                                            📎 {{ m.file }}
+                                        </a>
+                                    {% endif %}
+                                {% endif %}</div>
+
+                                <div class="message-time">You · Trainer</div>
+                            </div>
+
+                            <div class="avatar message-avatar trainer-avatar">
+                                {% if trainer.photo %}
+                                    <img
+                                        src="{{ url_for('static', filename='uploads/' ~ trainer.photo) }}"
+                                        alt="{{ trainer.name }} profile"
+                                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <span style="display:none;">{{ (trainer.name or 'T')[0]|upper }}</span>
+                                {% else %}
+                                    {{ (trainer.name or 'T')[0]|upper }}
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                    {% else %}
+
+                        <!-- CLIENT MESSAGE: LEFT SIDE -->
+                        <div class="message-row">
+
+                            <div class="avatar message-avatar client-avatar">
+                                {% if client.photo %}
+                                    <img
+                                        src="{{ url_for('static', filename='uploads/' ~ client.photo) }}"
+                                        alt="{{ client.username }} profile"
+                                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                    <span style="display:none;">{{ (client.username or 'C')[0]|upper }}</span>
+                                {% else %}
+                                    {{ (client.username or 'C')[0]|upper }}
+                                {% endif %}
+                            </div>
+
+                            <div class="message-content">
+                                <div class="sender-name">{{ client.username }}</div>
+
+                                <div class="bubble">{{ m.message or '' }}{% if m.file %}
+                                    {% set ext = m.file.rsplit('.', 1)[-1].lower() %}
+
+                                    {% if ext in ['png', 'jpg', 'jpeg', 'gif', 'webp'] %}
+                                        <a href="{{ url_for('static', filename='uploads/' ~ m.file) }}"
+                                           target="_blank" rel="noopener noreferrer">
+                                            <img class="chat-image"
+                                                 src="{{ url_for('static', filename='uploads/' ~ m.file) }}"
+                                                 alt="Shared image">
+                                        </a>
+                                    {% else %}
+                                        <a class="file-link"
+                                           href="{{ url_for('static', filename='uploads/' ~ m.file) }}"
+                                           target="_blank" rel="noopener noreferrer">
+                                            📎 {{ m.file }}
+                                        </a>
+                                    {% endif %}
+                                {% endif %}</div>
+
+                                <div class="message-time">Client</div>
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="empty-state">
+                    <div class="empty-icon">✉</div>
+                    <strong>Start a conversation</strong>
+                    <p>Send a message to your client. Share guidance, encouragement, images, or helpful documents.</p>
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <!-- MESSAGE INPUT -->
+        <form class="composer"
+              method="POST"
+              enctype="multipart/form-data"
+              id="messageForm">
+
+            <div class="attachment-preview" id="attachmentPreview"></div>
+
+            <div class="input-row">
+
+                <label for="fileInput"
+                       class="attach-label"
+                       title="Attach a file">＋</label>
+
+                <input type="file"
+                       name="file"
+                       id="fileInput"
+                       accept="image/*,.pdf,.doc,.docx,.txt,.xlsx,.csv">
+
+                <input type="text"
+                       name="message"
+                       id="messageInput"
+                       placeholder="Write a message..."
+                       autocomplete="off">
+
+                <button type="submit" class="send-button">Send ↗</button>
+            </div>
+
+            <div class="composer-note">
+                Attach an image or document, or type your message below.
+            </div>
+        </form>
+
+    </main>
+
+    <footer class="footer">
+        NOURIVA · YOUR WELLNESS JOURNEY
+    </footer>
+
+</div>
+
+<script>
+    const chatBox = document.getElementById('chatBox');
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('attachmentPreview');
+    const messageInput = document.getElementById('messageInput');
+    const messageForm = document.getElementById('messageForm');
+
+    // Scroll to the latest message when the page opens.
+    window.addEventListener('load', function () {
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    // Show the selected filename.
+    fileInput.addEventListener('change', function () {
+        if (this.files && this.files.length > 0) {
+            preview.textContent = '📎 Attached: ' + this.files[0].name;
+            preview.style.display = 'block';
+        } else {
+            preview.textContent = '';
+            preview.style.display = 'none';
+        }
+    });
+
+    // Do not submit if there is no text or attachment.
+    messageForm.addEventListener('submit', function (event) {
+        const hasMessage = messageInput.value.trim().length > 0;
+        const hasFile = fileInput.files && fileInput.files.length > 0;
+
+        if (!hasMessage && !hasFile) {
+            event.preventDefault();
+            messageInput.focus();
+        }
+    });
+</script>
+
+</body>
+</html>

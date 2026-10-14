@@ -1,0 +1,2234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Professional Trainers</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+            margin: 0;
+
+            font-family: "DM Sans", sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 8% 20%,
+                    rgba(163, 197, 125, 0.25),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 95% 35%,
+                    rgba(183, 211, 147, 0.25),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    135deg,
+                    #fbfcf5,
+                    #f3f7ea
+                );
+
+            color: #173f2c;
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+        }
+
+
+        /* ==========================================
+           BACKGROUND DECORATIONS
+        ========================================== */
+
+        .leaf-decoration {
+            position: fixed;
+
+            pointer-events: none;
+
+            z-index: 0;
+
+            opacity: 0.35;
+
+            animation: floatingLeaf 7s ease-in-out infinite;
+        }
+
+
+        .leaf-left {
+
+            width: 260px;
+            height: 480px;
+
+            left: -130px;
+            top: 160px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #b9d99b,
+                    #dcebc9
+                );
+
+            border-radius:
+                60% 40% 60% 40%;
+
+            transform: rotate(-20deg);
+        }
+
+
+        .leaf-right {
+
+            width: 280px;
+            height: 500px;
+
+            right: -150px;
+            bottom: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #c4dfa9,
+                    #e6f0d9
+                );
+
+            border-radius:
+                40% 60% 40% 60%;
+
+            transform: rotate(25deg);
+
+            animation-delay: 2s;
+        }
+
+
+        @keyframes floatingLeaf {
+
+            0%,
+            100% {
+                margin-top: 0;
+            }
+
+            50% {
+                margin-top: -15px;
+            }
+
+        }
+
+
+        .circle-decoration {
+
+            position: fixed;
+
+            width: 160px;
+            height: 160px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(181, 211, 147, 0.18);
+
+            pointer-events: none;
+
+            z-index: 0;
+
+            animation: floatingCircle 6s ease-in-out infinite;
+        }
+
+
+        .circle-one {
+
+            left: 3%;
+            bottom: 20%;
+        }
+
+
+        .circle-two {
+
+            right: 8%;
+            top: 18%;
+
+            width: 110px;
+            height: 110px;
+
+            animation-delay: 1.5s;
+        }
+
+
+        @keyframes floatingCircle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-18px);
+            }
+
+        }
+
+
+        /* ==========================================
+           NAVBAR
+        ========================================== */
+
+        .navbar {
+
+            width: calc(100% - 70px);
+
+            max-width: 1420px;
+
+            margin: 14px auto 0;
+
+            background:
+                rgba(255, 255, 255, 0.90);
+
+            backdrop-filter: blur(18px);
+
+            -webkit-backdrop-filter: blur(18px);
+
+            border:
+                1px solid rgba(210, 223, 198, 0.75);
+
+            border-radius: 28px;
+
+            padding: 14px 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            box-shadow:
+                0 15px 45px rgba(47, 77, 51, 0.08);
+
+            position: sticky;
+
+            top: 12px;
+
+            z-index: 100;
+
+            animation: navbarDrop 0.8s ease;
+        }
+
+
+        @keyframes navbarDrop {
+
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            text-decoration: none;
+        }
+
+
+        .brand-icon {
+
+            width: 48px;
+            height: 48px;
+
+            border-radius: 17px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f7b733,
+                    #f59e0b
+                );
+
+            font-size: 24px;
+
+            box-shadow:
+                0 8px 20px rgba(245, 158, 11, 0.22);
+
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+
+        @keyframes iconFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-4px) rotate(2deg);
+            }
+
+        }
+
+
+        .brand-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            color: #164630;
+        }
+
+
+        .brand-name span {
+
+            color: #6b9d4f;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 34px;
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: #315d47;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+
+        .nav-links a:hover {
+
+            color: #e89012;
+
+            transform: translateY(-2px);
+        }
+
+
+        .premium-link {
+
+            color: #e58b0d !important;
+        }
+
+
+        .logout-link {
+
+            color: #d94b4b !important;
+        }
+
+
+        /* ==========================================
+           MAIN
+        ========================================== */
+
+        .main {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 100%;
+
+            max-width: 1450px;
+
+            margin: auto;
+
+            padding:
+                55px 45px 70px;
+        }
+
+
+        /* ==========================================
+           HERO
+        ========================================== */
+
+        .hero {
+
+            text-align: center;
+
+            max-width: 950px;
+
+            margin:
+                0 auto 55px;
+
+            animation:
+                heroAppear 1s ease;
+        }
+
+
+        @keyframes heroAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+
+            }
+
+        }
+
+
+        .hero-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                9px 18px;
+
+            border-radius: 30px;
+
+            background:
+                #eaf3df;
+
+            border:
+                1px solid #d7e7c6;
+
+            color:
+                #315e3f;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            letter-spacing:
+                1.2px;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom: 18px;
+        }
+
+
+        .hero-badge i {
+
+            color:
+                #4c8b42;
+        }
+
+
+        .hero-title {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                clamp(42px, 5vw, 68px);
+
+            line-height:
+                1.08;
+
+            margin: 0;
+
+            color:
+                #143f2c;
+
+            font-weight: 800;
+
+            letter-spacing:
+                -1.5px;
+        }
+
+
+        .hero-title span {
+
+            color:
+                #62944d;
+        }
+
+
+        .leaf-icon {
+
+            display: inline-block;
+
+            color:
+                #57904b;
+
+            font-size:
+                40px;
+
+            margin-left:
+                8px;
+
+            animation:
+                leafWave 3s ease-in-out infinite;
+        }
+
+
+        @keyframes leafWave {
+
+            0%,
+            100% {
+                transform:
+                    rotate(-15deg)
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    rotate(10deg)
+                    translateY(-5px);
+            }
+
+        }
+
+
+        .hero-description {
+
+            max-width:
+                760px;
+
+            margin:
+                20px auto 0;
+
+            font-size:
+                17px;
+
+            line-height:
+                1.7;
+
+            color:
+                #6b776f;
+        }
+
+
+        .hero-divider {
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap: 15px;
+
+            margin-top:
+                25px;
+        }
+
+
+        .hero-divider span {
+
+            width:
+                90px;
+
+            height:
+                2px;
+
+            background:
+                #a6c890;
+        }
+
+
+        .hero-divider i {
+
+            color:
+                #629c51;
+
+            font-size:
+                17px;
+
+            animation:
+                spinLeaf 4s linear infinite;
+        }
+
+
+        @keyframes spinLeaf {
+
+            from {
+                transform:
+                    rotate(0);
+            }
+
+            to {
+                transform:
+                    rotate(360deg);
+            }
+
+        }
+
+
+        /* ==========================================
+           TRAINER GRID
+        ========================================== */
+
+        .trainer-grid {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap:
+                20px;
+
+            align-items:
+                stretch;
+        }
+
+
+        /* ==========================================
+           TRAINER CARD
+        ========================================== */
+
+        .trainer-card {
+
+            position:
+                relative;
+
+            background:
+                rgba(255, 255, 255, 0.94);
+
+            border:
+                1px solid #dfe8d6;
+
+            border-radius:
+                27px;
+
+            padding:
+                12px;
+
+            overflow:
+                hidden;
+
+            box-shadow:
+                0 15px 40px
+                rgba(47, 77, 51, 0.08);
+
+            transition:
+                transform 0.4s ease,
+                box-shadow 0.4s ease,
+                border-color 0.4s ease;
+
+            animation:
+                cardAppear 0.8s ease both;
+        }
+
+
+        .trainer-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+
+        .trainer-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+
+        .trainer-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+
+        .trainer-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+
+        .trainer-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+
+        .trainer-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    scale(0.97);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+
+        }
+
+
+        .trainer-card:hover {
+
+            transform:
+                translateY(-10px);
+
+            border-color:
+                #a8c88d;
+
+            box-shadow:
+                0 28px 60px
+                rgba(47, 77, 51, 0.16);
+        }
+
+
+        /* ==========================================
+           PHOTO
+        ========================================== */
+
+        .trainer-photo {
+
+            height:
+                225px;
+
+            position:
+                relative;
+
+            border-radius:
+                21px;
+
+            overflow:
+                hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #e8f2dd,
+                    #f7eee9
+                );
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+        }
+
+
+        .trainer-photo img {
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            object-fit:
+                cover;
+
+            display:
+                block;
+
+            transition:
+                transform 0.6s ease;
+        }
+
+
+        .trainer-card:hover
+        .trainer-photo img {
+
+            transform:
+                scale(1.08);
+        }
+
+
+        /* ==========================================
+           FIRST LETTER PROFILE
+        ========================================== */
+
+        .letter-profile {
+
+            width:
+                105px;
+
+            height:
+                105px;
+
+            border-radius:
+                50%;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            position:
+                relative;
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                55px;
+
+            font-weight:
+                800;
+
+            color:
+                white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2c7350,
+                    #76a85a
+                );
+
+            box-shadow:
+                0 15px 35px
+                rgba(43, 111, 76, 0.28);
+
+            animation:
+                profileFloat 3.5s ease-in-out infinite;
+
+            z-index:
+                2;
+        }
+
+
+        .letter-profile::before {
+
+            content: "";
+
+            position:
+                absolute;
+
+            inset:
+                -8px;
+
+            border-radius:
+                50%;
+
+            border:
+                2px solid
+                rgba(92, 145, 74, 0.30);
+
+            animation:
+                profilePulse 2.5s ease-out infinite;
+        }
+
+
+        .letter-profile::after {
+
+            content: "";
+
+            position:
+                absolute;
+
+            width:
+                18px;
+
+            height:
+                18px;
+
+            border-radius:
+                50%;
+
+            background:
+                #f4bd3c;
+
+            right:
+                3px;
+
+            top:
+                7px;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0,0,0,0.12);
+
+            animation:
+                sparkle 2s ease-in-out infinite;
+        }
+
+
+        @keyframes profileFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0)
+                    rotate(0deg);
+            }
+
+            50% {
+                transform:
+                    translateY(-8px)
+                    rotate(2deg);
+            }
+
+        }
+
+
+        @keyframes profilePulse {
+
+            0% {
+                transform:
+                    scale(0.95);
+
+                opacity:
+                    0.8;
+            }
+
+            70% {
+                transform:
+                    scale(1.18);
+
+                opacity:
+                    0;
+            }
+
+            100% {
+                opacity:
+                    0;
+            }
+
+        }
+
+
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                transform:
+                    scale(1);
+
+                opacity:
+                    1;
+            }
+
+            50% {
+                transform:
+                    scale(1.4);
+
+                opacity:
+                    0.6;
+            }
+
+        }
+
+
+        /* ==========================================
+           CERTIFIED BADGE
+        ========================================== */
+
+        .certified-badge {
+
+            position:
+                absolute;
+
+            top:
+                13px;
+
+            right:
+                13px;
+
+            z-index:
+                5;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            gap:
+                7px;
+
+            background:
+                rgba(255,255,255,0.95);
+
+            border-radius:
+                30px;
+
+            padding:
+                8px 12px;
+
+            color:
+                #295c3d;
+
+            font-size:
+                11px;
+
+            font-weight:
+                800;
+
+            box-shadow:
+                0 6px 18px
+                rgba(31,70,41,0.12);
+
+            animation:
+                badgeFloat 3s ease-in-out infinite;
+        }
+
+
+        @keyframes badgeFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-3px);
+            }
+
+        }
+
+
+        .certified-badge i {
+
+            color:
+                #4e964d;
+
+            font-size:
+                14px;
+        }
+
+
+        /* ==========================================
+           CARD CONTENT
+        ========================================== */
+
+        .trainer-content {
+
+            padding:
+                18px 10px 10px;
+        }
+
+
+        .trainer-name {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color:
+                #173f2c;
+
+            font-size:
+                23px;
+
+            font-weight:
+                800;
+
+            margin:
+                0 0 12px;
+
+            line-height:
+                1.2;
+        }
+
+
+        .info-list {
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                12px;
+
+            margin-bottom:
+                17px;
+        }
+
+
+        .info-row {
+
+            display:
+                flex;
+
+            align-items:
+                flex-start;
+
+            gap:
+                11px;
+
+            color:
+                #68756d;
+
+            font-size:
+                13px;
+
+            line-height:
+                1.45;
+        }
+
+
+        .info-icon {
+
+            flex-shrink:
+                0;
+
+            width:
+                28px;
+
+            height:
+                28px;
+
+            border-radius:
+                9px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                #edf5e6;
+
+            color:
+                #3d7c48;
+
+            font-size:
+                12px;
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease;
+        }
+
+
+        .info-row:hover
+        .info-icon {
+
+            transform:
+                rotate(8deg)
+                scale(1.08);
+
+            background:
+                #dfeecf;
+        }
+
+
+        .info-text {
+
+            padding-top:
+                5px;
+        }
+
+
+        /* ==========================================
+           BOOK BUTTON
+        ========================================== */
+
+        .book-btn {
+
+            width:
+                100%;
+
+            border:
+                none;
+
+            border-radius:
+                17px;
+
+            padding:
+                14px 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1c6547,
+                    #247b52
+                );
+
+            color:
+                white;
+
+            font-size:
+                14px;
+
+            font-weight:
+                800;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                9px;
+
+            cursor:
+                pointer;
+
+            text-decoration:
+                none;
+
+            box-shadow:
+                0 8px 20px
+                rgba(28,101,71,0.18);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+
+        .book-btn i {
+
+            color:
+                #f6c343;
+        }
+
+
+        .book-btn:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 14px 27px
+                rgba(28,101,71,0.25);
+        }
+
+
+        .arrow {
+
+            transition:
+                transform 0.3s ease;
+        }
+
+
+        .book-btn:hover
+        .arrow {
+
+            transform:
+                translateX(5px);
+        }
+
+
+        /* ==========================================
+           SUMMARY
+        ========================================== */
+
+        .summary {
+
+            max-width:
+                760px;
+
+            margin:
+                30px auto 0;
+
+            padding:
+                19px 30px;
+
+            background:
+                rgba(255,255,255,0.88);
+
+            border:
+                1px solid #dfe9d7;
+
+            border-radius:
+                40px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            gap:
+                20px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(47,77,51,0.07);
+
+            animation:
+                summaryAppear 1s ease;
+        }
+
+
+        @keyframes summaryAppear {
+
+            from {
+
+                opacity:
+                    0;
+
+                transform:
+                    translateY(15px);
+            }
+
+            to {
+
+                opacity:
+                    1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        .summary-icon {
+
+            font-size:
+                30px;
+
+            color:
+                #57904b;
+        }
+
+
+        .summary-number {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            font-size:
+                34px;
+
+            font-weight:
+                800;
+
+            color:
+                #5c914a;
+        }
+
+
+        .summary-divider {
+
+            width:
+                1px;
+
+            height:
+                35px;
+
+            background:
+                #cddcc3;
+        }
+
+
+        .summary-text {
+
+            color:
+                #647168;
+
+            font-size:
+                14px;
+
+            font-weight:
+                600;
+        }
+
+
+        /* ==========================================
+           EMPTY STATE
+        ========================================== */
+
+        .empty-state {
+
+            max-width:
+                800px;
+
+            margin:
+                30px auto;
+
+            padding:
+                70px 35px;
+
+            text-align:
+                center;
+
+            background:
+                rgba(255,255,255,0.92);
+
+            border:
+                1px solid #dfe8d6;
+
+            border-radius:
+                30px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(47,77,51,0.08);
+        }
+
+
+        .empty-icon {
+
+            width:
+                100px;
+
+            height:
+                100px;
+
+            margin:
+                0 auto 25px;
+
+            border-radius:
+                50%;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                center;
+
+            background:
+                #eaf3df;
+
+            color:
+                #4c8b4b;
+
+            font-size:
+                42px;
+        }
+
+
+        .empty-state h2 {
+
+            font-family:
+                "Playfair Display",
+                serif;
+
+            color:
+                #173f2c;
+
+            font-size:
+                34px;
+
+            margin-bottom:
+                15px;
+        }
+
+
+        .empty-state p {
+
+            color:
+                #718077;
+
+            max-width:
+                620px;
+
+            margin:
+                0 auto 30px;
+
+            line-height:
+                1.7;
+        }
+
+
+        .premium-btn {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                10px;
+
+            padding:
+                15px 25px;
+
+            border-radius:
+                16px;
+
+            text-decoration:
+                none;
+
+            background:
+                #1e6044;
+
+            color:
+                white;
+
+            font-weight:
+                800;
+
+            transition:
+                0.3s ease;
+        }
+
+
+        .premium-btn:hover {
+
+            background:
+                #174b36;
+
+            transform:
+                translateY(-3px);
+        }
+
+
+        /* ==========================================
+           BACK
+        ========================================== */
+
+        .back-container {
+
+            text-align:
+                center;
+        }
+
+
+        .back-link {
+
+            display:
+                inline-flex;
+
+            align-items:
+                center;
+
+            gap:
+                9px;
+
+            color:
+                #4d7d55;
+
+            text-decoration:
+                none;
+
+            font-weight:
+                700;
+
+            font-size:
+                14px;
+
+            margin-top:
+                38px;
+
+            transition:
+                0.3s ease;
+        }
+
+
+        .back-link:hover {
+
+            color:
+                #1c5d40;
+
+            transform:
+                translateX(-4px);
+        }
+
+
+        /* ==========================================
+           FOOTER
+        ========================================== */
+
+        .footer {
+
+            position:
+                relative;
+
+            z-index:
+                2;
+
+            text-align:
+                center;
+
+            padding:
+                25px 20px 35px;
+
+            color:
+                #829087;
+
+            font-size:
+                12px;
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 1200px) {
+
+            .trainer-grid {
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+            .trainer-photo {
+
+                height:
+                    260px;
+            }
+
+        }
+
+
+        @media (max-width: 750px) {
+
+            .navbar {
+
+                width:
+                    calc(100% - 24px);
+
+                padding:
+                    12px 16px;
+
+                border-radius:
+                    20px;
+            }
+
+
+            .brand-name {
+
+                font-size:
+                    20px;
+            }
+
+
+            .brand-icon {
+
+                width:
+                    42px;
+
+                height:
+                    42px;
+
+                font-size:
+                    21px;
+            }
+
+
+            .nav-links {
+
+                gap:
+                    13px;
+            }
+
+
+            .nav-links a {
+
+                font-size:
+                    11px;
+            }
+
+
+            .main {
+
+                padding:
+                    40px 18px 50px;
+            }
+
+
+            .hero {
+
+                margin-bottom:
+                    38px;
+            }
+
+
+            .hero-title {
+
+                font-size:
+                    42px;
+            }
+
+
+            .hero-description {
+
+                font-size:
+                    14px;
+            }
+
+
+            .trainer-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .trainer-photo {
+
+                height:
+                    260px;
+            }
+
+
+            .summary {
+
+                padding:
+                    16px;
+
+                gap:
+                    12px;
+            }
+
+
+            .summary-number {
+
+                font-size:
+                    28px;
+            }
+
+
+            .summary-text {
+
+                font-size:
+                    12px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .nav-links a:first-child {
+
+                display:
+                    none;
+            }
+
+
+            .hero-title {
+
+                font-size:
+                    36px;
+            }
+
+
+            .leaf-icon {
+
+                font-size:
+                    28px;
+            }
+
+
+            .hero-divider span {
+
+                width:
+                    55px;
+            }
+
+
+            .summary {
+
+                flex-wrap:
+                    wrap;
+            }
+
+
+            .summary-divider {
+
+                display:
+                    none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Background -->
+
+    <div class="leaf-decoration leaf-left"></div>
+
+    <div class="leaf-decoration leaf-right"></div>
+
+    <div class="circle-decoration circle-one"></div>
+
+    <div class="circle-decoration circle-two"></div>
+
+
+
+    <!-- ==========================================
+         NAVBAR
+    =========================================== -->
+
+    <header class="navbar">
+
+        <a href="/dashboard" class="brand">
+
+            <div class="brand-icon">
+                🌿
+            </div>
+
+            <div class="brand-name">
+                NOURIVA
+            </div>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="/trainer">
+                Trainer Home
+            </a>
+
+
+            <a href="/premium_trainer"
+               class="premium-link">
+
+                Premium Access
+
+            </a>
+
+
+            <a href="/logout"
+               class="logout-link">
+
+                Logout
+
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
+
+    <main class="main">
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+
+            <div class="hero-badge">
+
+                <i class="fa-solid fa-users"></i>
+
+                Expert Trainers
+
+            </div>
+
+
+            <h1 class="hero-title">
+
+                Approved
+
+                <span>
+                    Professional
+                </span>
+
+                Trainers
+
+                <span class="leaf-icon">
+                    🍃
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                Connect with certified experts for personalized
+                fitness & nutrition guidance — tailored for your
+                lifestyle in Kerala.
+
+            </p>
+
+
+            <div class="hero-divider">
+
+                <span></span>
+
+                <i class="fa-solid fa-leaf"></i>
+
+                <span></span>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==========================================
+             TRAINER LIST
+        =========================================== -->
+
+        {% if trainers %}
+
+
+        <div class="trainer-grid">
+
+
+            {% for t in trainers %}
+
+
+            <article class="trainer-card">
+
+
+                <!-- PHOTO / LETTER -->
+
+                <div class="trainer-photo">
+
+
+                    <!-- CERTIFIED BADGE -->
+
+                    <div class="certified-badge">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        Certified
+
+                    </div>
+
+
+                    {% if t.photo_url %}
+
+
+                        <!-- UPLOADED PROFILE PHOTO -->
+
+                        <img
+                            src="{{ t.photo_url }}"
+                            alt="{{ t.name }}"
+                        >
+
+
+                    {% else %}
+
+
+                        <!-- FIRST LETTER PROFILE -->
+
+                        <div class="letter-profile">
+
+                            {{ t.name[0]|upper }}
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+                <!-- TRAINER DETAILS -->
+
+                <div class="trainer-content">
+
+
+                    <h3 class="trainer-name">
+
+                        {{ t.name }}
+
+                    </h3>
+
+
+
+                    <div class="info-list">
+
+
+                        <!-- EMAIL -->
+
+                        <div class="info-row">
+
+                            <div class="info-icon">
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                            </div>
+
+
+                            <div class="info-text">
+
+                                {{ t.email }}
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- SPECIALIZATION -->
+
+                        <div class="info-row">
+
+                            <div class="info-icon">
+
+                                <i class="fa-solid fa-dumbbell"></i>
+
+                            </div>
+
+
+                            <div class="info-text">
+
+                                {{ t.specialization }}
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- EXPERIENCE -->
+
+                        <div class="info-row">
+
+                            <div class="info-icon">
+
+                                <i class="fa-solid fa-clock"></i>
+
+                            </div>
+
+
+                            <div class="info-text">
+
+                                {{ t.experience }}
+                                years experience
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- EXISTING BOOKING FUNCTIONALITY -->
+
+                    
+<!-- VIEW TRAINER DETAILS -->
+<a
+    href="/trainer_details/{{ t.id }}"
+    class="book-btn"
+>
+    <i class="fa-solid fa-user"></i>
+    View Trainer Profile
+    <span class="arrow">→</span>
+</a>
+
+
+
+                </div>
+
+
+            </article>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary">
+
+
+            <div class="summary-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+
+            <div class="summary-number">
+
+                {{ trainers|length }}
+
+            </div>
+
+
+            <div class="summary-divider"></div>
+
+
+            <div class="summary-text">
+
+                Certified Trainers Currently Available
+
+            </div>
+
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- EMPTY STATE -->
+
+        <div class="empty-state">
+
+
+            <div class="empty-icon">
+
+                <i class="fa-solid fa-person-running"></i>
+
+            </div>
+
+
+            <h2>
+
+                No Trainers Available Yet
+
+            </h2>
+
+
+            <p>
+
+                We're onboarding more certified trainers every week.
+                Check back soon or upgrade to Premium for priority
+                access and direct bookings.
+
+            </p>
+
+
+            <a
+                href="/premium_trainer"
+                class="premium-btn"
+            >
+
+                <i class="fa-solid fa-crown"></i>
+
+                Unlock Premium Trainer Access (₹599 lifetime)
+
+            </a>
+
+
+        </div>
+
+
+        {% endif %}
+
+
+
+        <!-- BACK TO TRAINER -->
+
+        <div class="back-container">
+
+            <a
+                href="/trainer"
+                class="back-link"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Trainer Dashboard
+
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        NOURIVA • Personal Trainer • Kanayannur, Kerala
+
+    </footer>
+
+
+</body>
+
+</html>

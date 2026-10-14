@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Payout History</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 85% 8%, rgba(34,197,94,.12), transparent 24%),
+                linear-gradient(135deg, #031b13, #06271b 45%, #03140e);
+        }
+
+        .sidebar {
+            background: linear-gradient(180deg, rgba(2,20,14,.98), rgba(1,17,12,.98));
+            border-right: 1px solid rgba(255,255,255,.07);
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 13px 16px;
+            margin-bottom: 8px;
+            border-radius: 13px;
+            color: rgba(255,255,255,.65);
+            text-decoration: none;
+            transition: .3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(34,197,94,.08);
+            color: #86efac;
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, rgba(34,197,94,.20), rgba(16,185,129,.10));
+            color: #86efac;
+            border: 1px solid rgba(34,197,94,.15);
+        }
+
+        .logo-box {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #22c55e, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payout-card {
+            background: linear-gradient(145deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+            border: 1px solid rgba(255,255,255,.08);
+            box-shadow: 0 25px 70px rgba(0,0,0,.18);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 75px;
+            }
+
+            .sidebar-text,
+            .logo-text-area {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 75px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar w-64 min-h-screen fixed left-0 top-0 z-50">
+        <div class="p-6">
+
+            <div class="flex items-center gap-3 mb-10">
+                <div class="logo-box">
+                    <i class="fa-solid fa-leaf text-white text-xl"></i>
+                </div>
+
+                <div class="logo-text-area">
+                    <div class="text-xl font-extrabold">NOURIVA</div>
+                    <div class="text-emerald-300 text-xs">TRAINER HUB</div>
+                </div>
+            </div>
+
+            <nav>
+                <a href="{{ url_for('trainer_dashboard') }}"
+                   class="nav-link">
+                    <i class="fa-solid fa-house w-5"></i>
+                    <span class="sidebar-text">Dashboard</span>
+                </a>
+
+                <a href="/trainer_reviews" class="nav-link">
+                    <i class="fa-solid fa-star w-5"></i>
+                    <span class="sidebar-text">Reviews</span>
+                </a>
+
+                <a href="{{ url_for('trainer_payout_history') }}"
+                   class="nav-link active">
+                    <i class="fa-solid fa-wallet w-5"></i>
+                    <span class="sidebar-text">Payout History</span>
+                </a>
+
+                <div class="h-px bg-white/10 my-6"></div>
+
+                <a href="/trainer_login" class="nav-link"
+                   style="color:#fca5a5">
+                    <i class="fa-solid fa-right-from-bracket w-5"></i>
+                    <span class="sidebar-text">Logout</span>
+                </a>
+            </nav>
+
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content ml-64 min-h-screen p-6 md:p-10">
+        <div class="max-w-6xl mx-auto">
+
+            <div class="mb-8">
+                <p class="text-emerald-400 text-xs font-bold tracking-widest uppercase">
+                    Trainer Hub
+                </p>
+
+                <h1 class="text-4xl font-extrabold mt-2">
+                    Payout History
+                </h1>
+
+                <p class="text-white/50 mt-2">
+                    View your recorded salary and payment details.
+                </p>
+            </div>
+
+            <section class="payout-card rounded-3xl p-6 md:p-8">
+
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-400/10 text-emerald-300 flex items-center justify-center">
+                        <i class="fa-solid fa-wallet text-xl"></i>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold">My Payments</h2>
+                        <p class="text-sm text-white/50 mt-1">
+                            Your payment records
+                        </p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left min-w-[650px]">
+                        <thead>
+                            <tr class="text-emerald-300 border-b border-white/10">
+                                <th class="py-4 px-3">Date</th>
+                                <th class="py-4 px-3">Amount</th>
+                                <th class="py-4 px-3">Reference</th>
+                                <th class="py-4 px-3">Note</th>
+                                <th class="py-4 px-3">Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for payout in payouts %}
+                            <tr class="border-b border-white/5 hover:bg-emerald-400/5">
+                                <td class="py-4 px-3 text-white/70">
+                                    {{ payout['paid_at'] }}
+                                </td>
+
+                                <td class="py-4 px-3 font-bold text-emerald-300">
+                                    ₹{{ "%.2f"|format(payout['amount_paise'] / 100) }}
+                                </td>
+
+                                <td class="py-4 px-3 text-white/70">
+                                    {{ payout['payment_reference'] or '—' }}
+                                </td>
+
+                                <td class="py-4 px-3 text-white/70">
+                                    {{ payout['note'] or '—' }}
+                                </td>
+
+                                <td class="py-4 px-3">
+                                    <span class="rounded-full px-3 py-1 text-xs font-bold bg-emerald-400/10 text-emerald-300">
+                                        {{ payout['status']|title }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="py-10 text-center text-white/50">
+                                    <i class="fa-solid fa-wallet text-3xl mb-3 block"></i>
+                                    No payout records available yet.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+</body>
+</html>

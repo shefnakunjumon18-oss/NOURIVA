@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Saved Recipes</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            font-family: 'DM Sans', sans-serif;
+
+            color: #174f3d;
+
+            background:
+                linear-gradient(
+                    rgba(246, 249, 226, 0.48),
+                    rgba(246, 249, 226, 0.68)
+                ),
+                url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=2200&q=90");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =========================================
+           SOFT OVERLAY
+        ========================================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(255,255,255,0.72),
+                    rgba(241,248,218,0.30) 55%,
+                    rgba(218,234,178,0.18)
+                );
+
+            pointer-events: none;
+
+            z-index: 0;
+        }
+
+
+        /* =========================================
+           DECORATIVE CIRCLES
+        ========================================= */
+
+        .decor {
+            position: fixed;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: 0;
+        }
+
+
+        .decor-one {
+            width: 330px;
+            height: 330px;
+
+            left: -170px;
+            top: 160px;
+
+            background: rgba(201, 226, 158, 0.43);
+        }
+
+
+        .decor-two {
+            width: 290px;
+            height: 290px;
+
+            right: -140px;
+            bottom: 30px;
+
+            background: rgba(238, 226, 169, 0.42);
+        }
+
+
+        .decor-three {
+            width: 180px;
+            height: 180px;
+
+            right: 8%;
+            top: 90px;
+
+            background: rgba(219, 235, 173, 0.35);
+        }
+
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .navbar {
+            width: calc(100% - 100px);
+
+            max-width: 1380px;
+
+            margin: 0 auto;
+
+            padding: 14px 28px;
+
+            min-height: 76px;
+
+            border-radius: 0 0 24px 24px;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #0b573f,
+                    #145d45
+                );
+
+            box-shadow:
+                0 14px 35px rgba(20, 80, 58, 0.20);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: relative;
+
+            z-index: 20;
+        }
+
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            text-decoration: none;
+        }
+
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 15px;
+
+            background: #f3f7df;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #5a9a48;
+
+            font-size: 23px;
+
+            box-shadow:
+                0 6px 15px rgba(0,0,0,0.10);
+        }
+
+
+        .brand-name {
+            color: white;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 28px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 42px;
+        }
+
+
+        .nav-links a {
+            color: rgba(255,255,255,0.92);
+
+            text-decoration: none;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+
+        .nav-links a:hover {
+            color: #d7efb7;
+
+            transform: translateY(-1px);
+        }
+
+
+        .nav-links .logout {
+            color: #f2c75e;
+        }
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
+
+        .main {
+            width: 100%;
+
+            max-width: 1400px;
+
+            margin: 0 auto;
+
+            padding: 75px 35px 45px;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        /* =========================================
+           TITLE
+        ========================================= */
+
+        .title-section {
+            text-align: center;
+
+            margin-bottom: 45px;
+
+            animation: fadeUp 0.8s ease;
+        }
+
+
+        .collection-label {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding: 8px 17px;
+
+            border-radius: 30px;
+
+            background: rgba(255,255,255,0.84);
+
+            color: #4c8a60;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            box-shadow:
+                0 7px 20px rgba(50,90,55,0.08);
+        }
+
+
+        .collection-label i {
+            font-size: 10px;
+        }
+
+
+        .title {
+            margin: 20px 0 8px;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: clamp(48px, 6vw, 76px);
+
+            line-height: 1.05;
+
+            letter-spacing: -2.5px;
+
+            color: #104f3c;
+        }
+
+
+        .title span {
+            color: #70a94e;
+        }
+
+
+        .subtitle {
+            max-width: 760px;
+
+            margin: 0 auto;
+
+            color: #5e756b;
+
+            font-size: 18px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           DECORATIVE TITLE LINE
+        ========================================= */
+
+        .title-decoration {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 20px;
+
+            margin-top: 22px;
+        }
+
+
+        .title-decoration span {
+            width: 95px;
+
+            height: 1px;
+
+            background: #9cbd66;
+        }
+
+
+        .title-decoration i {
+            color: #6ea449;
+
+            font-size: 22px;
+        }
+
+
+        /* =========================================
+           EMPTY RECIPE CARD
+        ========================================= */
+
+        .empty-card {
+            width: min(980px, 100%);
+
+            min-height: 555px;
+
+            margin: 0 auto;
+
+            border-radius: 34px;
+
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.78),
+                    rgba(252,251,232,0.82)
+                );
+
+            border: 1px solid rgba(255,255,255,0.95);
+
+            box-shadow:
+                0 25px 70px rgba(38, 78, 52, 0.13);
+
+            backdrop-filter: blur(12px);
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
+
+            padding: 45px 30px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            animation: fadeUp 0.9s ease;
+        }
+
+
+        .empty-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            left: -125px;
+            top: -125px;
+
+            border-radius: 50%;
+
+            background: rgba(202,228,159,0.45);
+        }
+
+
+        .empty-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 230px;
+            height: 230px;
+
+            right: -100px;
+            bottom: -110px;
+
+            border-radius: 50%;
+
+            background: rgba(239,228,179,0.42);
+        }
+
+
+        /* =========================================
+           RECIPE BOOK ILLUSTRATION
+        ========================================= */
+
+        .book-area {
+            position: relative;
+
+            width: 220px;
+            height: 190px;
+
+            margin-bottom: 12px;
+
+            z-index: 2;
+
+            animation: floatingBook 4s ease-in-out infinite;
+        }
+
+
+        .book-glow {
+            position: absolute;
+
+            width: 180px;
+            height: 120px;
+
+            left: 20px;
+            top: 45px;
+
+            border-radius: 50%;
+
+            background: rgba(207,230,160,0.62);
+
+            filter: blur(2px);
+        }
+
+
+        .book {
+            position: absolute;
+
+            width: 175px;
+            height: 110px;
+
+            left: 22px;
+            top: 55px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #e7cfa9 0%,
+                    #fff6db 48%,
+                    #e9d2a9 50%,
+                    #fff8df 100%
+                );
+
+            border-radius: 10px 13px 12px 8px;
+
+            border: 5px solid #2d684d;
+
+            box-shadow:
+                0 12px 18px rgba(35,72,48,0.20);
+
+            transform: perspective(500px) rotateX(5deg);
+        }
+
+
+        .book::before {
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 7px;
+
+            bottom: 7px;
+
+            width: 2px;
+
+            background: #c4a979;
+
+            transform: translateX(-50%);
+        }
+
+
+        .book-page {
+            position: absolute;
+
+            height: 4px;
+
+            border-radius: 10px;
+
+            background: #d8bd8e;
+
+            opacity: 0.85;
+        }
+
+
+        .page-one {
+            width: 55px;
+
+            left: 15px;
+
+            top: 30px;
+        }
+
+
+        .page-two {
+            width: 48px;
+
+            left: 15px;
+
+            top: 45px;
+        }
+
+
+        .page-three {
+            width: 55px;
+
+            right: 15px;
+
+            top: 30px;
+        }
+
+
+        .page-four {
+            width: 45px;
+
+            right: 15px;
+
+            top: 45px;
+        }
+
+
+        .recipe-bowl {
+            position: absolute;
+
+            width: 55px;
+            height: 35px;
+
+            left: 60px;
+            top: 42px;
+
+            border-radius: 0 0 30px 30px;
+
+            background:
+                linear-gradient(
+                    #f4b04d,
+                    #e98632
+                );
+
+            border: 3px solid #b96e2b;
+        }
+
+
+        .recipe-bowl::before {
+            content: "";
+
+            position: absolute;
+
+            width: 44px;
+            height: 17px;
+
+            left: 2px;
+            top: -8px;
+
+            border-radius: 50%;
+
+            background: #7fb154;
+
+            border: 3px solid #467344;
+        }
+
+
+        .chef-hat {
+            position: absolute;
+
+            width: 64px;
+            height: 45px;
+
+            left: 78px;
+            top: 5px;
+
+            background: #fff8e9;
+
+            border-radius: 50% 50% 35% 35%;
+
+            box-shadow:
+                0 5px 10px rgba(60,50,30,0.10);
+        }
+
+
+        .chef-hat::after {
+            content: "";
+
+            position: absolute;
+
+            width: 72px;
+            height: 19px;
+
+            left: -4px;
+            bottom: -7px;
+
+            border-radius: 8px;
+
+            background: #eadfc9;
+        }
+
+
+        .heart {
+            position: absolute;
+
+            right: 47px;
+            top: 72px;
+
+            color: #e96542;
+
+            font-size: 22px;
+        }
+
+
+        .leaf-one {
+            position: absolute;
+
+            left: 36px;
+            top: 27px;
+
+            color: #6ca047;
+
+            font-size: 27px;
+
+            transform: rotate(-25deg);
+        }
+
+
+        .leaf-two {
+            position: absolute;
+
+            right: 30px;
+            top: 40px;
+
+            color: #4d8d4c;
+
+            font-size: 28px;
+
+            transform: rotate(25deg);
+        }
+
+
+        /* =========================================
+           EMPTY CONTENT
+        ========================================= */
+
+        .empty-content {
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        .empty-title {
+            margin: 5px 0 10px;
+
+            color: #15543e;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 38px;
+
+            line-height: 1.2;
+        }
+
+
+        .empty-text {
+            max-width: 650px;
+
+            margin: 0 auto 30px;
+
+            color: #61776c;
+
+            font-size: 17px;
+
+            line-height: 1.65;
+        }
+
+
+        /* =========================================
+           GENERATE BUTTON
+        ========================================= */
+
+        .generate-first {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 13px;
+
+            min-width: 430px;
+
+            padding: 16px 25px;
+
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    #76a842,
+                    #16704e
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 13px 28px rgba(35,111,70,0.22);
+
+            transition: 0.3s ease;
+        }
+
+
+        .generate-first:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 35px rgba(35,111,70,0.30);
+        }
+
+
+        .generate-first i:first-child {
+            font-size: 21px;
+        }
+
+
+        .arrow-circle {
+            width: 44px;
+            height: 44px;
+
+            margin-left: auto;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.95);
+
+            color: #28694d;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+        }
+
+
+        /* =========================================
+           SAVED RECIPE GRID
+        ========================================= */
+
+        .recipes-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 25px;
+
+            margin-top: 20px;
+        }
+
+
+        .recipe-card {
+            background: rgba(255,255,255,0.84);
+
+            border-radius: 26px;
+
+            padding: 25px;
+
+            border: 1px solid rgba(255,255,255,0.95);
+
+            box-shadow:
+                0 18px 45px rgba(38,78,52,0.10);
+
+            transition: 0.35s ease;
+
+            animation: fadeUp 0.7s ease;
+        }
+
+
+        .recipe-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 25px 55px rgba(38,78,52,0.16);
+        }
+
+
+        .recipe-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+
+        .recipe-number {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 14px;
+
+            background: #e7f2d0;
+
+            color: #377b54;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 700;
+        }
+
+
+        .saved-badge {
+            padding: 7px 12px;
+
+            border-radius: 30px;
+
+            background: #edf6df;
+
+            color: #4c8d58;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .recipe-content {
+            color: #506e60;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            max-height: 350px;
+
+            overflow-y: auto;
+        }
+
+
+        .recipe-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+
+        .recipe-content::-webkit-scrollbar-thumb {
+            background: #c8ddb1;
+
+            border-radius: 20px;
+        }
+
+
+        .generate-similar {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 13px;
+
+            border-radius: 14px;
+
+            background: #176448;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: 0.3s ease;
+        }
+
+
+        .generate-similar:hover {
+            background: #0d533b;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================
+           COUNT
+        ========================================= */
+
+        .stats-card {
+            margin: 30px auto 0;
+
+            width: fit-content;
+
+            min-width: 280px;
+
+            padding: 18px 30px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.80);
+
+            border: 1px solid rgba(255,255,255,0.95);
+
+            box-shadow:
+                0 12px 30px rgba(40,80,55,0.08);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 15px;
+
+            text-align: left;
+        }
+
+
+        .stats-icon {
+            width: 43px;
+            height: 43px;
+
+            border-radius: 14px;
+
+            background: #e5f0d0;
+
+            color: #438258;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .stats-number {
+            color: #18563f;
+
+            font-size: 25px;
+
+            font-family: 'Playfair Display', serif;
+
+            font-weight: 700;
+        }
+
+
+        .stats-text {
+            color: #6d8177;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================
+           BACK
+        ========================================= */
+
+        .back-section {
+            text-align: center;
+
+            margin-top: 38px;
+        }
+
+
+        .back-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #47845e;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+
+        .back-button:hover {
+            color: #15543e;
+
+            transform: translateX(-4px);
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            text-align: center;
+
+            padding: 20px;
+
+            color: #71857b;
+
+            font-size: 11px;
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        footer strong {
+            color: #47845e;
+        }
+
+
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        @keyframes floatingBook {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-8px);
+            }
+
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .navbar {
+                width: calc(100% - 35px);
+            }
+
+
+            .recipes-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                width: calc(100% - 20px);
+
+                padding: 12px 15px;
+
+                border-radius: 0 0 18px 18px;
+            }
+
+
+            .brand-name {
+                font-size: 21px;
+            }
+
+
+            .brand-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+
+            .nav-links {
+                gap: 13px;
+            }
+
+
+            .nav-links a {
+                font-size: 11px;
+            }
+
+
+            .main {
+                padding: 50px 15px 35px;
+            }
+
+
+            .title {
+                font-size: 43px;
+
+                letter-spacing: -1.5px;
+            }
+
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+
+            .title-decoration span {
+                width: 55px;
+            }
+
+
+            .empty-card {
+                min-height: 500px;
+
+                padding: 35px 20px;
+
+                border-radius: 26px;
+            }
+
+
+            .empty-title {
+                font-size: 29px;
+            }
+
+
+            .empty-text {
+                font-size: 14px;
+            }
+
+
+            .generate-first {
+                min-width: 0;
+
+                width: 100%;
+
+                font-size: 14px;
+            }
+
+
+            .recipes-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Decorative circles -->
+
+    <div class="decor decor-one"></div>
+    <div class="decor decor-two"></div>
+    <div class="decor decor-three"></div>
+
+
+    <!-- =====================================
+         NAVBAR
+    ====================================== -->
+
+    <header class="navbar">
+
+        <a href="/dashboard" class="brand">
+
+            <div class="brand-icon">
+
+                <i class="fa-solid fa-leaf"></i>
+
+            </div>
+
+
+            <span class="brand-name">
+                NOURIVA
+            </span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="/recipe_generator">
+                Generate
+            </a>
+
+
+            <a href="/groceries">
+                Groceries
+            </a>
+
+
+            <a href="/logout" class="logout">
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================
+         MAIN
+    ====================================== -->
+
+    <main class="main">
+
+
+        <!-- =====================================
+             TITLE
+        ====================================== -->
+
+        <section class="title-section">
+
+
+            <div class="collection-label">
+
+                <i class="fa-solid fa-leaf"></i>
+
+                YOUR RECIPE COLLECTION
+
+            </div>
+
+
+            <h1 class="title">
+
+                Your Saved
+                <span>Recipes</span>
+
+            </h1>
+
+
+            <p class="subtitle">
+
+                Your personal collection of favorite dishes —
+                ready whenever hunger strikes.
+
+            </p>
+
+
+            <div class="title-decoration">
+
+                <span></span>
+
+                <i class="fa-solid fa-leaf"></i>
+
+                <span></span>
+
+            </div>
+
+
+        </section>
+
+
+        {% if recipes %}
+
+
+        <!-- =====================================
+             SAVED RECIPES
+        ====================================== -->
+
+        <div class="recipes-grid">
+
+
+            {% for r in recipes %}
+
+
+            <div class="recipe-card">
+
+
+                <div class="recipe-top">
+
+
+                    <div class="recipe-number">
+
+                        {{ loop.index }}
+
+                    </div>
+
+
+                    <div class="saved-badge">
+
+                        <i class="fa-solid fa-bookmark"></i>
+
+                        SAVED
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="recipe-content">
+
+                    {{ r.recipe | safe }}
+
+                </div>
+
+
+                <a href="/recipe_generator"
+                   class="generate-similar">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                    Generate Similar
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+        <!-- Recipe count -->
+
+        <div class="stats-card">
+
+            <div class="stats-icon">
+
+                <i class="fa-solid fa-book-open"></i>
+
+            </div>
+
+
+            <div>
+
+                <div class="stats-number">
+
+                    {{ recipes | length }}
+
+                </div>
+
+
+                <div class="stats-text">
+
+                    Favorite Recipes Collected
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- =====================================
+             EMPTY RECIPE BOOK
+        ====================================== -->
+
+        <section class="empty-card">
+
+
+            <!-- Recipe book illustration -->
+
+            <div class="book-area">
+
+
+                <div class="book-glow"></div>
+
+
+                <div class="chef-hat"></div>
+
+
+                <div class="book">
+
+                    <div class="page-one book-page"></div>
+
+                    <div class="page-two book-page"></div>
+
+                    <div class="page-three book-page"></div>
+
+                    <div class="page-four book-page"></div>
+
+
+                    <div class="recipe-bowl"></div>
+
+                </div>
+
+
+                <i class="fa-solid fa-leaf leaf-one"></i>
+
+                <i class="fa-solid fa-leaf leaf-two"></i>
+
+
+                <i class="fa-solid fa-heart heart"></i>
+
+
+            </div>
+
+
+            <!-- Empty content -->
+
+            <div class="empty-content">
+
+
+                <h2 class="empty-title">
+
+                    Your Recipe Book is Empty
+
+                </h2>
+
+
+                <p class="empty-text">
+
+                    Start generating delicious recipes and save
+                    your favorites here.<br>
+
+                    Your personal Kerala-inspired cookbook awaits!
+
+                </p>
+
+
+                <a href="/recipe_generator"
+                   class="generate-first">
+
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+
+                    <span>
+                        Generate Your First Recipe
+                    </span>
+
+
+                    <span class="arrow-circle">
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </span>
+
+
+                </a>
+
+
+            </div>
+
+
+        </section>
+
+
+        {% endif %}
+
+
+        <!-- =====================================
+             BACK TO DASHBOARD
+        ====================================== -->
+
+        <div class="back-section">
+
+
+            <a href="/dashboard"
+               class="back-button">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <footer>
+
+        <strong>NOURIVA</strong>
+
+        &nbsp;•&nbsp;
+
+        Good Food • Better Life
+
+    </footer>
+
+
+</body>
+
+</html>

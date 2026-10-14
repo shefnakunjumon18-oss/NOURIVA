@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Admin • Manage Reviews</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #fffaf0;
+            --forest: #194b3b;
+            --green: #245c46;
+            --green-light: #3f8965;
+            --sage: #77a96b;
+            --pale: #e4edcf;
+            --muted: #718273;
+            --border: #e3e9dc;
+            --danger: #b94b4b;
+            --danger-bg: #fff0ed;
+            --gold: #d7a928;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--forest);
+            background:
+                radial-gradient(ellipse at 5% 90%, #e4edcf 0%, transparent 30%),
+                radial-gradient(ellipse at 95% 5%, #e8efd7 0%, transparent 28%),
+                var(--cream);
+        }
+
+        /* HEADER */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 250, 240, 0.94);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1250px;
+            margin: auto;
+            padding: 15px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--forest);
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            color: white;
+            font-size: 21px;
+            background: linear-gradient(135deg, var(--sage), var(--green));
+            box-shadow: 0 8px 20px rgba(36, 92, 70, 0.18);
+        }
+
+        .brand-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .brand-subtitle {
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green);
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--sage);
+        }
+
+        .logout-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 12px 18px;
+            color: white;
+            background: linear-gradient(135deg, var(--green-light), var(--green));
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(36, 92, 70, 0.2);
+        }
+
+        /* MAIN */
+
+        .main {
+            max-width: 1250px;
+            margin: auto;
+            padding: 45px 28px 55px;
+        }
+
+        .page-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 25px;
+            margin-bottom: 30px;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 13px;
+            margin-bottom: 16px;
+            border-radius: 30px;
+            color: #52784e;
+            background: var(--pale);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            margin: 0;
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.3px;
+        }
+
+        .page-title span {
+            color: #6fa75d;
+        }
+
+        .page-description {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .total-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 17px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            color: var(--forest);
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(39, 83, 56, 0.04);
+        }
+
+        .total-icon {
+            width: 35px;
+            height: 35px;
+            display: grid;
+            place-items: center;
+            background: var(--pale);
+            border-radius: 11px;
+            color: var(--green);
+            font-size: 17px;
+        }
+
+        /* SEARCH AND FILTER */
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 220px;
+            max-width: 390px;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #809481;
+            pointer-events: none;
+        }
+
+        .search-box input,
+        .rating-filter {
+            height: 47px;
+            padding: 0 15px;
+            outline: none;
+            border: 1px solid #dfe8d8;
+            border-radius: 13px;
+            color: var(--forest);
+            background: rgba(255, 255, 255, 0.88);
+            font-family: inherit;
+            font-size: 13px;
+            transition: all 0.25s;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding-left: 42px;
+        }
+
+        .search-box input::placeholder {
+            color: #9aaa99;
+        }
+
+        .search-box input:focus,
+        .rating-filter:focus {
+            border-color: var(--green-light);
+            box-shadow: 0 0 0 4px rgba(63, 137, 101, 0.1);
+        }
+
+        .rating-filter {
+            min-width: 145px;
+            cursor: pointer;
+        }
+
+        .results-label {
+            margin-left: auto;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* TABLE */
+
+        .table-card {
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.86);
+            border: 1px solid var(--border);
+            border-radius: 23px;
+            box-shadow: 0 15px 45px rgba(39, 83, 56, 0.065);
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: left;
+        }
+
+        thead {
+            background: #eef3e5;
+        }
+
+        th {
+            padding: 19px 22px;
+            color: #55705a;
+            border-bottom: 1px solid #e1e9d9;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 20px 22px;
+            border-bottom: 1px solid #edf0e8;
+            color: #657668;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .review-row {
+            transition: background 0.25s;
+        }
+
+        .review-row:hover {
+            background: #f5f8ef;
+        }
+
+        .user-cell {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 130px;
+        }
+
+        .avatar-placeholder {
+            width: 43px;
+            height: 43px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            background: linear-gradient(135deg, var(--sage), var(--green));
+            border: 2px solid #e4edcf;
+            box-shadow: 0 5px 12px rgba(36, 92, 70, 0.12);
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .username {
+            color: var(--forest);
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .trainer-id {
+            color: #718273;
+            font-weight: 600;
+        }
+
+        /* STAR RATINGS */
+
+        .stars {
+            white-space: nowrap;
+            letter-spacing: 1px;
+            font-size: 19px;
+        }
+
+        .star-filled {
+            color: var(--gold);
+        }
+
+        .star-empty {
+            color: #d8dfd1;
+        }
+
+        .rating-label {
+            display: inline-block;
+            margin-left: 7px;
+            color: #6c806d;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* FEEDBACK */
+
+        .feedback {
+            max-width: 300px;
+            color: #657668;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+
+        /* DELETE BUTTON */
+
+        .delete-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 1px solid #f4d9d3;
+            border-radius: 10px;
+            color: #a64a44;
+            background: var(--danger-bg);
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 800;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.22s ease;
+        }
+
+        .delete-btn:hover {
+            color: white;
+            background: var(--danger);
+            border-color: var(--danger);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(185, 75, 75, 0.15);
+        }
+
+        /* SEARCH EMPTY RESULT */
+
+        .no-results td {
+            padding: 32px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        /* SUMMARY */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .stat-card {
+            padding: 28px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(39, 83, 56, 0.045);
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: var(--pale);
+            color: var(--green);
+            font-size: 22px;
+        }
+
+        .stat-number {
+            color: var(--forest);
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-state {
+            padding: 60px 25px;
+            text-align: center;
+        }
+
+        .empty-emoji {
+            margin-bottom: 18px;
+            font-size: 65px;
+        }
+
+        .empty-state h2 {
+            margin: 0 0 12px;
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+        }
+
+        .empty-state p {
+            margin: 0 auto 25px;
+            max-width: 440px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .return-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--green-light), var(--green));
+            color: white;
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .return-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(36, 92, 70, 0.2);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: 40px;
+            padding: 24px 15px;
+            border-top: 1px solid var(--border);
+            color: #879486;
+            font-size: 11px;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+            .page-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .total-pill {
+                align-self: flex-start;
+            }
+
+            .results-label {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner {
+                padding: 13px 16px;
+            }
+
+            .brand-title {
+                font-size: 19px;
+            }
+
+            .brand-subtitle {
+                font-size: 8px;
+            }
+
+            .brand-icon {
+                width: 41px;
+                height: 41px;
+            }
+
+            .header-actions {
+                gap: 12px;
+            }
+
+            .back-link {
+                font-size: 11px;
+            }
+
+            .logout-btn {
+                padding: 10px 12px;
+                font-size: 11px;
+            }
+
+            .main {
+                padding: 32px 15px 40px;
+            }
+
+            .page-title {
+                font-size: 37px;
+            }
+
+            .page-description {
+                font-size: 12px;
+            }
+
+            .controls {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .search-box {
+                width: 100%;
+                max-width: none;
+            }
+
+            .rating-filter {
+                width: 100%;
+            }
+
+            .table-card {
+                border-radius: 17px;
+            }
+
+            th,
+            td {
+                padding: 15px 13px;
+            }
+
+            .stat-card {
+                padding: 22px 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="header-inner">
+
+            <a href="/admin_dashboard" class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div>
+                    <div class="brand-title">NOURIVA</div>
+                    <div class="brand-subtitle">ADMIN WORKSPACE</div>
+                </div>
+            </a>
+
+            <div class="header-actions">
+                <a href="/admin_dashboard" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+
+                <a href="/logout" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TITLE -->
+        <section class="page-heading">
+
+            <div>
+                <div class="eyebrow">
+                    <i class="fa-solid fa-star"></i>
+                    Community Feedback
+                </div>
+
+                <h1 class="page-title">
+                    Manage <span>Reviews</span>
+                </h1>
+
+                <p class="page-description">
+                    Review and moderate trainer feedback.
+                    ⭐ {{ reviews|length }} reviews found.
+                </p>
+            </div>
+
+            <div class="total-pill">
+                <span class="total-icon">
+                    <i class="fa-solid fa-comments"></i>
+                </span>
+
+                <span>{{ reviews|length }} Total Reviews</span>
+            </div>
+
+        </section>
+
+        {% if reviews %}
+
+        <!-- SEARCH AND FILTER -->
+        <section class="controls">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="reviewSearch"
+                    placeholder="Search by user or feedback..."
+                    aria-label="Search reviews">
+            </div>
+
+            <select
+                id="ratingFilter"
+                class="rating-filter"
+                aria-label="Filter reviews by rating">
+
+                <option value="all">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4 Stars</option>
+                <option value="3">3 Stars</option>
+                <option value="2">2 Stars</option>
+                <option value="1">1 Star</option>
+
+            </select>
+
+            <span class="results-label" id="resultsLabel">
+                Showing {{ reviews|length }} reviews
+            </span>
+
+        </section>
+
+        <!-- REVIEWS TABLE -->
+        <section class="table-card">
+
+            <div class="table-scroll">
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>User</th>
+                            <th>Trainer ID</th>
+                            <th>Rating</th>
+                            <th>Feedback Preview</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="reviewsTableBody">
+
+                        {% for r in reviews %}
+
+                        <tr class="review-row"
+                            data-rating="{{ r.rating }}">
+
+                            <!-- USER -->
+                            <td>
+                                <div class="user-cell">
+
+                                    <div class="avatar-placeholder">
+                                        {{ (r.user or 'U')[0]|upper }}
+                                    </div>
+
+                                    <span class="username">
+                                        {{ r.user }}
+                                    </span>
+
+                                </div>
+                            </td>
+
+                            <!-- TRAINER ID -->
+                            <td>
+                                <span class="trainer-id">
+                                    {{ r.trainer_id }}
+                                </span>
+                            </td>
+
+                            <!-- RATING -->
+                            <td>
+                                <div class="stars">
+                                    {% for i in range(r.rating) %}
+                                        <span class="star-filled">★</span>
+                                    {% endfor %}
+
+                                    {% for i in range(5 - r.rating) %}
+                                        <span class="star-empty">☆</span>
+                                    {% endfor %}
+                                </div>
+
+                                <span class="rating-label">
+                                    {{ r.rating }}/5
+                                </span>
+                            </td>
+
+                            <!-- FEEDBACK -->
+                            <td>
+                                <div class="feedback">
+                                    {{ r.feedback or 'No written feedback.' }}
+                                </div>
+                            </td>
+
+                            <!-- DELETE -->
+                            <td>
+                                <form
+                                    action="{{ url_for('delete_review', id=r.id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Are you sure you want to permanently delete this review by {{ r.user }}? This cannot be undone.');">
+
+                                    <button
+                                        type="submit"
+                                        class="delete-btn">
+
+                                        <i class="fa-solid fa-trash-can"></i>
+                                        Delete
+
+                                    </button>
+
+                                </form>
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        <tr id="noSearchResults" class="no-results"
+                            style="display: none;">
+                            <td colspan="5">
+                                <div style="font-size: 30px; margin-bottom: 10px;">
+                                    🔎
+                                </div>
+                                No reviews match your search or rating filter.
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </section>
+
+        <!-- SUMMARY STATS -->
+        {% set total = reviews | sum(attribute='rating') %}
+        {% set avg = total / reviews|length if reviews else 0 %}
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+
+                <div>
+                    <div class="stat-number">
+                        {{ reviews|length }}
+                    </div>
+
+                    <div class="stat-label">
+                        Total Reviews 💬
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <div>
+                    <div class="stat-number">
+                        {{ "%.1f"|format(avg) }}
+                    </div>
+
+                    <div class="stat-label">
+                        Average Rating ⭐
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        {% else %}
+
+        <!-- EMPTY STATE -->
+        <section class="table-card empty-state">
+
+            <div class="empty-emoji">⭐🌿</div>
+
+            <h2>No Reviews Yet</h2>
+
+            <p>
+                Users haven't left any trainer feedback yet.
+                Once they do, reviews will appear here for moderation.
+            </p>
+
+            <a href="/admin_dashboard" class="return-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Admin Dashboard
+            </a>
+
+        </section>
+
+        {% endif %}
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>🌿 NOURIVA • AI Health & Fitness • Admin Workspace</p>
+        <p>Protected Area • Unauthorized access prohibited 🔒</p>
+    </footer>
+
+    <!-- SEARCH AND RATING FILTER -->
+    <script>
+        const reviewSearch = document.getElementById("reviewSearch");
+        const ratingFilter = document.getElementById("ratingFilter");
+        const reviewRows = document.querySelectorAll(
+            "#reviewsTableBody .review-row"
+        );
+        const noSearchResults = document.getElementById("noSearchResults");
+        const resultsLabel = document.getElementById("resultsLabel");
+
+        function filterReviews() {
+            const searchText = reviewSearch
+                ? reviewSearch.value.trim().toLowerCase()
+                : "";
+
+            const selectedRating = ratingFilter
+                ? ratingFilter.value
+                : "all";
+
+            let visibleCount = 0;
+
+            reviewRows.forEach(function (row) {
+                const rowText = row.textContent.toLowerCase();
+                const rowRating = row.dataset.rating;
+
+                const matchesText = rowText.includes(searchText);
+                const matchesRating =
+                    selectedRating === "all" ||
+                    rowRating === selectedRating;
+
+                const isVisible = matchesText && matchesRating;
+
+                row.style.display = isVisible ? "" : "none";
+
+                if (isVisible) {
+                    visibleCount++;
+                }
+            });
+
+            if (noSearchResults) {
+                noSearchResults.style.display =
+                    visibleCount === 0 ? "table-row" : "none";
+            }
+
+            if (resultsLabel) {
+                resultsLabel.textContent =
+                    "Showing " + visibleCount +
+                    (visibleCount === 1 ? " review" : " reviews");
+            }
+        }
+
+        if (reviewSearch) {
+            reviewSearch.addEventListener("input", filterReviews);
+        }
+
+        if (ratingFilter) {
+            ratingFilter.addEventListener("change", filterReviews);
+        }
+    </script>
+
+</body>
+</html>

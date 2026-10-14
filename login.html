@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Sign In</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family: 'DM Sans', sans-serif;
+
+            color: white;
+
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(62, 130, 71, 0.28),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 85% 75%,
+                    rgba(117, 180, 88, 0.18),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #020b05 0%,
+                    #06170c 45%,
+                    #0b2112 100%
+                );
+        }
+
+
+        /* =========================================
+           BACKGROUND GLOW
+        ========================================= */
+
+        .background-glow {
+
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(86, 166, 91, 0.15),
+                    transparent 68%
+                );
+
+            pointer-events: none;
+
+            filter: blur(10px);
+
+            animation: glowMove 8s ease-in-out infinite alternate;
+        }
+
+
+        .glow-one {
+
+            top: -180px;
+            left: -150px;
+        }
+
+
+        .glow-two {
+
+            bottom: -200px;
+            right: -150px;
+
+            animation-delay: 2s;
+        }
+
+
+        @keyframes glowMove {
+
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(50px, 30px) scale(1.15);
+            }
+        }
+
+
+        /* =========================================
+           DECORATIVE CIRCLES
+        ========================================= */
+
+        .circle {
+
+            position: fixed;
+
+            border: 1px solid rgba(130, 205, 112, 0.20);
+
+            border-radius: 50%;
+
+            pointer-events: none;
+        }
+
+
+        .circle-one {
+
+            width: 420px;
+            height: 420px;
+
+            top: -230px;
+            left: -180px;
+        }
+
+
+        .circle-two {
+
+            width: 520px;
+            height: 520px;
+
+            bottom: -300px;
+            right: -250px;
+        }
+
+
+        .circle-three {
+
+            width: 260px;
+            height: 260px;
+
+            top: 8%;
+            right: -130px;
+
+            border-color: rgba(91, 169, 95, 0.14);
+        }
+
+
+        /* =========================================
+           FLOATING LEAVES
+        ========================================= */
+
+        .leaf {
+
+            position: fixed;
+
+            color: rgba(132, 201, 112, 0.40);
+
+            font-size: 22px;
+
+            pointer-events: none;
+
+            animation: floatLeaf 7s ease-in-out infinite;
+        }
+
+
+        .leaf-one {
+            top: 18%;
+            left: 7%;
+        }
+
+
+        .leaf-two {
+
+            top: 12%;
+            right: 14%;
+
+            font-size: 17px;
+
+            animation-delay: 1.5s;
+        }
+
+
+        .leaf-three {
+
+            bottom: 18%;
+            left: 12%;
+
+            font-size: 16px;
+
+            animation-delay: 3s;
+        }
+
+
+        .leaf-four {
+
+            bottom: 25%;
+            right: 8%;
+
+            font-size: 24px;
+
+            animation-delay: 4s;
+        }
+
+
+        @keyframes floatLeaf {
+
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.35;
+            }
+
+            50% {
+                transform: translateY(-18px) rotate(12deg);
+                opacity: 0.75;
+            }
+        }
+
+
+        /* =========================================
+           PAGE
+        ========================================= */
+
+        .page {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 45px 25px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =========================================
+           MAIN CARD
+        ========================================= */
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 1120px;
+
+            min-height: 650px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            border-radius: 30px;
+
+            overflow: hidden;
+
+            background: rgba(255,255,255,0.06);
+
+            border: 1px solid rgba(174, 226, 161, 0.20);
+
+            box-shadow:
+                0 35px 100px rgba(0,0,0,0.55),
+                0 0 80px rgba(71, 145, 76, 0.10);
+
+            backdrop-filter: blur(18px);
+
+            animation: cardAppear 1s ease forwards;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(35px)
+                    scale(0.97);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================================
+           LEFT BRAND PANEL
+        ========================================= */
+
+        .brand-section {
+
+            position: relative;
+
+            padding: 58px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(103, 178, 91, 0.20),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    145deg,
+                    #082613,
+                    #0d351b 55%,
+                    #174824
+                );
+        }
+
+
+        .brand-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 430px;
+            height: 430px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(121, 193, 100, 0.14),
+                    transparent 68%
+                );
+
+            top: -220px;
+            right: -190px;
+        }
+
+
+        .brand-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 340px;
+            height: 340px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(146, 214, 125, 0.18);
+
+            bottom: -190px;
+            left: -130px;
+        }
+
+
+        .brand-content {
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .brand-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 28px;
+
+            color: #ecffe7;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(105, 185, 100, 0.38),
+                    rgba(255,255,255,0.08)
+                );
+
+            border: 1px solid rgba(185, 237, 169, 0.30);
+
+            box-shadow:
+                0 12px 35px rgba(0,0,0,0.25),
+                0 0 25px rgba(95, 181, 89, 0.15);
+
+            margin-bottom: 28px;
+
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+
+        @keyframes logoFloat {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+        }
+
+
+        /* =========================================
+           NOURIVA TITLE
+        ========================================= */
+
+        .brand-title {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 48px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+            color: #f5f8ed;
+
+            margin-bottom: 18px;
+        }
+
+
+        .brand-tagline {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 32px;
+
+            line-height: 1.08;
+
+            font-weight: 700;
+
+            color: #ffffff;
+
+            max-width: 390px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .brand-tagline span {
+
+            color: #9bd68a;
+        }
+
+
+        .brand-description {
+
+            max-width: 400px;
+
+            font-size: 15px;
+
+            line-height: 1.8;
+
+            color: rgba(255,255,255,0.70);
+
+            margin-bottom: 34px;
+        }
+
+
+        /* =========================================
+           FEATURES
+        ========================================= */
+
+        .features {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 17px;
+        }
+
+
+        .feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            color: rgba(255,255,255,0.88);
+
+            font-size: 14px;
+
+            animation: featureAppear 0.8s ease forwards;
+
+            opacity: 0;
+        }
+
+
+        .feature:nth-child(1) {
+            animation-delay: 0.3s;
+        }
+
+        .feature:nth-child(2) {
+            animation-delay: 0.45s;
+        }
+
+        .feature:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+
+        @keyframes featureAppear {
+
+            from {
+                opacity: 0;
+                transform: translateX(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+
+        .feature-icon {
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #b9e8a8;
+
+            background:
+                rgba(113, 181, 104, 0.13);
+
+            border: 1px solid rgba(151, 218, 131, 0.30);
+
+            transition: 0.3s ease;
+        }
+
+
+        .feature:hover .feature-icon {
+
+            transform: scale(1.12);
+
+            background:
+                rgba(113, 181, 104, 0.25);
+
+            box-shadow:
+                0 0 20px rgba(120, 205, 105, 0.20);
+        }
+
+
+        .brand-footer {
+
+            position: relative;
+
+            z-index: 3;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 17px;
+
+            font-style: italic;
+
+            color: #a8d895;
+        }
+
+
+        /* =========================================
+           RIGHT FORM PANEL
+        ========================================= */
+
+        .form-section {
+
+            position: relative;
+
+            padding: 58px 65px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            color: #183126;
+
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(143, 192, 123, 0.30),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 0% 100%,
+                    rgba(215, 232, 191, 0.45),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    145deg,
+                    #f7f8ee,
+                    #eef2e5
+                );
+        }
+
+
+        .form-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(117, 166, 103, 0.10);
+
+            top: -150px;
+            right: -100px;
+        }
+
+
+        .form-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(76, 124, 80, 0.12);
+
+            bottom: -100px;
+            left: -80px;
+        }
+
+
+        .form-content {
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =========================================
+           FORM HEADER
+        ========================================= */
+
+        .small-leaf {
+
+            color: #4e8155;
+
+            font-size: 19px;
+
+            margin-bottom: 12px;
+
+            animation: leafPulse 3s ease-in-out infinite;
+        }
+
+
+        @keyframes leafPulse {
+
+            0%, 100% {
+                transform: rotate(-4deg);
+            }
+
+            50% {
+                transform: rotate(7deg) scale(1.08);
+            }
+        }
+
+
+        .form-header h1 {
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 43px;
+
+            line-height: 1.1;
+
+            margin: 0 0 10px;
+
+            color: #163426;
+        }
+
+
+        .form-header h1 span {
+
+            color: #59885c;
+        }
+
+
+        .form-header p {
+
+            margin: 0 0 30px;
+
+            font-size: 14px;
+
+            color: #748078;
+        }
+
+
+        /* =========================================
+           ERROR MESSAGE
+        ========================================= */
+
+        .error-message {
+
+            margin-bottom: 20px;
+
+            padding: 13px 15px;
+
+            border-radius: 13px;
+
+            background: #fff0ef;
+
+            border: 1px solid #efb9b5;
+
+            color: #c0392b;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            animation: errorShake 0.4s ease;
+        }
+
+
+        @keyframes errorShake {
+
+            0%, 100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
+        }
+
+
+        /* =========================================
+           INPUT
+        ========================================= */
+
+        .input-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            color: #284337;
+        }
+
+
+        .input-box {
+
+            position: relative;
+        }
+
+
+        .input-box i {
+
+            position: absolute;
+
+            left: 17px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #729077;
+
+            font-size: 14px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .input-field {
+
+            width: 100%;
+
+            height: 54px;
+
+            padding: 0 18px 0 46px;
+
+            border: 1px solid #d4ddd2;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.65);
+
+            color: #193327;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            outline: none;
+
+            transition: all 0.3s ease;
+
+            box-shadow:
+                inset 0 1px 2px rgba(0,0,0,0.02);
+        }
+
+
+        .input-field::placeholder {
+
+            color: #a2aaa4;
+        }
+
+
+        .input-field:focus {
+
+            background: white;
+
+            border-color: #5e9462;
+
+            box-shadow:
+                0 0 0 4px rgba(91,145,94,0.12),
+                0 8px 25px rgba(55,100,60,0.08);
+
+            transform: translateY(-1px);
+        }
+
+
+        .input-box:focus-within i {
+
+            color: #3f7747;
+
+            transform:
+                translateY(-50%)
+                scale(1.12);
+        }
+
+
+        /* =========================================
+           SIGN IN BUTTON
+        ========================================= */
+
+        .login-button {
+
+            width: 100%;
+
+            height: 56px;
+
+            border: none;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #174d2b,
+                    #4f8b51,
+                    #78a96e
+                );
+
+            background-size: 200% 200%;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            box-shadow:
+                0 12px 28px rgba(40,96,48,0.25);
+
+            transition: all 0.4s ease;
+
+            animation: buttonGradient 5s ease infinite;
+        }
+
+
+        @keyframes buttonGradient {
+
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+
+        .login-button:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 18px 35px rgba(40,96,48,0.35);
+        }
+
+
+        .login-button:active {
+
+            transform: translateY(0);
+        }
+
+
+        .login-button i {
+
+            margin-right: 8px;
+        }
+
+
+        /* =========================================
+           REGISTER LINK
+        ========================================= */
+
+        .register-text {
+
+            text-align: center;
+
+            margin-top: 24px;
+
+            font-size: 13px;
+
+            color: #7b867e;
+        }
+
+
+        .register-text a {
+
+            color: #397044;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            transition: 0.25s;
+        }
+
+
+        .register-text a:hover {
+
+            color: #174d2b;
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           SECURITY
+        ========================================= */
+
+        .security {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            margin-top: 25px;
+
+            font-size: 11px;
+
+            color: #89958d;
+        }
+
+
+        .security i {
+
+            color: #5b8d5f;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .login-card {
+
+                grid-template-columns: 1fr;
+
+                max-width: 560px;
+            }
+
+
+            .brand-section {
+
+                min-height: 450px;
+
+                padding: 45px;
+            }
+
+
+            .form-section {
+
+                padding: 48px 45px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .page {
+
+                padding: 20px 12px;
+            }
+
+
+            .login-card {
+
+                border-radius: 24px;
+            }
+
+
+            .brand-section {
+
+                padding: 35px 28px;
+
+                min-height: 400px;
+            }
+
+
+            .form-section {
+
+                padding: 40px 28px;
+            }
+
+
+            .brand-title {
+
+                font-size: 38px;
+            }
+
+
+            .brand-tagline {
+
+                font-size: 27px;
+            }
+
+
+            .form-header h1 {
+
+                font-size: 35px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- BACKGROUND EFFECTS -->
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+    <div class="circle circle-three"></div>
+
+
+    <!-- FLOATING LEAVES -->
+
+    <div class="leaf leaf-one">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+    <div class="leaf leaf-two">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+    <div class="leaf leaf-three">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+    <div class="leaf leaf-four">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+
+    <!-- PAGE -->
+
+    <div class="page">
+
+
+        <!-- MAIN CARD -->
+
+        <div class="login-card">
+
+
+            <!-- =====================================
+                 LEFT BRAND SECTION
+            ====================================== -->
+
+            <div class="brand-section">
+
+                <div class="brand-content">
+
+
+                    <!-- LOGO -->
+
+                    <div class="brand-icon">
+
+                        <i class="fa-solid fa-leaf"></i>
+
+                    </div>
+
+
+                    <!-- BRAND -->
+
+                    <div class="brand-title">
+
+                        NOURIVA
+
+                    </div>
+
+
+                    <div class="brand-tagline">
+
+                        Welcome back.<br>
+
+                        <span>Live healthier.</span>
+
+                    </div>
+
+
+                    <p class="brand-description">
+
+                        Your smart companion for delicious recipes,
+                        personalized fitness and a healthier lifestyle.
+
+                    </p>
+
+
+                    <!-- FEATURES -->
+
+                    <div class="features">
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+
+                                <i class="fa-solid fa-utensils"></i>
+
+                            </div>
+
+                            <span>
+                                Discover personalized recipes
+                            </span>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+
+                                <i class="fa-solid fa-dumbbell"></i>
+
+                            </div>
+
+                            <span>
+                                Connect with fitness trainers
+                            </span>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+
+                                <i class="fa-solid fa-heart-pulse"></i>
+
+                            </div>
+
+                            <span>
+                                Build a healthier lifestyle
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOOTER -->
+
+                <div class="brand-footer">
+
+                    Good Food • Better Life ♥
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================
+                 RIGHT LOGIN FORM
+            ====================================== -->
+
+            <div class="form-section">
+
+
+                <div class="form-content">
+
+
+                    <!-- HEADER -->
+
+                    <div class="form-header">
+
+                        <div class="small-leaf">
+
+                            <i class="fa-solid fa-leaf"></i>
+
+                        </div>
+
+
+                        <h1>
+
+                            Welcome <span>Back</span>
+
+                        </h1>
+
+
+                        <p>
+
+                            Sign in to continue your wellness journey.
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- ERROR MESSAGE -->
+
+                    {% if error %}
+
+                        <div class="error-message">
+
+                            <i class="fa-solid fa-circle-exclamation"></i>
+
+                            <span>
+
+                                {{ error }}
+
+                            </span>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <!-- LOGIN FORM -->
+
+                    <form method="POST">
+
+
+                        <!-- EMAIL -->
+
+                        <div class="input-group">
+
+                            <label>
+                                Email Address
+                            </label>
+
+
+                            <div class="input-box">
+
+                                <i class="fa-solid fa-envelope"></i>
+
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required
+                                    placeholder="your@email.com"
+                                    class="input-field"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="input-group">
+
+                            <label>
+                                Password
+                            </label>
+
+
+                            <div class="input-box">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    name="password"
+                                    required
+                                    placeholder="Enter your password"
+                                    class="input-field"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SIGN IN -->
+
+                        <button
+                            type="submit"
+                            class="login-button">
+
+                            <i class="fa-solid fa-right-to-bracket"></i>
+
+                            Sign In
+
+                        </button>
+
+
+                    </form>
+
+
+                    <!-- REGISTER -->
+
+                    <div class="register-text">
+
+                        Don't have an account yet?
+
+                        <a href="/register">
+
+                            Create one now
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- SECURITY -->
+
+                    <div class="security">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Your account information is securely protected.
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

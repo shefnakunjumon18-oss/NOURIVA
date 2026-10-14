@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOURIVA | Booking Conflict</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #071713;
+            color: #f0fdf4;
+            font-family: Arial, sans-serif;
+        }
+
+        .error-card {
+            width: 100%;
+            max-width: 520px;
+            padding: 32px;
+            background: #10251f;
+            border: 1px solid #7f3038;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .error-icon {
+            font-size: 44px;
+            color: #f87171;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0 0 14px;
+        }
+
+        .message {
+            padding: 16px;
+            background: #3b1e22;
+            border: 1px solid #7f3038;
+            border-radius: 10px;
+            color: #fecaca;
+            line-height: 1.7;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 22px;
+            padding: 13px 20px;
+            background: #4ade80;
+            color: #062013;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        a:hover {
+            background: #86efac;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="error-card">
+        <div class="error-icon">⚠</div>
+        <h1>Booking Time Conflict</h1>
+
+        <div class="message">
+            {{ message }}
+        </div>
+
+        <a href="{{ url_for('trainer_bookings') }}">
+            ← Back to Session Bookings
+        </a>
+    </main>
+</body>
+</html>

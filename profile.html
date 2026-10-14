@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • My Profile</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .profile-ring {
+            box-shadow:
+                0 0 0 5px rgba(255, 255, 255, 0.08),
+                0 0 35px rgba(16, 185, 129, 0.25);
+        }
+
+        input,
+        select,
+        textarea {
+            background: rgba(255, 255, 255, 0.07) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+            color: white !important;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #34d399 !important;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.12);
+        }
+
+        select option {
+            background: #10251e;
+            color: white;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        .success-message {
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            color: #6ee7b7;
+            padding: 14px 18px;
+            border-radius: 14px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 600;
+            animation: successFade 0.4s ease;
+        }
+
+        @keyframes successFade {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body class="min-h-screen text-white bg-gradient-to-br from-[#071c15] via-[#0b2b20] to-[#07130f]">
+
+    <!-- Background glow -->
+
+    <div class="fixed -top-32 -left-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
+
+    <div class="fixed bottom-0 -right-32 w-96 h-96 bg-teal-400/10 rounded-full blur-3xl"></div>
+
+
+    <!-- NAVBAR -->
+
+    <nav class="relative z-10 border-b border-white/10">
+
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+
+            <a href="/dashboard"
+               class="flex items-center gap-3">
+
+                <div class="w-11 h-11 rounded-2xl bg-emerald-400/10 flex items-center justify-center">
+
+                    <i class="fa-solid fa-leaf text-emerald-300 text-xl"></i>
+
+                </div>
+
+                <span class="title-font text-2xl font-bold">
+                    NOURIVA
+                </span>
+
+            </a>
+
+
+            <div class="flex items-center gap-4">
+
+                <a href="/dashboard"
+                   class="text-slate-300 hover:text-white transition">
+
+                    <i class="fa-solid fa-house mr-2"></i>
+                    Dashboard
+
+                </a>
+
+                <a href="/logout"
+                   class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 transition">
+
+                    <i class="fa-solid fa-right-from-bracket mr-2"></i>
+                    Logout
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN -->
+
+    <main class="relative z-10 max-w-5xl mx-auto px-6 py-12">
+
+        <!-- Heading -->
+
+        <div class="text-center mb-10">
+
+            <p class="text-emerald-300 uppercase tracking-[0.25em] text-sm font-semibold mb-3">
+                Personal Space
+            </p>
+
+            <h1 class="title-font text-4xl md:text-5xl font-bold mb-4">
+                My Profile
+            </h1>
+
+            <p class="text-slate-400 max-w-xl mx-auto">
+                Create your personal wellness profile and tell NOURIVA
+                a little about you.
+            </p>
+
+        </div>
+
+
+        <!-- PROFILE CARD -->
+
+        <form action="/profile"
+              method="POST"
+              enctype="multipart/form-data"
+              class="glass rounded-[2rem] p-6 md:p-10 shadow-2xl">
+
+            {% if success %}
+
+                <div class="success-message">
+
+                    <i class="fa-solid fa-circle-check mr-2"></i>
+
+                    {{ success }}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- PROFILE PHOTO -->
+
+            <div class="flex flex-col items-center mb-10">
+
+                <div class="relative">
+
+                    {% if user["photo"] %}
+
+                        <img src="{{ url_for('static', filename='uploads/' + user['photo']) }}"
+                             class="w-36 h-36 rounded-full object-cover profile-ring">
+
+                    {% else %}
+
+                        <div class="w-36 h-36 rounded-full bg-emerald-400/10
+                                    profile-ring flex items-center justify-center">
+
+                            <i class="fa-solid fa-user text-5xl text-emerald-300"></i>
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <label for="photo"
+                           class="absolute bottom-1 right-1 w-11 h-11
+                                  rounded-full bg-emerald-500
+                                  hover:bg-emerald-400
+                                  cursor-pointer
+                                  flex items-center justify-center
+                                  shadow-lg transition">
+
+                        <i class="fa-solid fa-camera"></i>
+
+                    </label>
+
+
+                    <input type="file"
+                           id="photo"
+                           name="photo"
+                           accept="image/*"
+                           class="hidden">
+
+                </div>
+
+
+                <h2 class="text-xl font-bold mt-5">
+                    {{ user["username"] }}
+                </h2>
+
+                <p class="text-slate-400 text-sm mt-1">
+                    {{ user["email"] }}
+                </p>
+
+                <p class="text-emerald-300 text-xs mt-3">
+                    Profile photo is optional
+                </p>
+
+            </div>
+
+
+            <!-- PERSONAL INFORMATION -->
+
+            <div class="mb-10">
+
+                <div class="flex items-center gap-3 mb-6">
+
+                    <div class="w-10 h-10 rounded-xl bg-emerald-400/10
+                                flex items-center justify-center">
+
+                        <i class="fa-solid fa-user text-emerald-300"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-xl font-bold">
+                            Personal Information
+                        </h3>
+
+                        <p class="text-slate-400 text-sm">
+                            Update your basic details
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="grid md:grid-cols-2 gap-6">
+
+
+                    <!-- USERNAME -->
+
+                    <div>
+
+                        <label class="block text-sm text-slate-300 mb-2">
+                            Name / Username
+                        </label>
+
+                        <div class="relative">
+
+                            <i class="fa-solid fa-user absolute left-4 top-4 text-slate-500"></i>
+
+                            <input type="text"
+                                   value="{{ user['username'] }}"
+                                   disabled
+                                   class="w-full rounded-xl py-3.5 pl-11 pr-4">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div>
+
+                        <label class="block text-sm text-slate-300 mb-2">
+                            Email
+                        </label>
+
+                        <div class="relative">
+
+                            <i class="fa-solid fa-envelope absolute left-4 top-4 text-slate-500"></i>
+
+                            <input type="email"
+                                   value="{{ user['email'] }}"
+                                   disabled
+                                   class="w-full rounded-xl py-3.5 pl-11 pr-4">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div>
+
+                        <label class="block text-sm text-slate-300 mb-2">
+                            Phone
+                        </label>
+
+                        <div class="relative">
+
+                            <i class="fa-solid fa-phone absolute left-4 top-4 text-slate-500"></i>
+
+                            <input type="text"
+                                   name="phone"
+                                   value="{{ user['phone'] or '' }}"
+                                   placeholder="Enter your phone number"
+                                   class="w-full rounded-xl py-3.5 pl-11 pr-4">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- AGE -->
+
+                    <div>
+
+                        <label class="block text-sm text-slate-300 mb-2">
+                            Age
+                        </label>
+
+                        <div class="relative">
+
+                            <i class="fa-solid fa-calendar absolute left-4 top-4 text-slate-500"></i>
+
+                            <input type="number"
+                                   name="age"
+                                   value="{{ user['age'] or '' }}"
+                                   placeholder="Enter your age"
+                                   min="1"
+                                   max="120"
+                                   class="w-full rounded-xl py-3.5 pl-11 pr-4">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- GENDER -->
+
+                    <div>
+
+                        <label class="block text-sm text-slate-300 mb-2">
+                            Gender
+                        </label>
+
+                        <div class="relative">
+
+                            <i class="fa-solid fa-venus-mars absolute left-4 top-4 text-slate-500"></i>
+
+                            <select name="gender"
+                                    class="w-full rounded-xl py-3.5 pl-11 pr-4">
+
+                                <option value="">
+                                    Select gender
+                                </option>
+
+                                <option value="Female"
+                                    {% if user['gender'] == 'Female' %}selected{% endif %}>
+                                    Female
+                                </option>
+
+                                <option value="Male"
+                                    {% if user['gender'] == 'Male' %}selected{% endif %}>
+                                    Male
+                                </option>
+
+                                <option value="Other"
+                                    {% if user['gender'] == 'Other' %}selected{% endif %}>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FITNESS GOAL -->
+
+                    <div>
+
+                        <label class="block text-sm text-slate-300 mb-2">
+                            Fitness Goal
+                        </label>
+
+                        <div class="relative">
+
+                            <i class="fa-solid fa-bullseye absolute left-4 top-4 text-slate-500"></i>
+
+                            <select name="fitness_goal"
+                                    class="w-full rounded-xl py-3.5 pl-11 pr-4">
+
+                                <option value="">
+                                    Select your goal
+                                </option>
+
+                                <option value="Weight Loss"
+                                    {% if user['fitness_goal'] == 'Weight Loss' %}selected{% endif %}>
+                                    Weight Loss
+                                </option>
+
+                                <option value="Weight Gain"
+                                    {% if user['fitness_goal'] == 'Weight Gain' %}selected{% endif %}>
+                                    Weight Gain
+                                </option>
+
+                                <option value="General Fitness"
+                                    {% if user['fitness_goal'] == 'General Fitness' %}selected{% endif %}>
+                                    General Fitness
+                                </option>
+
+                                <option value="Muscle Building"
+                                    {% if user['fitness_goal'] == 'Muscle Building' %}selected{% endif %}>
+                                    Muscle Building
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BIO -->
+
+            <div class="mb-10">
+
+                <div class="flex items-center gap-3 mb-6">
+
+                    <div class="w-10 h-10 rounded-xl bg-emerald-400/10
+                                flex items-center justify-center">
+
+                        <i class="fa-solid fa-pen text-emerald-300"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-xl font-bold">
+                            About You
+                        </h3>
+
+                        <p class="text-slate-400 text-sm">
+                            Add a short description about yourself
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <textarea name="bio"
+                          rows="5"
+                          placeholder="Tell us something about yourself, your lifestyle, interests or fitness journey..."
+                          class="w-full rounded-2xl p-4 resize-none">{{ user['bio'] or '' }}</textarea>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="flex flex-col sm:flex-row justify-end gap-4">
+
+                <a href="/dashboard"
+                   class="px-8 py-4 rounded-2xl
+                          bg-white/10 hover:bg-white/15
+                          text-center font-semibold transition">
+
+                    <i class="fa-solid fa-arrow-left mr-2"></i>
+
+                    Back
+
+                </a>
+
+
+                <button type="submit"
+                        class="px-8 py-4 rounded-2xl
+                               bg-gradient-to-r from-emerald-500 to-teal-500
+                               hover:from-emerald-400 hover:to-teal-400
+                               font-bold shadow-xl
+                               transition">
+
+                    <i class="fa-solid fa-floppy-disk mr-2"></i>
+
+                    Save Profile
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>

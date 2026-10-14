@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Trainer Login</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family: 'Inter', sans-serif;
+
+            min-height: 100vh;
+
+            color: white;
+
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(16, 185, 129, 0.18),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 20% 90%,
+                    rgba(16, 185, 129, 0.12),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #02140e 0%,
+                    #03281c 50%,
+                    #011b12 100%
+                );
+
+        }
+
+
+        /* ===============================
+           BACKGROUND EFFECTS
+        =============================== */
+
+        .background-glow {
+
+            position: fixed;
+
+            width: 550px;
+
+            height: 550px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(16, 185, 129, 0.12),
+                    transparent 65%
+                );
+
+            pointer-events: none;
+
+        }
+
+
+        .glow-one {
+
+            top: -250px;
+
+            right: 5%;
+
+        }
+
+
+        .glow-two {
+
+            bottom: -300px;
+
+            left: -100px;
+
+        }
+
+
+        /* ===============================
+           MAIN CONTAINER
+        =============================== */
+
+        .login-wrapper {
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 35px;
+
+            position: relative;
+
+        }
+
+
+        .main-container {
+
+            width: 100%;
+
+            max-width: 1250px;
+
+            min-height: 720px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            position: relative;
+
+        }
+
+
+        /* ===============================
+           LEFT SIDE
+        =============================== */
+
+        .left-section {
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            padding: 45px 50px;
+
+            position: relative;
+
+        }
+
+
+        /* LOGO */
+
+        .brand {
+
+            position: absolute;
+
+            top: 20px;
+
+            left: 35px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+        }
+
+
+        .brand-icon {
+
+            width: 54px;
+
+            height: 54px;
+
+            border-radius: 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #34d399,
+                    #10b981
+                );
+
+            color: white;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 10px 30px rgba(16,185,129,0.25);
+
+        }
+
+
+        .brand-name {
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.03em;
+
+        }
+
+
+        .brand-sub {
+
+            color: #34d399;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.28em;
+
+            margin-top: 2px;
+
+        }
+
+
+        /* HERO */
+
+        .hero-content {
+
+            margin-top: 50px;
+
+            max-width: 530px;
+
+        }
+
+
+        .eyebrow {
+
+            color: #34d399;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            letter-spacing: 0.35em;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .hero-title {
+
+            font-size: clamp(48px, 5vw, 76px);
+
+            line-height: 0.98;
+
+            font-weight: 900;
+
+            letter-spacing: -0.055em;
+
+            margin: 0;
+
+        }
+
+
+        .hero-title span {
+
+            color: #34d399;
+
+        }
+
+
+        .hero-text {
+
+            margin-top: 25px;
+
+            color: rgba(255,255,255,0.62);
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            max-width: 470px;
+
+        }
+
+
+        /* ===============================
+           FEATURE ITEMS
+        =============================== */
+
+        .features {
+
+            display: flex;
+
+            gap: 38px;
+
+            margin-top: 48px;
+
+        }
+
+
+        .feature {
+
+            text-align: center;
+
+        }
+
+
+        .feature-icon {
+
+            width: 62px;
+
+            height: 62px;
+
+            margin: 0 auto 12px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #34d399;
+
+            font-size: 22px;
+
+            background:
+                rgba(16,185,129,0.10);
+
+            border:
+                1px solid rgba(52,211,153,0.18);
+
+            box-shadow:
+                0 10px 30px rgba(16,185,129,0.08);
+
+            transition: all 0.3s ease;
+
+        }
+
+
+        .feature:hover .feature-icon {
+
+            transform: translateY(-5px);
+
+            background:
+                rgba(16,185,129,0.18);
+
+            box-shadow:
+                0 15px 35px rgba(16,185,129,0.15);
+
+        }
+
+
+        .feature-title {
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            color: rgba(255,255,255,0.85);
+
+        }
+
+
+        .feature-sub {
+
+            font-size: 11px;
+
+            color: rgba(255,255,255,0.40);
+
+            margin-top: 3px;
+
+        }
+
+
+        /* ===============================
+           DECORATIVE FITNESS OBJECT
+        =============================== */
+
+        .visual-area {
+
+            position: absolute;
+
+            bottom: -20px;
+
+            right: 30px;
+
+            width: 310px;
+
+            height: 170px;
+
+            pointer-events: none;
+
+            opacity: 0.55;
+
+        }
+
+
+        .circle-shape {
+
+            position: absolute;
+
+            width: 270px;
+
+            height: 270px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid rgba(52,211,153,0.12);
+
+            right: 0;
+
+            bottom: -130px;
+
+        }
+
+
+        .leaf {
+
+            position: absolute;
+
+            width: 90px;
+
+            height: 45px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(16,185,129,0.30),
+                    rgba(52,211,153,0.04)
+                );
+
+            border-radius: 100% 0 100% 0;
+
+            transform: rotate(-35deg);
+
+        }
+
+
+        .leaf-one {
+
+            right: 150px;
+
+            bottom: 50px;
+
+        }
+
+
+        .leaf-two {
+
+            right: 100px;
+
+            bottom: 15px;
+
+            transform:
+                rotate(25deg)
+                scale(0.8);
+
+        }
+
+
+        /* ===============================
+           RIGHT LOGIN CARD
+        =============================== */
+
+        .right-section {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 35px;
+
+        }
+
+
+        .login-card {
+
+            width: 100%;
+
+            max-width: 510px;
+
+            padding: 48px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.085),
+                    rgba(255,255,255,0.035)
+                );
+
+            border:
+                1px solid rgba(167,243,208,0.22);
+
+            backdrop-filter: blur(25px);
+
+            -webkit-backdrop-filter: blur(25px);
+
+            box-shadow:
+                0 35px 90px rgba(0,0,0,0.35),
+                inset 0 1px 0 rgba(255,255,255,0.06);
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .login-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+
+            height: 250px;
+
+            top: -140px;
+
+            right: -100px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(52,211,153,0.10);
+
+            filter: blur(10px);
+
+        }
+
+
+        .login-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+
+            height: 2px;
+
+            bottom: 0;
+
+            right: 70px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #34d399,
+                    transparent
+                );
+
+        }
+
+
+        /* LOGIN ICON */
+
+        .login-icon {
+
+            width: 78px;
+
+            height: 78px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #34d399,
+                    #10b981
+                );
+
+            font-size: 34px;
+
+            box-shadow:
+                0 15px 40px rgba(16,185,129,0.25);
+
+        }
+
+
+        .login-title {
+
+            text-align: center;
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.04em;
+
+        }
+
+
+        .login-subtitle {
+
+            text-align: center;
+
+            color: rgba(255,255,255,0.52);
+
+            font-size: 14px;
+
+            margin-top: 8px;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        /* ===============================
+           ERROR
+        =============================== */
+
+        .error-message {
+
+            background:
+                rgba(239,68,68,0.10);
+
+            border:
+                1px solid rgba(248,113,113,0.30);
+
+            color:
+                #fca5a5;
+
+            padding: 13px 15px;
+
+            border-radius: 13px;
+
+            font-size: 13px;
+
+            text-align: center;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* ===============================
+           INPUTS
+        =============================== */
+
+        .input-group {
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .input-label {
+
+            display: block;
+
+            color:
+                rgba(255,255,255,0.85);
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            margin-bottom: 9px;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 18px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color:
+                rgba(255,255,255,0.50);
+
+            font-size: 16px;
+
+            pointer-events: none;
+
+        }
+
+
+        .input-field {
+
+            width: 100%;
+
+            height: 66px;
+
+            padding:
+                0 50px;
+
+            border-radius: 16px;
+
+            background:
+                rgba(16,70,52,0.42);
+
+            border:
+                1px solid rgba(167,243,208,0.12);
+
+            color: white;
+
+            outline: none;
+
+            font-size: 14px;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+        .input-field::placeholder {
+
+            color:
+                rgba(255,255,255,0.38);
+
+        }
+
+
+        .input-field:focus {
+
+            border-color:
+                rgba(52,211,153,0.55);
+
+            background:
+                rgba(16,70,52,0.58);
+
+            box-shadow:
+                0 0 0 4px rgba(52,211,153,0.08);
+
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 18px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            background: none;
+
+            border: none;
+
+            color:
+                rgba(255,255,255,0.42);
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+        }
+
+
+        .password-toggle:hover {
+
+            color: #34d399;
+
+        }
+
+
+        /* ===============================
+           REMEMBER ROW
+        =============================== */
+
+        .remember-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin: 4px 0 25px;
+
+            font-size: 12px;
+
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color:
+                rgba(255,255,255,0.65);
+
+        }
+
+
+        .remember input {
+
+            width: 17px;
+
+            height: 17px;
+
+            accent-color: #10b981;
+
+        }
+
+
+        .forgot {
+
+            color: #34d399;
+
+            text-decoration: none;
+
+            font-weight: 600;
+
+        }
+
+
+        .forgot:hover {
+
+            color: #6ee7b7;
+
+        }
+
+
+        /* ===============================
+           LOGIN BUTTON
+        =============================== */
+
+        .submit-btn {
+
+            width: 100%;
+
+            height: 65px;
+
+            border: none;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #34d399,
+                    #10b981
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 11px;
+
+            cursor: pointer;
+
+            transition: all 0.35s ease;
+
+            box-shadow:
+                0 15px 35px rgba(16,185,129,0.18);
+
+        }
+
+
+        .submit-btn:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 20px 45px rgba(16,185,129,0.30);
+
+        }
+
+
+        .submit-btn:active {
+
+            transform:
+                translateY(0);
+
+        }
+
+
+        /* ===============================
+           DIVIDER
+        =============================== */
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin: 30px 0;
+
+            color:
+                rgba(255,255,255,0.35);
+
+            font-size: 12px;
+
+        }
+
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+        }
+
+
+        /* REGISTER */
+
+        .register-text {
+
+            text-align: center;
+
+            color:
+                rgba(255,255,255,0.55);
+
+            font-size: 13px;
+
+        }
+
+
+        .register-link {
+
+            color: #34d399;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            transition: color 0.2s ease;
+
+        }
+
+
+        .register-link:hover {
+
+            color: #6ee7b7;
+
+        }
+
+
+        /* ===============================
+           ANIMATION
+        =============================== */
+
+        .fade-left {
+
+            animation:
+                fadeLeft 0.8s ease forwards;
+
+        }
+
+
+        .fade-right {
+
+            animation:
+                fadeRight 0.8s ease forwards;
+
+        }
+
+
+        @keyframes fadeLeft {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateX(-35px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+
+            }
+
+        }
+
+
+        @keyframes fadeRight {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateX(35px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateX(0);
+
+            }
+
+        }
+
+
+        /* ===============================
+           RESPONSIVE
+        =============================== */
+
+        @media (max-width: 900px) {
+
+            .main-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .left-section {
+
+                padding:
+                    100px 25px 35px;
+
+                align-items: center;
+
+                text-align: center;
+
+            }
+
+
+            .brand {
+
+                top: 20px;
+
+                left: 25px;
+
+            }
+
+
+            .hero-content {
+
+                max-width: 650px;
+
+            }
+
+
+            .hero-title {
+
+                font-size: 55px;
+
+            }
+
+
+            .hero-text {
+
+                margin-left: auto;
+
+                margin-right: auto;
+
+            }
+
+
+            .features {
+
+                justify-content: center;
+
+            }
+
+
+            .visual-area {
+
+                display: none;
+
+            }
+
+
+            .right-section {
+
+                padding:
+                    20px 10px 50px;
+
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .login-wrapper {
+
+                padding: 15px;
+
+            }
+
+
+            .left-section {
+
+                padding-left: 10px;
+
+                padding-right: 10px;
+
+            }
+
+
+            .brand {
+
+                position: relative;
+
+                top: auto;
+
+                left: auto;
+
+                align-self: flex-start;
+
+                margin-bottom: 35px;
+
+            }
+
+
+            .hero-content {
+
+                margin-top: 0;
+
+            }
+
+
+            .hero-title {
+
+                font-size: 43px;
+
+            }
+
+
+            .hero-text {
+
+                font-size: 14px;
+
+            }
+
+
+            .features {
+
+                gap: 15px;
+
+            }
+
+
+            .feature-icon {
+
+                width: 52px;
+
+                height: 52px;
+
+            }
+
+
+            .login-card {
+
+                padding: 30px 22px;
+
+                border-radius: 24px;
+
+            }
+
+
+            .login-title {
+
+                font-size: 30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- BACKGROUND GLOWS -->
+
+    <div class="background-glow glow-one"></div>
+
+    <div class="background-glow glow-two"></div>
+
+
+
+    <div class="login-wrapper">
+
+
+        <div class="main-container">
+
+
+            <!-- ==================================================
+                 LEFT SIDE
+            =================================================== -->
+
+            <section class="left-section fade-left">
+
+
+                <!-- BRAND -->
+
+                <div class="brand">
+
+                    <div class="brand-icon">
+
+                        <i class="fa-solid fa-leaf"></i>
+
+                    </div>
+
+                    <div>
+
+                        <div class="brand-name">
+
+                            NOURIVA
+
+                        </div>
+
+                        <div class="brand-sub">
+
+                            TRAINER HUB
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- HERO -->
+
+                <div class="hero-content">
+
+
+                    <div class="eyebrow">
+
+                        TRAIN • GUIDE • TRANSFORM
+
+                    </div>
+
+
+                    <h1 class="hero-title">
+
+                        Inspire<br>
+
+                        <span>Healthier</span><br>
+
+                        Lives
+
+                    </h1>
+
+
+                    <p class="hero-text">
+
+                        Log in to your trainer account and
+                        continue making a difference in
+                        your clients' wellness journey.
+
+                    </p>
+
+
+
+                    <!-- FEATURES -->
+
+                    <div class="features">
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+
+                                <i class="fa-solid fa-users"></i>
+
+                            </div>
+
+                            <div class="feature-title">
+
+                                Manage
+
+                            </div>
+
+                            <div class="feature-sub">
+
+                                Clients
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+
+                                <i class="fa-solid fa-chart-simple"></i>
+
+                            </div>
+
+                            <div class="feature-title">
+
+                                Track
+
+                            </div>
+
+                            <div class="feature-sub">
+
+                                Progress
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+
+                                <i class="fa-solid fa-star"></i>
+
+                            </div>
+
+                            <div class="feature-title">
+
+                                Read
+
+                            </div>
+
+                            <div class="feature-sub">
+
+                                Reviews
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DECORATION -->
+
+                <div class="visual-area">
+
+                    <div class="circle-shape"></div>
+
+                    <div class="leaf leaf-one"></div>
+
+                    <div class="leaf leaf-two"></div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 RIGHT SIDE
+            =================================================== -->
+
+            <section class="right-section fade-right">
+
+
+                <div class="login-card">
+
+
+                    <!-- LOGIN ICON -->
+
+                    <div class="login-icon">
+
+                        <i class="fa-solid fa-leaf"></i>
+
+                    </div>
+
+
+                    <h2 class="login-title">
+
+                        Trainer Login
+
+                    </h2>
+
+
+                    <p class="login-subtitle">
+
+                        Welcome back! Access your trainer dashboard.
+
+                    </p>
+
+
+
+                    <!-- FORM -->
+
+                    <form method="POST">
+
+
+                        <!-- ERROR MESSAGE -->
+
+                        {% if error %}
+
+                            <div class="error-message">
+
+                                <i class="fa-solid fa-circle-exclamation mr-2"></i>
+
+                                {{ error }}
+
+                            </div>
+
+                        {% endif %}
+
+
+
+                        <!-- EMAIL -->
+
+                        <div class="input-group">
+
+
+                            <label
+                                class="input-label"
+                                for="email">
+
+                                Email
+
+                            </label>
+
+
+                            <div class="input-wrapper">
+
+
+                                <i class="fa-regular fa-envelope input-icon"></i>
+
+
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    placeholder="Enter your email"
+                                    class="input-field">
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="input-group">
+
+
+                            <label
+                                class="input-label"
+                                for="password">
+
+                                Password
+
+                            </label>
+
+
+                            <div class="input-wrapper">
+
+
+                                <i class="fa-solid fa-lock input-icon"></i>
+
+
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    required
+                                    placeholder="Enter your password"
+                                    class="input-field"
+                                    style="padding-right: 55px;">
+
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    onclick="togglePassword()">
+
+                                    <i
+                                        id="eyeIcon"
+                                        class="fa-regular fa-eye-slash"></i>
+
+                                </button>
+
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- REMEMBER / FORGOT -->
+
+                        <div class="remember-row">
+
+
+                            <label class="remember">
+
+                                <input
+                                    type="checkbox"
+                                    name="remember">
+
+                                <span>
+
+                                    Remember me
+
+                                </span>
+
+                            </label>
+
+
+                            <a
+                                href="#"
+                                class="forgot">
+
+                                Forgot password?
+
+                            </a>
+
+
+                        </div>
+
+
+
+                        <!-- LOGIN BUTTON -->
+
+                        <button
+                            type="submit"
+                            class="submit-btn">
+
+                            <i class="fa-solid fa-right-to-bracket"></i>
+
+                            Sign In as Trainer
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- DIVIDER -->
+
+                    <div class="divider">
+
+                        OR
+
+                    </div>
+
+
+
+                    <!-- REGISTER -->
+
+                    <div class="register-text">
+
+                        New trainer?
+
+                        <a
+                            href="/trainer_register"
+                            class="register-link">
+
+                            Register here
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- PASSWORD SHOW/HIDE -->
+
+    <script>
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const icon =
+                document.getElementById("eyeIcon");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                icon.classList.remove(
+                    "fa-eye-slash"
+                );
+
+                icon.classList.add(
+                    "fa-eye"
+                );
+
+            } else {
+
+                password.type = "password";
+
+                icon.classList.remove(
+                    "fa-eye"
+                );
+
+                icon.classList.add(
+                    "fa-eye-slash"
+                );
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

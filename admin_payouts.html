@@ -1,0 +1,1498 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA | Trainer Payouts</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #fffaf0;
+            --forest: #194b3b;
+            --green: #245c46;
+            --green-light: #438866;
+            --sage: #80aa70;
+            --pale: #e5edcf;
+            --muted: #788776;
+            --border: #e4e9dc;
+            --white: #ffffff;
+            --shadow: 0 18px 55px rgba(34, 76, 53, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--forest);
+            background:
+                radial-gradient(ellipse at 5% 75%, #e5edcf 0%, transparent 28%),
+                radial-gradient(ellipse at 95% 10%, #f2efd7 0%, transparent 28%),
+                var(--cream);
+        }
+
+        button, input, select, textarea {
+            font: inherit;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* HEADER */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 250, 240, 0.95);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1320px;
+            margin: auto;
+            padding: 14px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 47px;
+            height: 47px;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            color: white;
+            background: linear-gradient(145deg, var(--sage), var(--green));
+            box-shadow: 0 8px 20px rgba(36, 92, 70, 0.2);
+            font-size: 21px;
+        }
+
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .brand-caption {
+            margin-top: 2px;
+            color: var(--muted);
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 12px 17px;
+            border: 1px solid #dce6d4;
+            border-radius: 12px;
+            background: white;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.25s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            background: var(--pale);
+        }
+
+        /* PAGE */
+
+        .container {
+            max-width: 1320px;
+            margin: auto;
+            padding: 34px 30px 60px;
+        }
+
+        .page-intro {
+            margin-bottom: 28px;
+            animation: fadeUp 0.65s ease both;
+        }
+
+        .page-intro-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .page-intro-text {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 13px;
+            margin-bottom: 15px;
+            border-radius: 30px;
+            background: var(--pale);
+            color: #557a4f;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(34px, 4vw, 48px);
+            line-height: 1.16;
+            letter-spacing: -1px;
+        }
+
+        .page-title span {
+            color: #6d9f5d;
+        }
+
+        .page-subtitle {
+            max-width: 650px;
+            margin-top: 12px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        /* HISTORY BUTTONS */
+
+        .history-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 19px;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            background: linear-gradient(110deg, #438866, #194b3b);
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .history-toggle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 22px rgba(36, 92, 70, 0.22);
+        }
+
+        .top-history-toggle {
+            flex-shrink: 0;
+            min-height: 49px;
+            box-shadow: 0 8px 20px rgba(36, 92, 70, 0.15);
+        }
+
+        .toggle-arrow {
+            transition: transform 0.35s ease;
+        }
+
+        .history-toggle[aria-expanded="true"] .toggle-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+            min-height: 285px;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: center;
+            gap: 25px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            padding: 35px 45px;
+            border-radius: 28px;
+            color: white;
+            background: linear-gradient(118deg, #194b3b 0%, #28674d 58%, #78a36b 100%);
+            box-shadow: 0 22px 50px rgba(36, 92, 70, 0.18);
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            top: -210px;
+            left: 35%;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            right: -125px;
+            bottom: -230px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.11);
+            color: #e8f1d7;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .hero h2 {
+            max-width: 490px;
+            margin-top: 20px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 3.2vw, 39px);
+            line-height: 1.22;
+        }
+
+        .hero h2 span {
+            color: #d7e9a5;
+        }
+
+        .hero-description {
+            max-width: 460px;
+            margin-top: 14px;
+            color: rgba(255, 255, 255, 0.77);
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .hero-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 23px;
+            color: #e4edcf;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .hero-note i {
+            color: #c9e69d;
+        }
+
+        /* WALLET ILLUSTRATION */
+
+        .wallet-scene {
+            position: relative;
+            z-index: 2;
+            min-height: 215px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wallet-halo {
+            position: absolute;
+            width: 245px;
+            height: 245px;
+            border-radius: 50%;
+            background: rgba(224, 240, 190, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .wallet {
+            position: relative;
+            z-index: 2;
+            width: 205px;
+            height: 145px;
+            padding: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 24px;
+            background: linear-gradient(145deg, #fffdf4, #dfeac9);
+            color: var(--forest);
+            box-shadow: 0 25px 45px rgba(8, 37, 24, 0.28);
+            transform: rotate(-7deg);
+            animation: walletFloat 5s ease-in-out infinite;
+        }
+
+        .wallet-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .wallet-logo {
+            width: 35px;
+            height: 35px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            color: white;
+            background: linear-gradient(145deg, var(--sage), var(--green));
+            font-size: 16px;
+        }
+
+        .wallet-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .wallet-dots span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #80a47a;
+        }
+
+        .wallet-label {
+            margin-top: 20px;
+            color: #728571;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+        }
+
+        .wallet-word {
+            margin-top: 4px;
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            font-weight: 800;
+        }
+
+        .wallet-chip {
+            position: absolute;
+            right: 20px;
+            bottom: 19px;
+            width: 36px;
+            height: 25px;
+            border-radius: 7px;
+            background: linear-gradient(135deg, #c6dba0, #8fb17b);
+            opacity: 0.9;
+        }
+
+        .float-icon {
+            position: absolute;
+            z-index: 3;
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--green);
+            box-shadow: 0 10px 24px rgba(8, 37, 24, 0.15);
+            animation: iconFloat 4s ease-in-out infinite;
+        }
+
+        .float-one {
+            top: 18px;
+            left: 9%;
+        }
+
+        .float-two {
+            right: 4%;
+            top: 45px;
+            animation-delay: -1.2s;
+        }
+
+        .float-three {
+            left: 12%;
+            bottom: 20px;
+            animation-delay: -2s;
+        }
+
+        .float-four {
+            right: 10%;
+            bottom: 9px;
+            animation-delay: -0.7s;
+        }
+
+        /* SUMMARY CARDS */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.87);
+            box-shadow: 0 10px 30px rgba(39, 83, 56, 0.045);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeUp 0.75s ease both;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-card::after {
+            content: "";
+            position: absolute;
+            right: -28px;
+            bottom: -42px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #edf3e2;
+            opacity: 0.75;
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: var(--pale);
+            color: var(--green);
+            font-size: 20px;
+        }
+
+        .stat-emoji {
+            font-size: 23px;
+        }
+
+        .stat-label {
+            margin-top: 21px;
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .stat-value {
+            position: relative;
+            z-index: 1;
+            margin-top: 8px;
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .stat-caption {
+            margin-top: 7px;
+            color: #96a18e;
+            font-size: 10px;
+            line-height: 1.6;
+        }
+
+        /* PAYOUT FORM */
+
+        .section-card {
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow);
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 26px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: var(--pale);
+            color: var(--green);
+            font-size: 20px;
+        }
+
+        .section-heading h2 {
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+        }
+
+        .section-heading p {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            min-width: 0;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            color: #536d58;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        label i {
+            margin-right: 5px;
+            color: var(--green-light);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            min-height: 48px;
+            padding: 13px 15px;
+            border: 1px solid #dfe8d8;
+            border-radius: 12px;
+            outline: none;
+            background: #fffefa;
+            color: var(--forest);
+            font-size: 13px;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #9aaa99;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--green-light);
+            box-shadow: 0 0 0 4px rgba(63, 137, 101, 0.11);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        textarea {
+            min-height: 105px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            min-height: 51px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 22px;
+            border: none;
+            border-radius: 13px;
+            color: white;
+            background: linear-gradient(110deg, #438866, #194b3b);
+            box-shadow: 0 9px 23px rgba(36, 92, 70, 0.17);
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 26px rgba(36, 92, 70, 0.24);
+        }
+
+        /* LOWER HISTORY BAR */
+
+        .history-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 25px;
+            padding: 22px 25px;
+            border: 1px solid var(--border);
+            border-radius: 21px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 28px rgba(39, 83, 56, 0.045);
+            animation: fadeUp 0.85s ease both;
+        }
+
+        .history-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .history-icon {
+            width: 49px;
+            height: 49px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            border-radius: 15px;
+            background: var(--pale);
+            color: var(--green);
+            font-size: 20px;
+        }
+
+        .history-title {
+            color: var(--forest);
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .history-description {
+            margin-top: 5px;
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ANIMATED HISTORY PANEL */
+
+        .history-panel {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            margin-top: 0;
+            transition:
+                grid-template-rows 0.45s ease,
+                opacity 0.35s ease,
+                margin-top 0.4s ease;
+        }
+
+        .history-panel.open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            margin-top: 22px;
+        }
+
+        .history-inner {
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        .history-card {
+            padding: 27px;
+            border: 1px solid var(--border);
+            border-radius: 23px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: var(--shadow);
+        }
+
+        .history-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .record-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 13px;
+            border-radius: 30px;
+            background: var(--pale);
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        /* HISTORY TABLE */
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid #e5ebde;
+            border-radius: 15px;
+        }
+
+        table {
+            width: 100%;
+            min-width: 690px;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        thead {
+            background: #eef3e5;
+        }
+
+        th, td {
+            padding: 17px 15px;
+            border-bottom: 1px solid #e9eee3;
+        }
+
+        th {
+            color: #55705a;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        td {
+            color: #657668;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        tbody tr {
+            transition: background 0.2s;
+        }
+
+        tbody tr:hover {
+            background: #f5f8ef;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .amount {
+            color: var(--forest);
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .reference {
+            overflow-wrap: anywhere;
+        }
+
+        .date {
+            white-space: nowrap;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 10px;
+            border: 1px solid #d3e8cb;
+            border-radius: 30px;
+            background: #e8f3e1;
+            color: #286441;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: capitalize;
+        }
+
+        .empty {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        .empty i {
+            display: block;
+            margin-bottom: 13px;
+            color: var(--sage);
+            font-size: 30px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            padding: 25px 15px;
+            border-top: 1px solid var(--border);
+            color: #879486;
+            font-size: 11px;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        /* ANIMATIONS */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes walletFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(-7deg);
+            }
+
+            50% {
+                transform: translateY(-9px) rotate(-4deg);
+            }
+        }
+
+        @keyframes iconFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+            .hero {
+                grid-template-columns: 1fr 0.8fr;
+                padding: 30px;
+            }
+
+            .stats-grid {
+                gap: 13px;
+            }
+
+            .stat-card {
+                padding: 19px;
+            }
+
+            .top-history-toggle {
+                padding: 12px 14px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .header-inner {
+                padding: 12px 16px;
+            }
+
+            .brand-name {
+                font-size: 19px;
+            }
+
+            .brand-caption {
+                font-size: 8px;
+            }
+
+            .brand-icon {
+                width: 41px;
+                height: 41px;
+            }
+
+            .back-btn {
+                padding: 10px 11px;
+                font-size: 10px;
+            }
+
+            .back-label {
+                display: none;
+            }
+
+            .container {
+                padding: 25px 15px 40px;
+            }
+
+            .page-intro-row {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .page-title {
+                font-size: 35px;
+            }
+
+            .top-history-toggle {
+                width: 100%;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 28px 23px 15px;
+                border-radius: 23px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+            .wallet-scene {
+                min-height: 205px;
+            }
+
+            .wallet {
+                width: 190px;
+                height: 137px;
+            }
+
+            .wallet-halo {
+                width: 210px;
+                height: 210px;
+            }
+
+            .float-one {
+                left: 8%;
+            }
+
+            .float-two {
+                right: 7%;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 13px;
+            }
+
+            .stat-card {
+                padding: 19px 21px;
+            }
+
+            .stat-top {
+                justify-content: flex-start;
+                gap: 15px;
+            }
+
+            .stat-label {
+                margin-top: 15px;
+            }
+
+            .section-card {
+                padding: 22px 17px;
+                border-radius: 19px;
+            }
+
+            .section-heading h2 {
+                font-size: 21px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .history-toolbar {
+                align-items: stretch;
+                flex-direction: column;
+                padding: 19px;
+            }
+
+            .history-toolbar .history-toggle {
+                width: 100%;
+            }
+
+            .history-card {
+                padding: 19px 13px;
+            }
+
+            .history-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="header-inner">
+
+            <a href="{{ url_for('admin_dashboard') }}" class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div>
+                    <div class="brand-name">NOURIVA</div>
+                    <div class="brand-caption">ADMIN WORKSPACE</div>
+                </div>
+            </a>
+
+            <a href="{{ url_for('admin_dashboard') }}" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span class="back-label">Admin Dashboard</span>
+            </a>
+
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- PAGE TITLE + TOP PAYMENT HISTORY BUTTON -->
+        <section class="page-intro">
+            <div class="page-intro-row">
+
+                <div class="page-intro-text">
+                    <div class="eyebrow">
+                        <i class="fa-solid fa-chart-line"></i>
+                        Financial Workspace
+                    </div>
+
+                    <h1 class="page-title">
+                        Trainer <span>Payouts</span>
+                    </h1>
+
+                    <p class="page-subtitle">
+                        Manage trainer payments, record transactions, and review
+                        payout history in one place.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="history-toggle top-history-toggle"
+                    id="historyTopToggle"
+                    aria-expanded="false"
+                    aria-controls="historyPanel">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span id="historyTopToggleText">Payment History</span>
+                    <i class="fa-solid fa-chevron-down toggle-arrow"></i>
+                </button>
+
+            </div>
+        </section>
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-label">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    NOURIVA PAYMENT CENTER
+                </div>
+
+                <h2>
+                    Every payment,<br>
+                    managed with <span>care.</span>
+                </h2>
+
+                <p class="hero-description">
+                    Keep trainer payouts organized with a simple payment
+                    workflow and an easy-to-access transaction history.
+                </p>
+
+                <div class="hero-note">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Organized records · Simple management
+                </div>
+
+            </div>
+
+            <div class="wallet-scene" aria-hidden="true">
+
+                <div class="wallet-halo"></div>
+
+                <div class="float-icon float-one">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                </div>
+
+                <div class="float-icon float-two">
+                    <i class="fa-solid fa-receipt"></i>
+                </div>
+
+                <div class="float-icon float-three">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+
+                <div class="float-icon float-four">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div class="wallet">
+                    <div class="wallet-top">
+                        <div class="wallet-logo">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+
+                        <div class="wallet-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="wallet-label">NOURIVA</div>
+                    <div class="wallet-word">Payouts</div>
+                    <div class="wallet-chip"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- SUMMARY CARDS -->
+        <section class="stats-grid">
+
+            <div class="stat-card" style="animation-delay: 0.05s;">
+                <div class="stat-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <span class="stat-emoji">👥</span>
+                </div>
+
+                <div class="stat-label">Available Trainers</div>
+
+                <div class="stat-value">{{ trainers|length }}</div>
+
+                <p class="stat-caption">
+                    Trainers available in the payout selection list.
+                </p>
+            </div>
+
+            <div class="stat-card" style="animation-delay: 0.12s;">
+                <div class="stat-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                    <span class="stat-emoji">🧾</span>
+                </div>
+
+                <div class="stat-label">Recorded Payouts</div>
+
+                <div class="stat-value">{{ payouts|length }}</div>
+
+                <p class="stat-caption">
+                    Payment records currently available in the history.
+                </p>
+            </div>
+
+            <div class="stat-card" style="animation-delay: 0.19s;">
+                <div class="stat-top">
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+                    <span class="stat-emoji">🌿</span>
+                </div>
+
+                <div class="stat-label">Payment Records</div>
+
+                <div class="stat-value">{{ payouts|length }}</div>
+
+                <p class="stat-caption">
+                    History entries available to review.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- RECORD PAYOUT FORM -->
+        <section class="section-card">
+
+            <div class="section-heading">
+                <div class="section-icon">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                </div>
+
+                <div>
+                    <h2>Record a Payout</h2>
+                    <p>Enter the trainer and payment details below.</p>
+                </div>
+            </div>
+
+            <form method="POST" action="{{ url_for('admin_payouts') }}">
+
+                <div class="form-grid">
+
+                    <div class="field full">
+                        <label for="trainer_id">
+                            <i class="fa-solid fa-user"></i>
+                            Select Trainer
+                        </label>
+
+                        <select id="trainer_id" name="trainer_id" required>
+                            <option value="">Choose a trainer</option>
+
+                            {% for trainer in trainers %}
+                            <option value="{{ trainer['id'] }}">
+                                {{ trainer['name'] }} — {{ trainer['email'] }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="amount">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                            Amount (₹)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            name="amount"
+                            min="0.01"
+                            step="0.01"
+                            placeholder="Enter amount"
+                            required>
+                    </div>
+
+                    <div class="field">
+                        <label for="payment_reference">
+                            <i class="fa-solid fa-receipt"></i>
+                            Payment Reference
+                        </label>
+
+                        <input
+                            type="text"
+                            id="payment_reference"
+                            name="payment_reference"
+                            placeholder="e.g. PAY-1001">
+                    </div>
+
+                    <div class="field full">
+                        <label for="note">
+                            <i class="fa-solid fa-note-sticky"></i>
+                            Note
+                        </label>
+
+                        <textarea
+                            id="note"
+                            name="note"
+                            placeholder="Enter payout details..."></textarea>
+                    </div>
+
+                    <div class="field full">
+                        <button type="submit" class="submit-btn">
+                            <i class="fa-solid fa-circle-check"></i>
+                            Record Payout
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        
+
+        <!-- COLLAPSIBLE PAYMENT HISTORY -->
+        <section
+            class="history-panel"
+            id="historyPanel"
+            aria-hidden="true">
+
+            <div class="history-inner">
+
+                <div class="history-card">
+
+                    <div class="history-heading">
+
+                        <div class="section-heading" style="margin-bottom: 0;">
+                            <div class="section-icon">
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                            </div>
+
+                            <div>
+                                <h2>Payout History</h2>
+                                <p style="margin-top: 5px; color: var(--muted); font-size: 12px;">
+                                    Existing payout records from your database.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="record-count">
+                            <i class="fa-solid fa-list-check"></i>
+                            {{ payouts|length }} Records
+                        </div>
+
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Trainer</th>
+                                    <th>Amount</th>
+                                    <th>Reference</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for payout in payouts %}
+                                <tr>
+                                    <td>{{ payout['id'] }}</td>
+
+                                    <td>
+                                        <strong>{{ payout['trainer_name'] }}</strong>
+                                    </td>
+
+                                    <td class="amount">
+                                        ₹{{ "%.2f"|format(payout['amount_paise'] / 100) }}
+                                    </td>
+
+                                    <td class="reference">
+                                        {{ payout['payment_reference'] or '—' }}
+                                    </td>
+
+                                    <td class="date">
+                                        {{ payout['paid_at'] }}
+                                    </td>
+
+                                    <td>
+                                        <span class="status">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                            {{ payout['status'] }}
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                {% else %}
+                                <tr>
+                                    <td colspan="6" class="empty">
+                                        <i class="fa-solid fa-receipt"></i>
+                                        No payouts recorded yet.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>🌿 NOURIVA • AI Health & Fitness • Admin Workspace</p>
+        <p>Organized payout records · Authorized administrators only 🔒</p>
+    </footer>
+
+    <!-- BOTH BUTTONS CONTROL THE SAME HISTORY PANEL -->
+    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const historyPanel = document.getElementById("historyPanel");
+    const historyButton = document.getElementById("historyTopToggle");
+    const historyButtonText = document.getElementById("historyTopToggleText");
+
+    if (!historyPanel || !historyButton) {
+        return;
+    }
+
+    // Ensure history is hidden when the page first loads.
+    historyPanel.classList.remove("open");
+    historyPanel.setAttribute("aria-hidden", "true");
+    historyButton.setAttribute("aria-expanded", "false");
+
+    historyButton.addEventListener("click", function () {
+        const isOpening = !historyPanel.classList.contains("open");
+
+        historyPanel.classList.toggle("open", isOpening);
+        historyPanel.setAttribute("aria-hidden", String(!isOpening));
+        historyButton.setAttribute("aria-expanded", String(isOpening));
+
+        if (historyButtonText) {
+            historyButtonText.textContent = isOpening
+                ? "Hide Payment History"
+                : "Payment History";
+        }
+
+        if (isOpening) {
+            window.setTimeout(function () {
+                historyPanel.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }, 200);
+        }
+    });
+});
+</script>
+
+</body>
+</html>

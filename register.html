@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Create Account</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: white;
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(circle at 15% 20%, rgba(72, 130, 67, 0.25), transparent 28%),
+                radial-gradient(circle at 85% 30%, rgba(95, 150, 72, 0.18), transparent 30%),
+                radial-gradient(circle at 50% 100%, rgba(43, 91, 48, 0.35), transparent 40%),
+                linear-gradient(135deg, #020b06 0%, #06170d 45%, #020a05 100%);
+        }
+
+        /* ---------------- BACKGROUND ---------------- */
+
+        .background-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.18;
+            pointer-events: none;
+        }
+
+        .glow-one {
+            background: #4d9b50;
+            top: -250px;
+            left: -200px;
+            animation: glowMove 8s ease-in-out infinite alternate;
+        }
+
+        .glow-two {
+            background: #7abf55;
+            bottom: -300px;
+            right: -200px;
+            animation: glowMove2 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes glowMove {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(100px, 80px);
+            }
+        }
+
+        @keyframes glowMove2 {
+            from {
+                transform: translate(0, 0);
+            }
+
+            to {
+                transform: translate(-80px, -100px);
+            }
+        }
+
+        /* ---------------- DECORATIVE CIRCLES ---------------- */
+
+        .circle {
+            position: fixed;
+            border: 1px solid rgba(116, 194, 102, 0.25);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .circle-one {
+            width: 320px;
+            height: 320px;
+            top: -180px;
+            left: -130px;
+        }
+
+        .circle-two {
+            width: 420px;
+            height: 420px;
+            bottom: -250px;
+            right: -170px;
+        }
+
+        .circle-three {
+            width: 180px;
+            height: 180px;
+            top: 15%;
+            right: -100px;
+        }
+
+        /* ---------------- FLOATING LEAVES ---------------- */
+
+        .leaf {
+            position: fixed;
+            color: rgba(116, 190, 82, 0.55);
+            font-size: 22px;
+            pointer-events: none;
+            animation: floatLeaf linear infinite;
+        }
+
+        .leaf-1 {
+            top: 12%;
+            left: 7%;
+            animation-duration: 9s;
+        }
+
+        .leaf-2 {
+            top: 72%;
+            left: 15%;
+            font-size: 30px;
+            animation-duration: 12s;
+        }
+
+        .leaf-3 {
+            top: 20%;
+            right: 8%;
+            font-size: 26px;
+            animation-duration: 11s;
+        }
+
+        .leaf-4 {
+            bottom: 15%;
+            right: 13%;
+            font-size: 32px;
+            animation-duration: 10s;
+        }
+
+        .leaf-5 {
+            top: 48%;
+            left: 3%;
+            font-size: 18px;
+            animation-duration: 8s;
+        }
+
+        @keyframes floatLeaf {
+
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.25;
+            }
+
+            50% {
+                transform: translateY(-35px) rotate(15deg);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.25;
+            }
+        }
+
+        /* ---------------- MAIN CONTAINER ---------------- */
+
+        .page-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ---------------- MAIN CARD ---------------- */
+
+        .register-card {
+            width: min(1080px, 100%);
+            min-height: 650px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 32px;
+            overflow: hidden;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(139, 210, 118, 0.35);
+
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, 0.65),
+                0 0 50px rgba(79, 150, 72, 0.12);
+
+            backdrop-filter: blur(20px);
+
+            animation: cardAppear 1s ease forwards;
+
+            position: relative;
+        }
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ---------------- LEFT SIDE ---------------- */
+
+        .left-panel {
+            position: relative;
+            padding: 55px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(92, 157, 82, 0.28),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(5, 40, 20, 0.98),
+                    rgba(11, 67, 35, 0.92),
+                    rgba(4, 31, 18, 0.98)
+                );
+        }
+
+        .left-panel::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            border: 1px solid rgba(139, 210, 118, 0.16);
+            top: -150px;
+            right: -120px;
+        }
+
+        .left-panel::after {
+            content: "";
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(110, 170, 90, 0.08);
+            bottom: -130px;
+            left: -100px;
+        }
+
+        .left-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* ---------------- LOGO ---------------- */
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 55px;
+        }
+
+        .logo-box {
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            color: white;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #75bd6c,
+                    #174b2b
+                );
+
+            border: 1px solid rgba(170, 230, 145, 0.4);
+
+            box-shadow:
+                0 10px 30px rgba(50, 130, 58, 0.35),
+                inset 0 0 20px rgba(255,255,255,0.08);
+
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            color: #f5f8ef;
+        }
+
+        /* ---------------- LEFT HEADING ---------------- */
+
+        .left-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(42px, 4vw, 62px);
+            line-height: 0.98;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .left-title span {
+            color: #9bd47f;
+            text-shadow:
+                0 0 25px rgba(122, 190, 92, 0.25);
+        }
+
+        .left-description {
+            max-width: 410px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.72);
+            margin-bottom: 35px;
+        }
+
+        /* ---------------- FEATURES ---------------- */
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+            transition: 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateX(8px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #b5e996;
+            background: rgba(113, 180, 92, 0.12);
+            border: 1px solid rgba(137, 211, 111, 0.55);
+            box-shadow:
+                0 0 20px rgba(90, 170, 74, 0.12);
+        }
+
+        .feature-text strong {
+            display: block;
+            font-size: 15px;
+            color: white;
+            margin-bottom: 3px;
+        }
+
+        .feature-text span {
+            font-size: 13px;
+            color: rgba(255,255,255,0.55);
+        }
+
+        .quote {
+            position: relative;
+            z-index: 3;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-style: italic;
+            color: #a8d982;
+            letter-spacing: 0.5px;
+        }
+
+        /* ---------------- RIGHT SIDE ---------------- */
+
+        .right-panel {
+            padding: 55px 58px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background:
+                radial-gradient(
+                    circle at 100% 0%,
+                    rgba(162, 195, 123, 0.35),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    145deg,
+                    #f3f5e9,
+                    #e5ead8 55%,
+                    #dfe7d4
+                );
+
+            color: #123c29;
+        }
+
+        .right-panel::before {
+            content: "🌿";
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            font-size: 100px;
+            opacity: 0.14;
+            transform: rotate(25deg);
+        }
+
+        .right-panel::after {
+            content: "";
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: rgba(103, 146, 82, 0.09);
+            right: -60px;
+            bottom: -60px;
+        }
+
+        .form-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        /* ---------------- TITLE ---------------- */
+
+        .form-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(38px, 4vw, 52px);
+            line-height: 1;
+            color: #092d1e;
+            margin-bottom: 12px;
+        }
+
+        .form-subtitle {
+            font-size: 14px;
+            color: #718276;
+            margin-bottom: 25px;
+        }
+
+        .mini-leaf {
+            color: #46794e;
+            margin-bottom: 8px;
+            font-size: 22px;
+        }
+
+        /* ---------------- ALERT MESSAGES ---------------- */
+
+        .alert-message {
+            padding: 14px 18px;
+            border-radius: 16px;
+            margin-bottom: 22px;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.5;
+            animation: alertAppear 0.4s ease;
+        }
+
+        .alert-error {
+            color: #8b2e2e;
+            background: rgba(255, 235, 235, 0.95);
+            border: 1px solid rgba(190, 80, 80, 0.35);
+            box-shadow: 0 8px 20px rgba(120, 40, 40, 0.08);
+        }
+
+        .alert-success {
+            color: #236b3b;
+            background: rgba(231, 249, 235, 0.95);
+            border: 1px solid rgba(70, 150, 90, 0.35);
+            box-shadow: 0 8px 20px rgba(40, 120, 60, 0.08);
+        }
+
+        @keyframes alertAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---------------- FORM ---------------- */
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #14442d;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 19px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #63816c;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 56px;
+            padding: 0 18px 0 52px;
+            border-radius: 30px;
+            border: 1px solid #c8d4c3;
+            background: rgba(255,255,255,0.38);
+            color: #163b29;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s ease;
+
+            box-shadow:
+                inset 0 2px 8px rgba(0,0,0,0.025);
+        }
+
+        .input-field::placeholder {
+            color: #91a096;
+        }
+
+        .input-field:focus {
+            border-color: #59935c;
+            background: rgba(255,255,255,0.75);
+
+            box-shadow:
+                0 0 0 4px rgba(85, 145, 88, 0.13),
+                0 8px 25px rgba(45, 100, 55, 0.08);
+
+            transform: translateY(-1px);
+        }
+
+        /* ---------------- REGISTER BUTTON ---------------- */
+
+        .register-btn {
+            width: 100%;
+            height: 58px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #174f2d,
+                    #4f8c56,
+                    #7ab66b
+                );
+
+            box-shadow:
+                0 12px 30px rgba(49, 107, 57, 0.25);
+
+            transition: all 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .register-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.35),
+                transparent
+            );
+
+            transform: skewX(-20deg);
+            transition: 0.6s;
+        }
+
+        .register-btn:hover::before {
+            left: 130%;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 18px 35px rgba(49, 107, 57, 0.35);
+        }
+
+        .register-btn i {
+            margin-right: 10px;
+        }
+
+        /* ---------------- LOGIN ---------------- */
+
+        .login-area {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(67, 108, 75, 0.18);
+            color: #7a897e;
+            font-size: 13px;
+        }
+
+        .login-link {
+            color: #245f3a;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .login-link:hover {
+            color: #75a962;
+            text-decoration: underline;
+        }
+
+        .security {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            margin-top: 20px;
+            font-size: 11px;
+            color: #7f9184;
+        }
+
+        .security i {
+            color: #5c8d62;
+        }
+
+        /* ---------------- RESPONSIVE ---------------- */
+
+        @media (max-width: 850px) {
+
+            .page-wrapper {
+                padding: 25px 15px;
+            }
+
+            .register-card {
+                grid-template-columns: 1fr;
+                max-width: 620px;
+            }
+
+            .left-panel {
+                padding: 40px 35px;
+                min-height: 480px;
+            }
+
+            .right-panel {
+                padding: 45px 35px;
+            }
+
+            .left-title {
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .page-wrapper {
+                padding: 15px;
+            }
+
+            .register-card {
+                border-radius: 24px;
+            }
+
+            .left-panel,
+            .right-panel {
+                padding: 32px 24px;
+            }
+
+            .logo-row {
+                margin-bottom: 35px;
+            }
+
+            .left-title {
+                font-size: 40px;
+            }
+
+            .feature-list {
+                gap: 15px;
+            }
+
+            .form-title {
+                font-size: 38px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Background effects -->
+
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <div class="circle circle-one"></div>
+    <div class="circle circle-two"></div>
+    <div class="circle circle-three"></div>
+
+    <!-- Floating leaves -->
+
+    <div class="leaf leaf-1">🍃</div>
+    <div class="leaf leaf-2">🌿</div>
+    <div class="leaf leaf-3">🍃</div>
+    <div class="leaf leaf-4">🌿</div>
+    <div class="leaf leaf-5">🍃</div>
+
+
+    <main class="page-wrapper">
+
+        <div class="register-card">
+
+            <!-- ================= LEFT PANEL ================= -->
+
+            <section class="left-panel">
+
+                <div class="left-content">
+
+                    <!-- Logo -->
+
+                    <div class="logo-row">
+
+                        <div class="logo-box">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+
+                        <div class="brand">
+                            NOURIVA
+                        </div>
+
+                    </div>
+
+
+                    <!-- Heading -->
+
+                    <h1 class="left-title">
+
+                        Better Choices.<br>
+
+                        <span>Healthier You.</span>
+
+                    </h1>
+
+
+                    <p class="left-description">
+
+                        Your journey to a healthier, happier life starts here.
+                        Join NOURIVA and build better habits, one step at a time.
+
+                    </p>
+
+
+                    <!-- Features -->
+
+                    <div class="feature-list">
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+
+                            <div class="feature-text">
+
+                                <strong>
+                                    Personalized Nutrition
+                                </strong>
+
+                                <span>
+                                    AI-powered meal plans
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-dumbbell"></i>
+                            </div>
+
+                            <div class="feature-text">
+
+                                <strong>
+                                    Fitness Guidance
+                                </strong>
+
+                                <span>
+                                    Train smarter, get stronger
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="feature">
+
+                            <div class="feature-icon">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                            </div>
+
+                            <div class="feature-text">
+
+                                <strong>
+                                    Holistic Wellness
+                                </strong>
+
+                                <span>
+                                    Body • Mind • Lifestyle
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quote">
+                    Good Food. Better Life ♥
+                </div>
+
+            </section>
+
+
+            <!-- ================= RIGHT PANEL ================= -->
+
+            <section class="right-panel">
+
+                <div class="form-content">
+
+                    <div class="mini-leaf">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+
+
+                    <h2 class="form-title">
+                        Create Account
+                    </h2>
+
+
+                    <p class="form-subtitle">
+                        Start your wellness journey with NOURIVA.
+                    </p>
+
+
+                    <!-- ================= ALERT MESSAGES ================= -->
+
+                    {% if error %}
+
+                    <div class="alert-message alert-error">
+
+                        ⚠️ <strong>Account already exists!</strong><br>
+
+                        This username or email is already registered.
+                        Please login instead.
+
+                    </div>
+
+                    {% endif %}
+                     {% if error_message %}
+
+                    <div class="alert-message alert-error">
+
+                        ⚠️ <strong>{{ error_message }}</strong>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    {% if success %}
+
+                    <div class="alert-message alert-success">
+
+                        ✅ <strong>Account created successfully!</strong><br>
+
+                        Your account has been created.
+                        Please login to continue.
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <!-- ================= FORM ================= -->
+
+                    <form method="POST">
+
+                        <!-- Username -->
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Username
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-user input-icon"></i>
+
+                                <input
+                                    type="text"
+                                    name="username"
+                                    required
+                                    placeholder="HealthNerd@gmail.com"
+                                    class="input-field">
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Email Address
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-envelope input-icon"></i>
+
+                                <input
+                                    type="email"
+                                    name="email"
+                                    required
+                                    placeholder="Your@email.com"
+                                    class="input-field">
+
+                            </div>
+
+                        </div>
+
+
+                      <!-- Password -->
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock input-icon"></i>
+
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    required
+                                    minlength="8"
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}"
+                                    title="Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character."
+                                    placeholder="••••••••"
+                                    class="input-field">
+
+                            </div>
+
+                            <small style="color: #777; font-size: 12px;">
+                                Minimum 8 characters, including uppercase, lowercase,
+                                a number, and a special character.
+                            </small>
+
+                        </div>
+
+                        
+                        <!-- Confirm Password -->
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Confirm Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock input-icon"></i>
+
+                                <input
+                                    type="password"
+                                    name="confirm_password"
+                                    required
+                                    placeholder="Confirm your password"
+                                    class="input-field">
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Register Button -->
+
+                        <button
+                            type="submit"
+                            class="register-btn">
+
+                            <i class="fa-solid fa-user-plus"></i>
+
+                            Register Now
+
+                            <i class="fa-solid fa-arrow-right"
+                               style="margin-left: 8px; margin-right: 0;">
+                            </i>
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- Login -->
+
+                    <div class="login-area">
+
+                        Already have an account?
+
+                        <a href="/login"
+                           class="login-link">
+
+                            Sign In here
+
+                        </a>
+
+                    </div>
+
+
+                    <!-- Security -->
+
+                    <div class="security">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                        Your account information is securely protected.
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

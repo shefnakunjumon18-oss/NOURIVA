@@ -1,0 +1,644 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Client Profile</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 85% 8%,
+                    rgba(34, 197, 94, 0.12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 20% 90%,
+                    rgba(16, 185, 129, 0.07),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #031b13 0%,
+                    #06271b 45%,
+                    #03140e 100%
+                );
+        }
+
+        .glass {
+            background: linear-gradient(
+                145deg,
+                rgba(255, 255, 255, 0.065),
+                rgba(255, 255, 255, 0.025)
+            );
+
+            border: 1px solid rgba(255, 255, 255, 0.09);
+
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.18);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .profile-card {
+            animation: profileIn 0.65s ease both;
+        }
+
+        @keyframes profileIn {
+            from {
+                opacity: 0;
+                transform: translateY(22px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #22c55e,
+                #10b981
+            );
+
+            box-shadow: 0 10px 28px rgba(34, 197, 94, 0.24);
+        }
+
+        .brand-title {
+            font-size: 19px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-subtitle {
+            margin-top: 2px;
+            color: #6ee7b7;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+        }
+
+        .back-top {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 12px 17px;
+            border-radius: 13px;
+
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+
+            transition: all 0.3s ease;
+        }
+
+        .back-top:hover {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(52, 211, 153, 0.3);
+            color: #86efac;
+            transform: translateY(-2px);
+        }
+
+        .profile-photo,
+        .avatar {
+            width: 112px;
+            height: 112px;
+            flex-shrink: 0;
+            border-radius: 27px;
+        }
+
+        .profile-photo {
+            object-fit: cover;
+            border: 2px solid rgba(52, 211, 153, 0.45);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .avatar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #22c55e,
+                #059669
+            );
+
+            font-size: 43px;
+            font-weight: 800;
+
+            box-shadow: 0 18px 40px rgba(34, 197, 94, 0.18);
+        }
+
+        .eyebrow {
+            color: #34d399;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.4px;
+        }
+
+        .section-icon {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+        }
+
+        .detail-card {
+            min-width: 0;
+            padding: 18px;
+            border-radius: 17px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+
+            transition: all 0.3s ease;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(52, 211, 153, 0.25);
+        }
+
+        .detail-icon {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(34, 197, 94, 0.12);
+            color: #4ade80;
+        }
+
+        .label {
+            margin-bottom: 5px;
+            color: rgba(255, 255, 255, 0.43);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+        }
+
+        .value {
+            color: rgba(255, 255, 255, 0.94);
+            font-size: 14px;
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
+
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-top: 16px;
+            padding: 9px 14px;
+            border-radius: 999px;
+
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.2);
+
+            color: #6ee7b7;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .goal-card {
+            padding: 20px;
+            border-radius: 18px;
+
+            background: linear-gradient(
+                135deg,
+                rgba(16, 185, 129, 0.13),
+                rgba(34, 197, 94, 0.055)
+            );
+
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+
+        .bio-card {
+            padding: 21px;
+            border-radius: 17px;
+
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-left: 3px solid #10b981;
+        }
+
+        .action-btn {
+            min-height: 49px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
+            padding: 13px 20px;
+            border-radius: 12px;
+
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 800;
+
+            transition: all 0.3s ease;
+        }
+
+        .chat-btn {
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                #22c55e,
+                #10b981
+            );
+
+            box-shadow: 0 9px 24px rgba(34, 197, 94, 0.17);
+        }
+
+        .chat-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(34, 197, 94, 0.28);
+        }
+
+        .back-btn {
+            color: rgba(255, 255, 255, 0.86);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(52, 211, 153, 0.25);
+            color: #86efac;
+        }
+
+        .footer-note {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @media (max-width: 640px) {
+            .profile-photo,
+            .avatar {
+                width: 92px;
+                height: 92px;
+                border-radius: 23px;
+            }
+
+            .avatar {
+                font-size: 35px;
+            }
+
+            .section-title {
+                font-size: 18px;
+            }
+
+            .detail-card {
+                padding: 14px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="min-h-screen px-4 py-6 sm:px-6 md:px-10 md:py-8">
+
+        <div class="max-w-5xl mx-auto">
+
+            <!-- TOP NAVIGATION -->
+            <header class="flex items-center justify-between gap-4 mb-8">
+
+                <div class="flex items-center gap-3">
+
+                    <div class="logo-box">
+                        <i class="fa-solid fa-leaf text-white text-xl"></i>
+                    </div>
+
+                    <div>
+                        <div class="brand-title">NOURIVA</div>
+                        <div class="brand-subtitle">TRAINER HUB</div>
+                    </div>
+
+                </div>
+
+                <a href="/trainer_dashboard" class="back-top">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Back to Dashboard</span>
+                    <span class="sm:hidden">Dashboard</span>
+                </a>
+
+            </header>
+
+            <!-- PROFILE CARD -->
+            <main class="glass profile-card rounded-3xl p-5 sm:p-7 md:p-10">
+
+                <!-- PROFILE HEADER -->
+                <section class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-10">
+
+                    <!-- CLIENT PHOTO -->
+                    <div>
+                        {% if client.photo %}
+                            <img
+                                src="{{ url_for('static', filename='uploads/' ~ client.photo) }}"
+                                alt="{{ client.username }}"
+                                class="profile-photo"
+                            >
+                        {% else %}
+                            <div class="avatar">
+                                {{ (client.username or 'U')[0]|upper }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- CLIENT NAME -->
+                    <div class="text-center sm:text-left flex-1 min-w-0">
+
+                        <p class="eyebrow mb-3">Client Profile</p>
+
+                        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mb-3 break-words">
+                            {{ client.username }}
+                        </h1>
+
+                        <p class="text-sm text-white/50">
+                            Complete client information
+                        </p>
+
+                        {% if client.premium == 1 %}
+                            <div class="premium-badge">
+                                <i class="fa-solid fa-crown"></i>
+                                Premium Member
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="hidden lg:flex items-center gap-2 text-emerald-300/70 text-xs font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        Client Details
+                    </div>
+
+                </section>
+
+                <!-- PERSONAL DETAILS -->
+                <section class="mb-9">
+
+                    <h2 class="section-title">
+                        <span class="section-icon">
+                            <i class="fa-solid fa-address-card"></i>
+                        </span>
+                        Personal Details
+                    </h2>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                        <!-- EMAIL -->
+                        {% if client.email %}
+                            <div class="detail-card">
+                                <div class="flex items-center gap-4">
+
+                                    <div class="detail-icon">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+
+                                    <div class="min-w-0">
+                                        <p class="label">Email</p>
+                                        <p class="value">{{ client.email }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- PHONE -->
+                        {% if client.phone %}
+                            <div class="detail-card">
+                                <div class="flex items-center gap-4">
+
+                                    <div class="detail-icon">
+                                        <i class="fa-solid fa-phone"></i>
+                                    </div>
+
+                                    <div class="min-w-0">
+                                        <p class="label">Phone</p>
+                                        <p class="value">{{ client.phone }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- AGE -->
+                        {% if client.age %}
+                            <div class="detail-card">
+                                <div class="flex items-center gap-4">
+
+                                    <div class="detail-icon">
+                                        <i class="fa-solid fa-cake-candles"></i>
+                                    </div>
+
+                                    <div>
+                                        <p class="label">Age</p>
+                                        <p class="value">{{ client.age }} years</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <!-- GENDER -->
+                        {% if client.gender %}
+                            <div class="detail-card">
+                                <div class="flex items-center gap-4">
+
+                                    <div class="detail-icon">
+                                        <i class="fa-solid fa-venus-mars"></i>
+                                    </div>
+
+                                    <div>
+                                        <p class="label">Gender</p>
+                                        <p class="value">{{ client.gender }}</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+
+                </section>
+
+                <!-- FITNESS GOAL -->
+                {% if client.fitness_goal %}
+                    <section class="mb-9">
+
+                        <h2 class="section-title">
+                            <span class="section-icon">
+                                <i class="fa-solid fa-bullseye"></i>
+                            </span>
+                            Fitness Goal
+                        </h2>
+
+                        <div class="goal-card">
+
+                            <div class="flex items-center gap-4">
+
+                                <div class="w-12 h-12 rounded-xl bg-emerald-400/10 flex items-center justify-center text-emerald-300 flex-shrink-0">
+                                    <i class="fa-solid fa-bullseye text-xl"></i>
+                                </div>
+
+                                <div class="min-w-0">
+                                    <p class="text-xs uppercase tracking-wider text-emerald-300/60 mb-2">
+                                        Current Goal
+                                    </p>
+
+                                    <p class="text-lg font-extrabold text-emerald-300 break-words">
+                                        {{ client.fitness_goal }}
+                                    </p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+                {% endif %}
+
+                <!-- ABOUT CLIENT -->
+                {% if client.bio %}
+                    <section class="mb-9">
+
+                        <h2 class="section-title">
+                            <span class="section-icon">
+                                <i class="fa-solid fa-user-pen"></i>
+                            </span>
+                            About Client
+                        </h2>
+
+                        <div class="bio-card">
+
+                            <div class="flex items-start gap-4">
+
+                                <i class="fa-solid fa-quote-left text-emerald-400 mt-1"></i>
+
+                                <p class="text-white/75 leading-7 text-sm md:text-base break-words">
+                                    {{ client.bio }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+                {% endif %}
+
+                <!-- ACTION BUTTONS -->
+                <section class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-white/10">
+
+                    <!-- CHAT -->
+                    <a
+                        href="/trainer_chat/{{ client.username }}"
+                        class="action-btn chat-btn flex-1"
+                    >
+                        <i class="fa-solid fa-comment-dots"></i>
+                        Chat with {{ client.username }}
+                    </a>
+
+                    <!-- BACK TO CLIENTS -->
+                    <a
+                        href="/trainer_dashboard"
+                        class="action-btn back-btn"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Back to Clients
+                    </a>
+
+                </section>
+
+            </main>
+
+            <!-- FOOTER -->
+            <footer class="footer-note mt-6">
+                NOURIVA TRAINER HUB · Supporting your clients' fitness journey
+            </footer>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

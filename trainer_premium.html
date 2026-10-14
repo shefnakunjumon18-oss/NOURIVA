@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Premium Trainer Access</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #164e3b;
+
+            background:
+                radial-gradient(circle at 10% 20%,
+                    rgba(181, 214, 116, 0.25),
+                    transparent 25%),
+
+                radial-gradient(circle at 90% 30%,
+                    rgba(207, 229, 173, 0.35),
+                    transparent 30%),
+
+                linear-gradient(
+                    135deg,
+                    #fbfdf1 0%,
+                    #f1f7df 45%,
+                    #eef6dc 100%
+                );
+
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           FLOATING DECORATIVE LEAVES
+        ===================================================== */
+
+        .leaf {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.48;
+            z-index: 0;
+        }
+
+        .leaf-left-top {
+            top: 110px;
+            left: -30px;
+
+            font-size: 130px;
+            color: #a8c96f;
+
+            transform: rotate(-25deg);
+
+            animation: leafFloat 7s ease-in-out infinite;
+        }
+
+        .leaf-left-bottom {
+            bottom: -20px;
+            left: 20px;
+
+            font-size: 150px;
+            color: #91b85a;
+
+            transform: rotate(20deg);
+
+            animation: leafFloatReverse 9s ease-in-out infinite;
+        }
+
+        .leaf-right {
+            right: -30px;
+            bottom: 20px;
+
+            font-size: 160px;
+            color: #a9c978;
+
+            transform: rotate(-25deg);
+
+            animation: leafFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes leafFloat {
+
+            0%, 100% {
+                transform: rotate(-25deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(-18deg) translateY(-18px);
+            }
+
+        }
+
+        @keyframes leafFloatReverse {
+
+            0%, 100% {
+                transform: rotate(20deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(28deg) translateY(15px);
+            }
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #0d5b45,
+                    #12654c,
+                    #0c5a43
+                );
+
+            border-radius: 0 0 30px 30px;
+
+            box-shadow:
+                0 12px 35px rgba(21, 83, 59, 0.20);
+        }
+
+        .nav-inner {
+            max-width: 1450px;
+            margin: auto;
+
+            padding: 16px 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 36px;
+
+            background: rgba(255,255,255,0.08);
+
+            border-radius: 18px;
+
+            transition: 0.4s ease;
+        }
+
+        .brand:hover .brand-icon {
+            transform: rotate(-8deg) scale(1.08);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .brand-name {
+            color: white;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 32px;
+            font-weight: 700;
+
+            letter-spacing: 1px;
+        }
+
+        .brand-subtitle {
+            display: block;
+
+            font-family: 'Inter', sans-serif;
+
+            font-size: 9px;
+            letter-spacing: 4px;
+            font-weight: 600;
+
+            margin-top: -4px;
+
+            color: #e8f1d2;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+        }
+
+        .nav-links a {
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 15px;
+            font-weight: 500;
+
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            transition: 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d7ec9c;
+            transform: translateY(-2px);
+        }
+
+        .logout {
+            color: #ffe0d8 !important;
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .main-container {
+            position: relative;
+            z-index: 2;
+
+            max-width: 1450px;
+
+            margin: auto;
+
+            padding: 45px 30px 70px;
+        }
+
+        .hero-grid {
+            display: grid;
+
+            grid-template-columns:
+                0.95fr
+                1.15fr
+                0.95fr;
+
+            gap: 28px;
+
+            align-items: center;
+        }
+
+
+        /* =====================================================
+           LEFT HERO
+        ===================================================== */
+
+        .left-content {
+            padding: 20px;
+        }
+
+        .small-label {
+            display: inline-flex;
+
+            align-items: center;
+            gap: 10px;
+
+            background: #e3efc7;
+            color: #32644c;
+
+            padding: 11px 20px;
+
+            border-radius: 30px;
+
+            font-weight: 700;
+            font-size: 15px;
+
+            letter-spacing: 0.5px;
+
+            box-shadow:
+                0 8px 20px rgba(78, 126, 61, 0.08);
+
+            animation: labelPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes labelPulse {
+
+            0%, 100% {
+                box-shadow:
+                    0 8px 20px rgba(78, 126, 61, 0.08);
+            }
+
+            50% {
+                box-shadow:
+                    0 10px 28px rgba(78, 126, 61, 0.18);
+            }
+
+        }
+
+        .small-label i {
+            color: #4b8f3c;
+        }
+
+        .main-heading {
+            margin: 25px 0 18px;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: clamp(48px, 5vw, 78px);
+
+            line-height: 0.98;
+
+            font-weight: 800;
+
+            color: #0d4f3c;
+        }
+
+        .main-heading span {
+            color: #70a72e;
+        }
+
+        .description {
+            max-width: 550px;
+
+            font-size: 18px;
+            line-height: 1.7;
+
+            color: #557264;
+        }
+
+        .quote {
+            margin-top: 32px;
+
+            font-family: 'Playfair Display', serif;
+
+            font-style: italic;
+
+            font-size: 28px;
+
+            line-height: 1.25;
+
+            color: #618c5b;
+        }
+
+
+        /* =====================================================
+           PRICING CARD
+        ===================================================== */
+
+        .pricing-card {
+            position: relative;
+
+            background: rgba(255,255,255,0.88);
+
+            border: 1px solid #d4e3bd;
+
+            border-radius: 28px;
+
+            padding: 38px 42px;
+
+            box-shadow:
+                0 25px 70px rgba(57, 102, 60, 0.14);
+
+            backdrop-filter: blur(15px);
+
+            animation:
+                floatCard 5s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+
+            0%,100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-7px);
+            }
+
+        }
+
+        /* Most popular badge */
+
+        .popular-badge {
+            position: absolute;
+
+            top: -14px;
+            right: 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #76b82f,
+                    #12634b
+                );
+
+            color: white;
+
+            padding: 8px 17px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            box-shadow:
+                0 8px 20px rgba(35, 105, 58, 0.25);
+
+            animation: badgeFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes badgeFloat {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+
+        }
+
+
+        /* Lifetime label */
+
+        .lifetime {
+            display: inline-block;
+
+            background: #e5f1c9;
+
+            color: #2f654d;
+
+            padding: 10px 20px;
+
+            border-radius: 30px;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* Price */
+
+        .price {
+            position: relative;
+
+            margin-top: 10px;
+
+            font-size: 78px;
+
+            line-height: 1;
+
+            font-weight: 800;
+
+            color: #0c5943;
+
+            text-shadow:
+                0 8px 20px rgba(50, 100, 55, 0.12);
+
+            animation: priceGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes priceGlow {
+
+            0%, 100% {
+                text-shadow:
+                    0 8px 20px rgba(50, 100, 55, 0.12);
+            }
+
+            50% {
+                text-shadow:
+                    0 0 12px rgba(112, 167, 46, 0.30),
+                    0 0 28px rgba(112, 167, 46, 0.18),
+                    0 8px 25px rgba(50, 100, 55, 0.14);
+            }
+
+        }
+
+        .forever {
+            margin-top: 12px;
+
+            color: #6c7770;
+
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ===================================================== */
+
+        .features {
+            margin-top: 28px;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        .feature {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 13px;
+
+            color: #38594b;
+
+            font-size: 15px;
+
+            line-height: 1.4;
+
+            padding: 6px;
+
+            border-radius: 12px;
+
+            transition: 0.3s ease;
+        }
+
+        .feature:hover {
+            background: #f2f8e7;
+
+            transform: translateX(5px);
+        }
+
+        .check {
+            flex-shrink: 0;
+
+            width: 29px;
+            height: 29px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #dff0ba;
+
+            color: #16704c;
+
+            font-size: 13px;
+
+            transition: 0.3s ease;
+        }
+
+        .feature:hover .check {
+            background:
+                linear-gradient(
+                    135deg,
+                    #78b83a,
+                    #12634b
+                );
+
+            color: white;
+
+            transform: rotate(8deg) scale(1.08);
+        }
+
+
+        /* Different feature icons */
+
+        .feature-icon {
+            flex-shrink: 0;
+
+            width: 29px;
+            height: 29px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: #e2f1c4;
+
+            color: #4f8d39;
+
+            font-size: 12px;
+
+            transition: 0.3s ease;
+        }
+
+        .feature:hover .feature-icon {
+            background:
+                linear-gradient(
+                    135deg,
+                    #78b83a,
+                    #12634b
+                );
+
+            color: white;
+
+            transform: scale(1.1);
+        }
+
+
+        /* =====================================================
+           PAYMENT BUTTON
+        ===================================================== */
+
+        .payment-button {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            width: 100%;
+
+            margin-top: 28px;
+
+            padding: 18px 22px;
+
+            border-radius: 40px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #6da92d,
+                    #12634b
+                );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: 700;
+
+            box-shadow:
+                0 12px 25px rgba(34, 105, 59, 0.25);
+
+            transition: 0.35s ease;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .payment-button::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: -100%;
+
+            width: 60%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.25),
+                    transparent
+                );
+
+            transform: skewX(-20deg);
+
+            transition: 0.6s ease;
+        }
+
+        .payment-button:hover::before {
+            left: 140%;
+        }
+
+        .payment-button:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 35px rgba(34, 105, 59, 0.30);
+        }
+
+
+        /* =====================================================
+           PAYMENT METHODS
+        ===================================================== */
+
+        .payment-title {
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #78827a;
+
+            font-size: 14px;
+        }
+
+        .payment-icons {
+            margin-top: 14px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .payment-icons img {
+            width: 54px;
+
+            height: 38px;
+
+            object-fit: contain;
+
+            transition: 0.3s ease;
+        }
+
+        .payment-icons img:hover {
+            transform: scale(1.12) translateY(-3px);
+        }
+
+        /* UPI */
+
+        .upi-logo {
+            width: 54px;
+
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            transition: 0.3s ease;
+        }
+
+        .upi-logo svg {
+            width: 54px;
+
+            height: 38px;
+        }
+
+        .upi-logo:hover {
+            transform: scale(1.12) translateY(-3px);
+        }
+
+        .secure {
+            margin-top: 14px;
+
+            text-align: center;
+
+            color: #7b857e;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RIGHT VISUAL
+        ===================================================== */
+
+        .visual-card {
+            position: relative;
+
+            min-height: 570px;
+
+            border-radius: 35px;
+
+            overflow: hidden;
+
+            background-image:
+                linear-gradient(
+                    180deg,
+                    rgba(255,255,255,0.02),
+                    rgba(22,78,59,0.10)
+                ),
+
+                url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1000&q=85');
+
+            background-size: cover;
+
+            background-position: center;
+
+            box-shadow:
+                0 25px 60px rgba(50, 90, 55, 0.15);
+
+            transition: 0.5s ease;
+        }
+
+        .visual-card:hover {
+            transform: translateY(-6px) scale(1.01);
+
+            box-shadow:
+                0 30px 70px rgba(50, 90, 55, 0.22);
+        }
+
+        .visual-overlay {
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent 55%,
+                    rgba(255,255,255,0.90)
+                );
+        }
+
+        .visual-text {
+            position: absolute;
+
+            right: 35px;
+
+            top: 100px;
+
+            max-width: 210px;
+
+            font-family: 'Playfair Display', serif;
+
+            font-size: 30px;
+
+            line-height: 1.2;
+
+            font-style: italic;
+
+            color: #35694f;
+        }
+
+        .visual-text span {
+            color: #70a72e;
+        }
+
+
+        /* =====================================================
+           BENEFITS
+        ===================================================== */
+
+        .benefits {
+            margin-top: 35px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 25px;
+        }
+
+        .benefit-card {
+            background: rgba(255,255,255,0.82);
+
+            border: 1px solid #d6e3c2;
+
+            border-radius: 24px;
+
+            padding: 24px 28px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 22px;
+
+            box-shadow:
+                0 15px 40px rgba(55, 100, 55, 0.08);
+
+            transition: 0.35s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 22px 45px rgba(55, 100, 55, 0.13);
+        }
+
+        .benefit-icon {
+            flex-shrink: 0;
+
+            width: 70px;
+
+            height: 70px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #78b83a,
+                    #12634b
+                );
+
+            color: white;
+
+            font-size: 30px;
+
+            transition: 0.4s ease;
+        }
+
+        .benefit-card:hover .benefit-icon {
+            transform: rotate(-8deg) scale(1.08);
+        }
+
+        .benefit-card h3 {
+            margin: 0 0 7px;
+
+            color: #14513e;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+        .benefit-card p {
+            margin: 0;
+
+            color: #6c7b71;
+
+            font-size: 14px;
+
+            line-height: 1.55;
+        }
+
+
+        /* =====================================================
+           BACK LINK
+        ===================================================== */
+
+        .back-link {
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-top: 35px;
+
+            color: #2d714e;
+
+            text-decoration: none;
+
+            font-size: 16px;
+
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #72a62e;
+
+            transform: translateX(-3px);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            position: relative;
+
+            z-index: 2;
+
+            background: #e8f0d8;
+
+            border-top: 1px solid #d1dfbc;
+
+            padding: 20px;
+
+            text-align: center;
+
+            color: #718071;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .hero-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .visual-card {
+                display: none;
+            }
+
+        }
+
+
+        @media (max-width: 768px) {
+
+            .nav-inner {
+                padding: 13px 18px;
+            }
+
+            .brand-name {
+                font-size: 25px;
+            }
+
+            .brand-icon {
+                width: 48px;
+
+                height: 48px;
+
+                font-size: 28px;
+            }
+
+            .nav-links {
+                gap: 13px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+            .nav-links a i {
+                display: none;
+            }
+
+            .main-container {
+                padding: 30px 16px 50px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .left-content {
+                text-align: center;
+            }
+
+            .small-label {
+                font-size: 12px;
+            }
+
+            .main-heading {
+                font-size: 52px;
+            }
+
+            .description {
+                margin: auto;
+            }
+
+            .quote {
+                font-size: 23px;
+            }
+
+            .pricing-card {
+                padding: 28px 22px;
+            }
+
+            .price {
+                font-size: 65px;
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .brand-subtitle {
+                display: none;
+            }
+
+            .main-heading {
+                font-size: 43px;
+            }
+
+            .pricing-card {
+                border-radius: 22px;
+            }
+
+            .price {
+                font-size: 55px;
+            }
+
+            .feature {
+                font-size: 13px;
+            }
+
+            .benefit-card {
+                padding: 20px;
+            }
+
+            .popular-badge {
+                right: 15px;
+                font-size: 9px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         DECORATIVE LEAVES
+    ====================================================== -->
+
+    <div class="leaf leaf-left-top">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+    <div class="leaf leaf-left-bottom">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+    <div class="leaf leaf-right">
+        <i class="fa-solid fa-leaf"></i>
+    </div>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="nav-inner">
+
+            <a href="/dashboard" class="brand">
+
+                <div class="brand-icon">
+
+                    <i class="fa-solid fa-leaf"></i>
+
+                </div>
+
+                <div>
+
+                    <div class="brand-name">
+                        NOURIVA
+                    </div>
+
+                    <span class="brand-subtitle">
+                        AI HEALTH • FOOD • FITNESS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="/trainer">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Trainer Home
+
+                </a>
+
+
+                <a href="/dashboard">
+
+                    <i class="fa-solid fa-table-cells-large"></i>
+
+                    Dashboard
+
+                </a>
+
+
+                <a href="/logout" class="logout">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main-container">
+
+
+        <div class="hero-grid">
+
+
+            <!-- =================================================
+                 LEFT CONTENT
+            ================================================== -->
+
+            <section class="left-content">
+
+
+                <div class="small-label">
+
+                    <i class="fa-solid fa-dumbbell"></i>
+
+                    PREMIUM TRAINER ACCESS
+
+                </div>
+
+
+                <h1 class="main-heading">
+
+                    Unlock Your
+
+                    <br>
+
+                    <span>Healthier You</span>
+
+                </h1>
+
+
+                <p class="description">
+
+                    Get lifetime access to certified trainers,
+                    personalized meal plans, and direct guidance
+                    — designed for a healthier, happier you.
+
+                </p>
+
+
+                <div class="quote">
+
+                    Good Food
+
+                    <br>
+
+                    Better Life ♡
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 PRICING CARD
+            ================================================== -->
+
+            <section class="pricing-card">
+
+
+                <!-- POPULAR BADGE -->
+
+                <div class="popular-badge">
+
+                    <i class="fa-solid fa-crown"></i>
+
+                    LIFETIME ACCESS
+
+                </div>
+
+
+                <div class="text-center">
+
+
+                    <span class="lifetime">
+
+                        ONE-TIME LIFETIME ACCESS
+
+                    </span>
+
+
+                    <div class="price">
+
+                        ₹599
+
+                    </div>
+
+
+                    <div class="forever">
+
+                        No monthly fees • Forever yours
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     FEATURES
+                ================================================== -->
+
+                <div class="features">
+
+
+                    <div class="feature">
+
+                        <span class="feature-icon">
+
+                            <i class="fa-solid fa-user-check"></i>
+
+                        </span>
+
+                        <span>
+
+                            1-on-1 consultation with certified fitness trainers
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="feature-icon">
+
+                            <i class="fa-solid fa-utensils"></i>
+
+                        </span>
+
+                        <span>
+
+                            Custom meal plans based on your goals & Kerala cuisine
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="feature-icon">
+
+                            <i class="fa-solid fa-comments"></i>
+
+                        </span>
+
+                        <span>
+
+                            Direct chat support with your dedicated trainer
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="feature-icon">
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                        </span>
+
+                        <span>
+
+                            Priority responses & ongoing progress tracking
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <span class="feature-icon">
+
+                            <i class="fa-solid fa-heart"></i>
+
+                        </span>
+
+                        <span>
+
+                            Exclusive tips for home workouts & healthy Kerala eating
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PAYMENT BUTTON
+                ================================================== -->
+
+                <a href="/payment_page"
+                   class="payment-button">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                    Proceed to Secure Payment →
+
+                </a>
+
+
+                <!-- =================================================
+                     PAYMENT METHODS
+                ================================================== -->
+
+                <div class="payment-title">
+
+                    Secure Payment Partners We Accept
+
+                </div>
+
+
+                <div class="payment-icons">
+
+
+                    <img src="https://img.icons8.com/color/96/000000/visa.png"
+                         alt="Visa">
+
+
+                    <img src="https://img.icons8.com/color/96/000000/mastercard.png"
+                         alt="Mastercard">
+
+
+                    <img src="https://img.icons8.com/color/96/000000/rupay.png"
+                         alt="RuPay">
+
+
+                    <!-- UPI INLINE SVG -->
+
+                    <div class="upi-logo"
+                         title="UPI">
+
+                        <svg viewBox="0 0 120 45"
+                             xmlns="http://www.w3.org/2000/svg">
+
+                            <text x="4"
+                                  y="31"
+                                  font-family="Arial, sans-serif"
+                                  font-size="30"
+                                  font-weight="700"
+                                  fill="#2b7a4b">
+
+                                UPI
+
+                            </text>
+
+                        </svg>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="secure">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Powered by trusted gateways like Razorpay •
+
+                    100% secure & encrypted
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 RIGHT IMAGE
+            ================================================== -->
+
+            <section class="visual-card">
+
+                <div class="visual-overlay"></div>
+
+
+                <div class="visual-text">
+
+                    Stronger
+
+                    <br>
+
+                    <span>Healthier</span>
+
+                    <br>
+
+                    Happier You ♡
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- =====================================================
+             BENEFITS
+        ====================================================== -->
+
+        <section class="benefits">
+
+
+            <div class="benefit-card">
+
+
+                <div class="benefit-icon">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+
+                        Direct Trainer Chat
+
+                    </h3>
+
+
+                    <p>
+
+                        Ask questions anytime — form corrections,
+                        diet tweaks, motivation boosts.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="benefit-card">
+
+
+                <div class="benefit-icon">
+
+                    <i class="fa-solid fa-utensils"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+
+                        Custom Kerala Plans
+
+                    </h3>
+
+
+                    <p>
+
+                        Meals with sadhya vibes, appam breakfasts,
+                        fish curries — healthy & tasty.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================================
+             BACK LINK
+        ====================================================== -->
+
+        <a href="/trainer"
+           class="back-link">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Trainer Dashboard
+
+        </a>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <p>
+
+            NOURIVA • Premium Trainer Access •
+
+            AI Health • Food • Fitness
+
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

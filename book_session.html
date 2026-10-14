@@ -1,0 +1,405 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA | Book a Session</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #071713;
+            color: #f0fdf4;
+            min-height: 100vh;
+            padding: 35px 16px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #86efac;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .form-card {
+            background: #10251f;
+            border: 1px solid #285344;
+            border-radius: 22px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .tag {
+            display: inline-block;
+            color: #86efac;
+            background: #17392d;
+            padding: 7px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #a7c4b7;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        .trainer-box {
+            background: #17352a;
+            border-radius: 14px;
+            padding: 17px;
+            margin-bottom: 26px;
+            border: 1px solid #2c5947;
+        }
+
+        .trainer-box small {
+            display: block;
+            color: #a7c4b7;
+            margin-bottom: 6px;
+        }
+
+        .trainer-box h2 {
+            font-size: 19px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #d1fae5;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #315b4b;
+            border-radius: 10px;
+            background: #091c16;
+            color: #f0fdf4;
+            font: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #4ade80;
+            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+        }
+
+        input[type="radio"] {
+            width: auto;
+            accent-color: #4ade80;
+        }
+
+        .radio-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .radio-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            border: 1px solid #315b4b;
+            border-radius: 11px;
+            background: #0b2019;
+            cursor: pointer;
+        }
+
+        .radio-card span {
+            font-size: 14px;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .time-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .hint {
+            color: #8eafa0;
+            font-size: 12px;
+            margin-top: 7px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            border-radius: 11px;
+            padding: 15px;
+            margin-top: 5px;
+            background: #4ade80;
+            color: #062013;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #86efac;
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 540px) {
+            .form-card {
+                padding: 22px 17px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            .row, .radio-options {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .time-row {
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 6px;
+            }
+
+            .time-row select {
+                padding: 12px 7px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+
+        <a href="/trainer_details/{{ trainer.id }}" class="back-link">
+            ← Back to trainer
+        </a>
+
+        <section class="form-card">
+
+            <span class="tag">PERSONAL TRAINING</span>
+
+            <h1>Book Your Session</h1>
+
+            <p class="description">
+                Choose your preferred session type, date and time.
+                Your booking will be sent to the trainer for approval.
+            </p>
+
+            <div class="trainer-box">
+                <small>YOUR SELECTED TRAINER</small>
+                <h2>{{ trainer.name }}</h2>
+            </div>
+
+            <form method="POST" id="bookingForm">
+
+                <div class="field">
+                    <label>Session Type</label>
+
+                    <div class="radio-options">
+                        <label class="radio-card">
+                            <input type="radio" name="session_type"
+                                   value="Online" required>
+                            <span>💻 Online Session</span>
+                        </label>
+
+                        <label class="radio-card">
+                            <input type="radio" name="session_type"
+                                   value="Offline" required>
+                            <span>📍 Offline Session</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label for="session_date">Session Date</label>
+                        <input type="date" id="session_date"
+                               name="session_date" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Start Time</label>
+
+                        <div class="time-row">
+
+                            <select id="start_hour" required
+                                    aria-label="Start hour">
+                                <option value="">Hour</option>
+                                {% for hour in range(1, 13) %}
+                                <option value="{{ hour }}">
+                                    {{ "%02d"|format(hour) }}
+                                </option>
+                                {% endfor %}
+                            </select>
+
+                            <select id="start_minute" required
+                                    aria-label="Start minutes">
+                                <option value="">Minute</option>
+                                {% for minute in range(0, 60) %}
+                                <option value="{{ "%02d"|format(minute) }}">
+                                    {{ "%02d"|format(minute) }}
+                                </option>
+                                {% endfor %}
+                            </select>
+
+                            <select id="start_period" required
+                                    aria-label="AM or PM">
+                                <option value="">AM/PM</option>
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+
+                        </div>
+
+                        <input type="hidden" id="start_time"
+                               name="start_time">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="duration">Session Duration</label>
+
+                    <select id="duration" name="duration" required>
+                        <option value="">Choose duration</option>
+                        <option value="30">30 minutes</option>
+                        <option value="45">45 minutes</option>
+                        <option value="60">60 minutes</option>
+                        <option value="90">90 minutes</option>
+                        <option value="120">120 minutes</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="location">Location / Meeting Preference</label>
+
+                    <input type="text" id="location" name="location"
+                           placeholder="Optional: preferred gym or location">
+
+                    <p class="hint">
+                        For online sessions, the trainer can provide the
+                        meeting link after approving your booking.
+                    </p>
+                </div>
+
+                <div class="field">
+                    <label for="message">Message to Trainer</label>
+
+                    <textarea id="message" name="message"
+                              placeholder="Tell the trainer about your goals or preferred session..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Send Booking Request →
+                </button>
+
+            </form>
+
+        </section>
+    </main>
+
+    <script>
+        const dateInput = document.getElementById("session_date");
+        const bookingForm = document.getElementById("bookingForm");
+
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const day = String(date.getDate()).padStart(2, "0");
+
+            return `${year}-${month}-${day}`;
+        }
+
+        // Get today's local date
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Maximum booking date: 3 months from today
+        const maxDate = new Date(today);
+        maxDate.setMonth(maxDate.getMonth() + 3);
+
+        // Prevent past dates and dates beyond 3 months
+        dateInput.min = formatDate(today);
+        dateInput.max = formatDate(maxDate);
+
+        // Convert 12-hour dropdown selection to HH:MM (24-hour)
+        bookingForm.addEventListener("submit", function (event) {
+            const hourValue =
+                document.getElementById("start_hour").value;
+
+            const minuteValue =
+                document.getElementById("start_minute").value;
+
+            const period =
+                document.getElementById("start_period").value;
+
+            if (hourValue === "" ||
+                minuteValue === "" ||
+                period === "") {
+                event.preventDefault();
+                alert("Please select the hour, minutes, and AM/PM.");
+                return;
+            }
+
+            let hour24 = parseInt(hourValue, 10);
+
+            if (period === "AM" && hour24 === 12) {
+                hour24 = 0;
+            } else if (period === "PM" && hour24 !== 12) {
+                hour24 += 12;
+            }
+
+            document.getElementById("start_time").value =
+                String(hour24).padStart(2, "0") + ":" + minuteValue;
+        });
+    </script>
+
+</body>
+</html>

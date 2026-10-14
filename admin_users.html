@@ -1,0 +1,952 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Admin • All Users</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --cream: #fffaf0;
+            --forest: #194b3b;
+            --green: #245c46;
+            --green-light: #3f8965;
+            --sage: #77a96b;
+            --pale: #e4edcf;
+            --muted: #718273;
+            --border: #e3e9dc;
+            --white: #ffffff;
+            --danger: #b94b4b;
+            --danger-bg: #fff0ed;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--forest);
+            background:
+                radial-gradient(ellipse at 5% 90%, #e4edcf 0%, transparent 30%),
+                radial-gradient(ellipse at 95% 5%, #e8efd7 0%, transparent 28%),
+                var(--cream);
+        }
+
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* HEADER */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 250, 240, 0.94);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 1250px;
+            margin: auto;
+            padding: 15px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--forest);
+        }
+
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            color: white;
+            font-size: 21px;
+            background: linear-gradient(135deg, var(--sage), var(--green));
+            box-shadow: 0 8px 20px rgba(36, 92, 70, 0.18);
+        }
+
+        .brand-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-subtitle {
+            margin-top: 2px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green);
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--sage);
+        }
+
+        .logout-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 12px 18px;
+            color: white;
+            background: linear-gradient(135deg, #3f8965, #205c45);
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(36, 92, 70, 0.2);
+        }
+
+        /* MAIN */
+
+        .main {
+            width: 100%;
+            max-width: 1250px;
+            margin: auto;
+            padding: 45px 28px 60px;
+        }
+
+        .page-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 30px;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 13px;
+            margin-bottom: 16px;
+            border-radius: 30px;
+            color: #52784e;
+            background: var(--pale);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            margin: 0;
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.3px;
+        }
+
+        .page-title span {
+            color: #6fa75d;
+        }
+
+        .page-description {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .total-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            color: var(--forest);
+            font-size: 13px;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(39, 83, 56, 0.04);
+        }
+
+        .total-icon {
+            width: 35px;
+            height: 35px;
+            display: grid;
+            place-items: center;
+            background: var(--pale);
+            border-radius: 11px;
+            color: var(--green);
+            font-size: 17px;
+        }
+
+        /* SEARCH */
+
+        .search-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            position: relative;
+            width: min(100%, 360px);
+        }
+
+        .search-box > i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #809481;
+            pointer-events: none;
+        }
+
+        .search-box input {
+            width: 100%;
+            height: 47px;
+            padding: 0 16px 0 43px;
+            outline: none;
+            border: 1px solid #dfe8d8;
+            border-radius: 13px;
+            color: var(--forest);
+            background: rgba(255, 255, 255, 0.82);
+            font-family: inherit;
+            font-size: 13px;
+            transition: all 0.25s;
+        }
+
+        .search-box input::placeholder {
+            color: #9aaa99;
+        }
+
+        .search-box input:focus {
+            border-color: var(--green-light);
+            box-shadow: 0 0 0 4px rgba(63, 137, 101, 0.1);
+        }
+
+        .search-hint {
+            color: #879486;
+            font-size: 11px;
+        }
+
+        /* TABLE */
+
+        .table-card {
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.84);
+            border: 1px solid var(--border);
+            border-radius: 23px;
+            box-shadow: 0 15px 45px rgba(39, 83, 56, 0.065);
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .table-scroll {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: left;
+        }
+
+        thead {
+            background: #eef3e5;
+        }
+
+        th {
+            padding: 19px 23px;
+            color: #55705a;
+            border-bottom: 1px solid #e1e9d9;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 19px 23px;
+            border-bottom: 1px solid #edf0e8;
+            color: #657668;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .user-row {
+            transition: background 0.25s;
+        }
+
+        .user-row:hover {
+            background: #f5f8ef;
+        }
+
+        .avatar-placeholder,
+        .user-avatar {
+            width: 47px;
+            height: 47px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .avatar-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background: linear-gradient(135deg, var(--sage), var(--green));
+            border: 2px solid #e4edcf;
+            box-shadow: 0 5px 12px rgba(36, 92, 70, 0.12);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .user-avatar {
+            display: block;
+            object-fit: cover;
+            border: 2px solid #dce8d4;
+            box-shadow: 0 5px 12px rgba(36, 92, 70, 0.1);
+        }
+
+        .username {
+            color: var(--forest);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .email-text {
+            color: #647568;
+            overflow-wrap: anywhere;
+        }
+
+        .joined-text {
+            color: #829083;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* ACTION BUTTONS */
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn {
+            min-height: 37px;
+            padding: 9px 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 800;
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.22s ease;
+        }
+
+        .view-btn {
+            color: #2c7050;
+            background: #e9f2e3;
+            border: 1px solid #d8e8d0;
+        }
+
+        .view-btn:hover {
+            color: white;
+            background: var(--green);
+            border-color: var(--green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(36, 92, 70, 0.15);
+        }
+
+        .delete-btn {
+            color: #a64a44;
+            background: var(--danger-bg);
+            border: 1px solid #f4d9d3;
+        }
+
+        .delete-btn:hover {
+            color: white;
+            background: #b94b4b;
+            border-color: #b94b4b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(185, 75, 75, 0.15);
+        }
+
+        /* SUMMARY */
+
+        .summary-card {
+            margin-top: 25px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.78);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            text-align: center;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .summary-icon {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: var(--pale);
+            color: var(--green);
+            font-size: 21px;
+        }
+
+        .summary-count {
+            color: var(--forest);
+            font-size: 27px;
+            font-weight: 800;
+        }
+
+        .summary-label {
+            margin-top: 3px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* EMPTY STATE */
+
+        .empty-state {
+            padding: 65px 25px;
+            text-align: center;
+        }
+
+        .empty-emoji {
+            margin-bottom: 18px;
+            font-size: 65px;
+        }
+
+        .empty-state h2 {
+            margin: 0 0 12px;
+            color: var(--forest);
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+        }
+
+        .empty-state p {
+            margin: 0 auto 25px;
+            max-width: 440px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .return-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--green-light), var(--green));
+            color: white;
+            font-size: 13px;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .return-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(36, 92, 70, 0.2);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            margin-top: auto;
+            padding: 24px 15px;
+            border-top: 1px solid var(--border);
+            color: #879486;
+            font-size: 11px;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        /* ANIMATION */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+            .page-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .total-pill {
+                align-self: flex-start;
+            }
+
+            th,
+            td {
+                padding: 17px;
+            }
+
+            .actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .action-btn {
+                width: 125px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner {
+                padding: 13px 16px;
+            }
+
+            .brand-title {
+                font-size: 19px;
+            }
+
+            .brand-subtitle {
+                font-size: 8px;
+            }
+
+            .brand-icon {
+                width: 41px;
+                height: 41px;
+            }
+
+            .header-actions {
+                gap: 12px;
+            }
+
+            .back-link {
+                font-size: 11px;
+            }
+
+            .logout-btn {
+                padding: 10px 12px;
+                font-size: 11px;
+            }
+
+            .main {
+                padding: 32px 15px 40px;
+            }
+
+            .page-title {
+                font-size: 37px;
+            }
+
+            .page-description {
+                font-size: 12px;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .table-card {
+                border-radius: 17px;
+            }
+
+            th,
+            td {
+                padding: 15px 13px;
+            }
+
+            .actions {
+                flex-direction: row;
+            }
+
+            .action-btn {
+                width: auto;
+                padding: 9px 10px;
+            }
+
+            .action-btn i {
+                font-size: 11px;
+            }
+
+            .summary-card {
+                padding: 20px 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div class="header-inner">
+
+            <a href="/admin_dashboard" class="brand">
+
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div>
+                    <div class="brand-title">NOURIVA</div>
+                    <div class="brand-subtitle">ADMIN WORKSPACE</div>
+                </div>
+
+            </a>
+
+            <div class="header-actions">
+
+                <a href="/admin_dashboard" class="back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Dashboard
+                </a>
+
+                <a href="/logout" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Logout
+                </a>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- PAGE TITLE -->
+        <section class="page-heading">
+
+            <div>
+                <div class="eyebrow">
+                    <i class="fa-solid fa-users"></i>
+                    User Management
+                </div>
+
+                <h1 class="page-title">
+                    All <span>Users</span>
+                </h1>
+
+                <p class="page-description">
+                    Manage registered users and view their account details.
+                    👥 {{ users|length }} users in total.
+                </p>
+            </div>
+
+            <div class="total-pill">
+                <span class="total-icon">
+                    <i class="fa-solid fa-user-group"></i>
+                </span>
+
+                <span>
+                    {{ users|length }} Registered Users
+                </span>
+            </div>
+
+        </section>
+
+        {% if users %}
+
+        <!-- SEARCH -->
+        <section class="search-area">
+
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="userSearch"
+                    placeholder="Search by username or email..."
+                    aria-label="Search users">
+            </div>
+
+            <span class="search-hint">
+                <i class="fa-solid fa-filter"></i>
+                Find a registered user
+            </span>
+
+        </section>
+
+        <!-- USERS TABLE -->
+        <section class="table-card">
+
+            <div class="table-scroll">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Avatar</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Joined</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="usersTableBody">
+
+                        {% for u in users %}
+
+                        <tr class="user-row">
+
+                            <!-- AVATAR -->
+                            <td>
+                                {% if u.photo %}
+
+                                <img
+                                    src="{{ url_for('static', filename='uploads/' ~ u.photo) }}"
+                                    alt="{{ u.username }}"
+                                    class="user-avatar"
+                                    loading="lazy">
+
+                                {% else %}
+
+                                <div class="avatar-placeholder">
+                                    {{ (u.username or 'U')[0]|upper }}
+                                </div>
+
+                                {% endif %}
+                            </td>
+
+                            <!-- USERNAME -->
+                            <td>
+                                <div class="username">
+                                    {{ u.username }}
+                                </div>
+                            </td>
+
+                            <!-- EMAIL -->
+                            <td>
+                                <span class="email-text">
+                                    {{ u.email }}
+                                </span>
+                            </td>
+
+                            <!-- JOINED DATE -->
+                            <td>
+                                <span class="joined-text">
+                                    {{ u.created_at[:10] if u.created_at else 'Unknown' }}
+                                </span>
+                            </td>
+
+                            <!-- ACTIONS -->
+                            <td>
+                                <div class="actions">
+
+                                    <a
+                                        href="/admin_user/{{ u.id }}"
+                                        class="action-btn view-btn">
+
+                                        <i class="fa-solid fa-eye"></i>
+                                        View Profile
+
+                                    </a>
+
+                                    <form
+                                        action="{{ url_for('delete_user', id=u.id) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete {{ u.username }}? This action cannot be undone.');"
+                                        style="display:inline;">
+
+                                        <button
+                                            type="submit"
+                                            class="action-btn delete-btn">
+
+                                            <i class="fa-solid fa-trash-can"></i>
+                                            Delete
+
+                                        </button>
+
+                                    </form>
+
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                        <!-- SEARCH EMPTY RESULT -->
+                        <tr id="noSearchResults" style="display:none;">
+                            <td colspan="5"
+                                style="padding:35px;text-align:center;color:#718273;">
+                                🔍 No matching users found.
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+
+        <!-- SUMMARY -->
+        <section class="summary-card">
+
+            <div class="summary-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div>
+                <div class="summary-count">
+                    {{ users|length }}
+                </div>
+
+                <div class="summary-label">
+                    Registered Users 👥
+                </div>
+            </div>
+
+        </section>
+
+        {% else %}
+
+        <!-- EMPTY STATE -->
+        <section class="table-card empty-state">
+
+            <div class="empty-emoji">👥🌿</div>
+
+            <h2>No Users Found</h2>
+
+            <p>
+                The system currently has no registered users.
+                New registered accounts will appear here.
+            </p>
+
+            <a href="/admin_dashboard" class="return-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Return to Admin Dashboard
+            </a>
+
+        </section>
+
+        {% endif %}
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>🌿 NOURIVA • AI Health & Fitness • Admin Workspace</p>
+        <p>Protected Area • Unauthorized access prohibited 🔒</p>
+    </footer>
+
+    <!-- SEARCH FUNCTIONALITY -->
+    <script>
+        const userSearch = document.getElementById("userSearch");
+        const userRows = document.querySelectorAll(
+            "#usersTableBody .user-row"
+        );
+        const noSearchResults = document.getElementById("noSearchResults");
+
+        if (userSearch) {
+            userSearch.addEventListener("input", function () {
+                const searchText = this.value.trim().toLowerCase();
+                let visibleCount = 0;
+
+                userRows.forEach(function (row) {
+                    const username = row.cells[1].textContent.toLowerCase();
+                    const email = row.cells[2].textContent.toLowerCase();
+
+                    const matches =
+                        username.includes(searchText) ||
+                        email.includes(searchText);
+
+                    row.style.display = matches ? "" : "none";
+
+                    if (matches) {
+                        visibleCount++;
+                    }
+                });
+
+                if (noSearchResults) {
+                    noSearchResults.style.display =
+                        visibleCount === 0 ? "" : "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

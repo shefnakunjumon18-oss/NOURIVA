@@ -1,0 +1,2012 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Dashboard</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "DM Sans", sans-serif;
+            color: #174d3c;
+            overflow-x: hidden;
+        }
+
+        .serif {
+            font-family: "Playfair Display", serif;
+        }
+
+
+        /* =====================================================
+           BACKGROUND
+        ===================================================== */
+
+        .dashboard-bg {
+
+            background-image:
+                linear-gradient(
+                    rgba(7, 53, 39, 0.35),
+                    rgba(7, 53, 39, 0.35)
+                ),
+                url("https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&q=85&w=1920&auto=format&fit=crop");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            min-height: 100vh;
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ===================================================== */
+
+        .sidebar {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(3, 55, 39, 0.98),
+                    rgba(5, 67, 46, 0.96)
+                );
+
+            border-right: 1px solid rgba(255,255,255,0.12);
+
+            box-shadow:
+                10px 0 40px rgba(0,0,0,0.12);
+        }
+
+
+        .logo-box {
+
+            background: #eff7d9;
+
+            color: #16553f;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.12);
+        }
+
+
+        .nav-item {
+
+            color: rgba(255,255,255,0.82);
+
+            transition:
+                all 0.25s ease;
+        }
+
+
+        .nav-item:hover {
+
+            background: rgba(255,255,255,0.10);
+
+            color: white;
+
+            transform: translateX(4px);
+        }
+
+
+        .nav-item.active {
+
+            background: #edf5d7;
+
+            color: #19583f;
+
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.10);
+        }
+
+
+        .nav-item.active i {
+
+            color: #2d8255;
+        }
+
+
+        /* =====================================================
+           TOP BAR
+        ===================================================== */
+
+        .topbar {
+
+            background:
+                rgba(6, 67, 47, 0.94);
+
+            backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.10);
+        }
+
+
+        .top-pill {
+
+            background: #f4f6df;
+
+            color: #32694d;
+        }
+
+
+        .search-box {
+
+            background: #f7f7ea;
+
+            color: #315d4a;
+        }
+
+
+        .search-box input {
+
+            background: transparent;
+
+            outline: none;
+
+            color: #315d4a;
+        }
+
+
+        .search-box input::placeholder {
+
+            color: #789080;
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .content-area {
+
+            background:
+                linear-gradient(
+                    rgba(238, 243, 213, 0.16),
+                    rgba(238, 243, 213, 0.16)
+                );
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+
+            background:
+                linear-gradient(
+                    110deg,
+                    rgba(248, 249, 229, 0.97),
+                    rgba(244, 247, 222, 0.90)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.75);
+
+            box-shadow:
+                0 25px 60px rgba(5, 57, 39, 0.18);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .hero::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -80px;
+            top: -120px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(186, 222, 139, 0.30);
+        }
+
+
+        .hero::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            right: 220px;
+            bottom: -120px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(190, 225, 149, 0.25);
+        }
+
+
+        .hero-content {
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+
+        .hero-title {
+
+            font-family: "Playfair Display", serif;
+
+            color: #174d3c;
+
+            line-height: 0.98;
+        }
+
+
+        .hero-title span {
+
+            color: #72a957;
+        }
+
+
+        .hero-image-ring {
+
+            background: #c6e49d;
+
+            padding: 10px;
+
+            border-radius: 50%;
+
+            box-shadow:
+                0 15px 35px rgba(48, 104, 67, 0.20);
+        }
+
+
+        .hero-image {
+
+            width: 205px;
+            height: 205px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            border:
+                8px solid #edf6dc;
+        }
+
+
+        .hero-button {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2e8654,
+                    #277348
+                );
+
+            color: white;
+
+            box-shadow:
+                0 12px 25px rgba(40, 113, 70, 0.22);
+
+            transition:
+                all 0.25s ease;
+        }
+
+
+        .hero-button:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 18px 32px rgba(40, 113, 70, 0.30);
+        }
+
+
+        .secondary-button {
+
+            border:
+                1px solid #b7d59b;
+
+            color: #296348;
+
+            background:
+                rgba(255,255,255,0.45);
+
+            transition:
+                all 0.25s ease;
+        }
+
+
+        .secondary-button:hover {
+
+            background: #edf6dc;
+
+            transform: translateY(-3px);
+        }
+
+
+        /* =====================================================
+           STATS
+        ===================================================== */
+
+        .stats-container {
+
+            background:
+                rgba(247, 249, 228, 0.96);
+
+            box-shadow:
+                0 15px 35px rgba(5, 57, 39, 0.13);
+
+            border:
+                1px solid rgba(255,255,255,0.8);
+        }
+
+
+        .stat-item {
+
+            transition:
+                all 0.25s ease;
+
+            border-right:
+                1px solid rgba(38, 91, 59, 0.10);
+        }
+
+
+        .stat-item:last-child {
+
+            border-right: none;
+        }
+
+
+        .stat-item:hover {
+
+            background:
+                rgba(214, 234, 178, 0.30);
+
+            transform:
+                translateY(-2px);
+        }
+
+
+        .stat-icon {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background:
+                #e4f1c8;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #43815a;
+        }
+
+
+        .stat-number {
+
+            font-family:
+                "Playfair Display", serif;
+
+            color:
+                #20563f;
+        }
+
+
+        /* =====================================================
+           WELLNESS TITLE
+        ===================================================== */
+
+        .section-title {
+
+            font-family:
+                "Playfair Display", serif;
+
+            color:
+                #174d3c;
+        }
+
+
+        /* =====================================================
+           CREATIVE WORKING CARDS
+           SAME FEATURES - NEW LOOK
+        ===================================================== */
+
+        .action-card {
+
+            position: relative;
+
+            min-height: 245px;
+
+            overflow: hidden;
+
+            border-radius: 28px;
+
+            border:
+                1px solid rgba(255,255,255,0.82);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(251,253,235,0.98),
+                    rgba(235,246,211,0.92)
+                );
+
+            box-shadow:
+                0 15px 35px rgba(5,57,39,0.13);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease,
+                border-color 0.35s ease;
+        }
+
+
+        /* top colored line */
+
+        .action-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            top: 0;
+
+            height: 5px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #5caa70,
+                    #b9d98c
+                );
+
+            transform:
+                scaleX(0.25);
+
+            transform-origin:
+                left;
+
+            transition:
+                transform 0.4s ease;
+        }
+
+
+        /* large decorative circle */
+
+        .action-card::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            right: -55px;
+            bottom: -70px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(188,220,142,0.40);
+
+            transition:
+                transform 0.5s ease;
+        }
+
+
+        .action-card:hover {
+
+            transform:
+                translateY(-9px);
+
+            box-shadow:
+                0 25px 50px rgba(5,57,39,0.22);
+
+            border-color:
+                rgba(255,255,255,1);
+        }
+
+
+        .action-card:hover::before {
+
+            transform:
+                scaleX(1);
+        }
+
+
+        .action-card:hover::after {
+
+            transform:
+                scale(1.35);
+        }
+
+
+        .action-content {
+
+            position: relative;
+
+            z-index: 3;
+        }
+
+
+        /* different card accent */
+
+        .recipe-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(253,254,239,0.98),
+                    rgba(226,244,207,0.94)
+                );
+        }
+
+
+        .recipe-card::before {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2d8b59,
+                    #8bc36d
+                );
+        }
+
+
+        .saved-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,252,240,0.98),
+                    rgba(250,239,210,0.94)
+                );
+        }
+
+
+        .saved-card::before {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #d8953c,
+                    #f0c66e
+                );
+        }
+
+
+        .grocery-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(242,253,249,0.98),
+                    rgba(216,243,230,0.94)
+                );
+        }
+
+
+        .grocery-card::before {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #25967d,
+                    #76cba7
+                );
+        }
+
+
+        .trainer-card {
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(247,247,239,0.98),
+                    rgba(224,239,216,0.94)
+                );
+        }
+
+
+        .trainer-card::before {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #557f54,
+                    #9bc47f
+                );
+        }
+
+
+        /* =====================================================
+           CARD ICON
+        ===================================================== */
+
+        .action-icon {
+
+            width: 58px;
+            height: 58px;
+
+            border-radius: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                #e4f2cc;
+
+            color:
+                #347650;
+
+            font-size:
+                21px;
+
+            box-shadow:
+                0 8px 20px rgba(39,91,59,0.08);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+
+        .action-card:hover .action-icon {
+
+            transform:
+                rotate(-5deg) scale(1.10);
+
+            box-shadow:
+                0 12px 25px rgba(39,91,59,0.15);
+        }
+
+
+        .saved-card .action-icon {
+
+            background:
+                #f7e6bf;
+
+            color:
+                #bd7928;
+        }
+
+
+        .grocery-card .action-icon {
+
+            background:
+                #d4eee1;
+
+            color:
+                #21856e;
+        }
+
+
+        .trainer-card .action-icon {
+
+            background:
+                #dcebcf;
+
+            color:
+                #3d7250;
+        }
+
+
+        .action-link {
+
+            color:
+                #398157;
+
+            font-weight:
+                700;
+
+            transition:
+                all 0.3s ease;
+        }
+
+
+        .action-card:hover .action-link {
+
+            letter-spacing:
+                0.02em;
+        }
+
+
+        .action-arrow {
+
+            display: inline-flex;
+
+            width: 28px;
+            height: 28px;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                rgba(57,129,87,0.10);
+
+            transition:
+                all 0.3s ease;
+        }
+
+
+        .action-card:hover .action-arrow {
+
+            transform:
+                translateX(5px);
+
+            background:
+                #398157;
+
+            color:
+                white;
+        }
+
+
+        /* =====================================================
+           PROFILE
+        ===================================================== */
+
+        .profile-card {
+
+            background:
+                rgba(247, 249, 228, 0.97);
+
+            border:
+                1px solid rgba(255,255,255,0.8);
+
+            box-shadow:
+                0 15px 35px rgba(5, 57, 39, 0.12);
+        }
+
+
+        .profile-avatar {
+
+            background:
+                #dceec1;
+
+            color:
+                #286447;
+        }
+
+
+        /* =====================================================
+           FLOATING BUTTON
+        ===================================================== */
+
+        .floating-button {
+
+            background:
+                #15563e;
+
+            color:
+                white;
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,0.25);
+
+            transition:
+                all 0.25s ease;
+        }
+
+
+        .floating-button:hover {
+
+            transform:
+                scale(1.08) rotate(5deg);
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width: 900px) {
+
+            .sidebar {
+
+                position: fixed;
+
+                left: 0;
+                top: 0;
+                bottom: 0;
+
+                z-index: 100;
+
+                transform:
+                    translateX(-100%);
+            }
+
+
+            .sidebar.open {
+
+                transform:
+                    translateX(0);
+            }
+
+
+            .hero-image-container {
+
+                display:
+                    none;
+            }
+
+
+            .hero-title {
+
+                font-size:
+                    48px;
+            }
+
+
+            .stats-container {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+            }
+
+
+            .stat-item:nth-child(2) {
+
+                border-right:
+                    none;
+            }
+        }
+
+
+        @media(max-width: 600px) {
+
+            .hero-title {
+
+                font-size:
+                    40px;
+            }
+
+
+            .stats-container {
+
+                grid-template-columns:
+                    1fr 1fr;
+            }
+
+
+            .stat-item {
+
+                border-right:
+                    none;
+
+                border-bottom:
+                    1px solid rgba(38,91,59,0.10);
+            }
+
+
+            .action-card {
+
+                min-height:
+                    220px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard-bg min-h-screen">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside id="sidebar"
+           class="sidebar fixed left-0 top-0 bottom-0 w-[225px] z-50 flex flex-col transition-transform duration-300">
+
+
+        <!-- LOGO -->
+
+        <div class="px-5 py-7 border-b border-white/10">
+
+            <div class="flex items-center gap-3">
+
+                <div class="logo-box w-12 h-12 rounded-2xl flex items-center justify-center">
+
+                    <i class="fa-solid fa-leaf text-2xl"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1 class="serif text-2xl text-white font-semibold tracking-wide">
+                        NOURIVA
+                    </h1>
+
+                    <p class="text-[8px] tracking-[0.25em] text-green-200">
+                        HEALTH • FOOD • FITNESS
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="flex-1 px-3 py-7 overflow-y-auto">
+
+
+            <a href="/dashboard"
+               class="nav-item active flex items-center gap-4 px-5 py-3.5 rounded-2xl mb-2">
+
+                <i class="fa-solid fa-house w-5"></i>
+
+                <span class="font-semibold text-sm">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="/recipe_generator"
+               class="nav-item flex items-center gap-4 px-5 py-3.5 rounded-2xl mb-2">
+
+                <i class="fa-solid fa-wand-magic-sparkles w-5"></i>
+
+                <span class="text-sm">
+                    Recipe Generator
+                </span>
+
+            </a>
+
+
+            <a href="/saved_recipes"
+               class="nav-item flex items-center gap-4 px-5 py-3.5 rounded-2xl mb-2">
+
+                <i class="fa-solid fa-bookmark w-5"></i>
+
+                <span class="text-sm">
+                    Saved Recipes
+                </span>
+
+            </a>
+
+
+            <a href="/groceries"
+               class="nav-item flex items-center gap-4 px-5 py-3.5 rounded-2xl mb-2">
+
+                <i class="fa-solid fa-cart-shopping w-5"></i>
+
+                <span class="text-sm">
+                    Add Groceries
+                </span>
+
+            </a>
+
+
+            <a href="/meal_planner"
+               class="nav-item flex items-center gap-4 px-5 py-3.5 rounded-2xl mb-2">
+
+                <i class="fa-solid fa-calendar-days w-5"></i>
+
+                <span class="text-sm">
+                    Meal Planner
+                </span>
+
+            </a>
+
+
+            <a href="/trainer"
+               class="nav-item flex items-center gap-4 px-5 py-3.5 rounded-2xl mb-2">
+
+                <i class="fa-solid fa-dumbbell w-5"></i>
+
+                <span class="text-sm">
+                    Personal Trainer
+                </span>
+
+            </a>
+
+                        <!-- MY BOOKINGS -->
+            <a href="/my_bookings"
+               class="nav-item flex items-center gap-4 px-5 py-3.5 rounded-2xl mb-2">
+
+                <i class="fa-solid fa-calendar-check w-5"></i>
+
+                <span class="text-sm">
+                    My Bookings
+                </span>
+
+            </a>
+
+            <a href="/profile"
+               class="nav-item flex items-center gap-4 px-5 py-3.5 rounded-2xl mb-2">
+
+                <i class="fa-solid fa-circle-user w-5"></i>
+
+                <span class="text-sm">
+                    My Profile
+                </span>
+
+            </a>
+
+
+            
+            <div class="h-px bg-white/10 my-5 mx-3"></div>
+
+
+            <a href="/login"
+               class="nav-item flex items-center gap-4 px-5 py-3.5 rounded-2xl">
+
+                <i class="fa-solid fa-right-from-bracket w-5"></i>
+
+                <span class="text-sm">
+                    Logout
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- USER CARD -->
+
+        <div class="p-3 pb-5">
+
+            <div class="rounded-2xl border border-green-300/20 bg-green-950/30 p-3">
+
+                <div class="flex items-center gap-3">
+
+                    <div class="profile-avatar w-10 h-10 rounded-full flex items-center justify-center">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+
+                    <div class="min-w-0">
+
+                        <p class="text-[11px] text-green-200">
+                            Welcome back
+                        </p>
+
+                        <p class="text-white font-semibold text-sm truncate">
+                            {{ user }}
+                        </p>
+
+                        <div class="flex items-center gap-1">
+
+                            <span class="w-1.5 h-1.5 bg-green-300 rounded-full"></span>
+
+                            <span class="text-[9px] text-green-200">
+                                Online
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <div class="ml-[225px] min-h-screen">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar h-[78px] px-7 flex items-center justify-between sticky top-0 z-40">
+
+
+            <div class="flex items-center gap-4">
+
+                <button onclick="toggleSidebar()"
+                        class="lg:hidden text-white text-xl">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+
+                <div class="top-pill rounded-full px-5 py-2.5 text-xs font-medium">
+
+                    <i class="fa-solid fa-leaf mr-2 text-green-600"></i>
+
+                    Today's vibe: Hot Honey & Spicy Comfort
+
+                </div>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box hidden md:flex items-center rounded-full px-5 py-3 w-[390px]">
+
+                <i class="fa-solid fa-magnifying-glass text-green-600 mr-3"></i>
+
+                <input type="text"
+                       placeholder="Search recipes, ingredients..."
+                       class="w-full text-sm">
+
+            </div>
+
+
+            <!-- RIGHT USER -->
+
+            <div class="flex items-center gap-5">
+
+
+                <div class="relative">
+
+                    <i class="fa-solid fa-bell text-white text-lg"></i>
+
+                    <span class="absolute -top-2 -right-2
+                                 w-5 h-5 rounded-full
+                                 bg-lime-400 text-green-900
+                                 text-[10px] font-bold
+                                 flex items-center justify-center">
+
+                        2
+
+                    </span>
+
+                </div>
+
+
+                <div class="hidden sm:block text-right">
+
+                    <p class="text-white text-xs font-semibold">
+                        {{ user }}
+                    </p>
+
+                    <p class="text-green-200 text-[10px]">
+                        Home Chef • Kerala
+                    </p>
+
+                </div>
+
+
+                <a href="/profile"
+                   class="profile-avatar w-11 h-11 rounded-full flex items-center justify-center">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             CONTENT
+        ====================================================== -->
+
+        <main class="content-area px-7 py-7">
+
+
+            <!-- HERO -->
+
+            <section class="hero rounded-[28px] px-10 py-9">
+
+
+                <div class="hero-content flex items-center justify-between gap-10">
+
+
+                    <!-- HERO TEXT -->
+
+                    <div class="max-w-[620px]">
+
+
+                        <div class="inline-flex items-center gap-2
+                                    bg-[#e7f1d0]
+                                    text-[#397452]
+                                    px-4 py-2
+                                    rounded-full
+                                    text-xs
+                                    font-medium
+                                    mb-5">
+
+                            <i class="fa-solid fa-leaf"></i>
+
+                            Good evening, {{ user }}!
+
+                        </div>
+
+
+                        <h2 class="hero-title text-[58px] font-semibold">
+
+                            What are we
+
+                            <br>
+
+                            <span>
+                                cooking tonight?
+                            </span>
+
+                        </h2>
+
+
+                        <p class="mt-5 text-[#60796c] text-base leading-7 max-w-[600px]">
+
+                            Your intelligent wellness companion for delicious recipes,
+                            smart meal planning, groceries and personalized fitness guidance.
+
+                        </p>
+
+
+                        <!-- BUTTONS -->
+
+                        <div class="flex flex-wrap gap-3 mt-7">
+
+
+                            <a href="/recipe_generator"
+                               class="hero-button rounded-full px-7 py-3.5
+                                      flex items-center gap-3
+                                      text-sm font-semibold">
+
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                                Generate Recipe
+
+                                <i class="fa-solid fa-arrow-right"></i>
+
+                            </a>
+
+
+                            <a href="/meal_planner"
+                               class="secondary-button rounded-full px-6 py-3.5
+                                      flex items-center gap-3
+                                      text-sm font-semibold">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                                Plan My Week
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- HERO IMAGE -->
+
+                    <div class="hero-image-container relative mr-3">
+
+                        <div class="hero-image-ring">
+
+                            <img
+                                src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=700&q=85"
+                                class="hero-image">
+
+                        </div>
+
+
+                        <div class="absolute left-[-20px] bottom-[25px]
+                                    bg-white rounded-full px-4 py-2
+                                    shadow-xl text-xs font-semibold text-green-700">
+
+                            <i class="fa-solid fa-heart text-green-500 mr-2"></i>
+
+                            Healthy Living
+
+                        </div>
+
+
+                        <div class="absolute -right-4 -top-4 text-4xl text-green-700">
+
+                            <i class="fa-solid fa-leaf"></i>
+
+                        </div>
+
+
+                        <div class="absolute -right-5 -bottom-14 text-right">
+
+                            <p class="serif italic text-green-700 text-lg">
+                                Good Food
+                            </p>
+
+                            <p class="serif italic text-green-700 text-lg">
+                                Good Mood ♥
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 STATS
+            ====================================================== -->
+
+            <section class="stats-container rounded-[25px] mt-5 grid grid-cols-4 overflow-hidden">
+
+
+                <!-- RECIPES -->
+
+                <div class="stat-item p-5">
+
+                    <div class="flex justify-between items-start">
+
+                        <div class="stat-icon">
+
+                            <i class="fa-solid fa-utensils"></i>
+
+                        </div>
+
+                        <i class="fa-solid fa-chart-line text-green-400"></i>
+
+                    </div>
+
+
+                    <p class="text-[10px] uppercase tracking-wider text-gray-500 mt-4">
+                        Recipes Generated
+                    </p>
+
+
+                    <p class="stat-number text-3xl font-semibold mt-1">
+                        187
+                    </p>
+
+
+                    <p class="text-xs text-green-500 mt-1">
+                        ↑ +34 this week
+                    </p>
+
+                </div>
+
+
+                <!-- SAVED -->
+
+                <div class="stat-item p-5">
+
+                    <div class="flex justify-between items-start">
+
+                        <div class="stat-icon">
+
+                            <i class="fa-solid fa-bookmark"></i>
+
+                        </div>
+
+                        <i class="fa-solid fa-chart-line text-green-400"></i>
+
+                    </div>
+
+
+                    <p class="text-[10px] uppercase tracking-wider text-gray-500 mt-4">
+                        Saved Recipes
+                    </p>
+
+
+                    <p class="stat-number text-3xl font-semibold mt-1">
+                        52
+                    </p>
+
+
+                    <p class="text-xs text-orange-500 mt-1">
+                        ♥ 8 new favorites
+                    </p>
+
+                </div>
+
+
+                <!-- GROCERIES -->
+
+                <div class="stat-item p-5">
+
+                    <div class="flex justify-between items-start">
+
+                        <div class="stat-icon">
+
+                            <i class="fa-solid fa-basket-shopping"></i>
+
+                        </div>
+
+                        <i class="fa-solid fa-chart-line text-green-400"></i>
+
+                    </div>
+
+
+                    <p class="text-[10px] uppercase tracking-wider text-gray-500 mt-4">
+                        Groceries Added
+                    </p>
+
+
+                    <p class="stat-number text-3xl font-semibold mt-1">
+                        28
+                    </p>
+
+
+                    <p class="text-xs text-sky-500 mt-1">
+                        ☷ List updated today
+                    </p>
+
+                </div>
+
+
+                <!-- MEAL PLANS -->
+
+                <div class="stat-item p-5">
+
+                    <div class="flex justify-between items-start">
+
+                        <div class="stat-icon">
+
+                            <i class="fa-solid fa-calendar-check"></i>
+
+                        </div>
+
+                        <i class="fa-solid fa-chart-line text-green-400"></i>
+
+                    </div>
+
+
+                    <p class="text-[10px] uppercase tracking-wider text-gray-500 mt-4">
+                        Meal Plans
+                    </p>
+
+
+                    <p class="stat-number text-3xl font-semibold mt-1">
+                        12
+                    </p>
+
+
+                    <p class="text-xs text-purple-500 mt-1">
+                        ✓ Planning active
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 WELLNESS TOOLS
+            ====================================================== -->
+
+            <section class="mt-7">
+
+
+                <div class="flex items-end justify-between mb-4">
+
+                    <div>
+
+                        <p class="text-[10px] tracking-[0.25em] uppercase
+                                  text-green-700 font-semibold">
+
+                            Explore
+
+                        </p>
+
+
+                        <h2 class="section-title text-3xl font-semibold mt-1">
+
+                            Your wellness tools
+
+                        </h2>
+
+                    </div>
+
+
+                    <a href="/recipe_generator"
+                       class="text-sm text-green-700 font-semibold">
+
+                        View all
+
+                        <i class="fa-solid fa-arrow-right ml-1"></i>
+
+                    </a>
+
+                </div>
+
+
+                <!-- =================================================
+                     FOUR EXISTING WORKING CARDS
+                ================================================== -->
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+
+                    <!-- =================================================
+                         RECIPE GENERATOR
+                    ================================================== -->
+
+                    <a href="/recipe_generator"
+                       class="action-card recipe-card p-6 group">
+
+
+                        <div class="action-content">
+
+
+                            <div class="flex items-start justify-between">
+
+                                <div class="action-icon">
+
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                                </div>
+
+
+                                <span class="text-[#4e9a66] text-sm
+                                             opacity-60
+                                             group-hover:opacity-100
+                                             transition">
+
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                                </span>
+
+                            </div>
+
+
+                            <h3 class="font-semibold text-lg mt-6 text-[#20563f]">
+
+                                Recipe Generator
+
+                            </h3>
+
+
+                            <p class="text-xs text-gray-500 mt-2 leading-5">
+
+                                Turn your ingredients into delicious personalized recipes.
+
+                            </p>
+
+
+                            <div class="action-link text-xs mt-6
+                                        flex items-center gap-2">
+
+                                Start creating
+
+                                <span class="action-arrow">
+
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- =================================================
+                         SAVED RECIPES
+                    ================================================== -->
+
+                    <a href="/saved_recipes"
+                       class="action-card saved-card p-6 group">
+
+
+                        <div class="action-content">
+
+
+                            <div class="flex items-start justify-between">
+
+                                <div class="action-icon">
+
+                                    <i class="fa-solid fa-bookmark"></i>
+
+                                </div>
+
+
+                                <span class="text-[#d28b32] text-sm
+                                             opacity-60
+                                             group-hover:opacity-100
+                                             transition">
+
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                                </span>
+
+                            </div>
+
+
+                            <h3 class="font-semibold text-lg mt-6 text-[#20563f]">
+
+                                Saved Recipes
+
+                            </h3>
+
+
+                            <p class="text-xs text-gray-500 mt-2 leading-5">
+
+                                Keep your favorite recipes together in your personal cookbook.
+
+                            </p>
+
+
+                            <div class="action-link text-xs mt-6
+                                        flex items-center gap-2">
+
+                                View collection
+
+                                <span class="action-arrow">
+
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- =================================================
+                         SMART GROCERIES
+                    ================================================== -->
+
+                    <a href="/groceries"
+                       class="action-card grocery-card p-6 group">
+
+
+                        <div class="action-content">
+
+
+                            <div class="flex items-start justify-between">
+
+                                <div class="action-icon">
+
+                                    <i class="fa-solid fa-basket-shopping"></i>
+
+                                </div>
+
+
+                                <span class="text-[#268f78] text-sm
+                                             opacity-60
+                                             group-hover:opacity-100
+                                             transition">
+
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                                </span>
+
+                            </div>
+
+
+                            <h3 class="font-semibold text-lg mt-6 text-[#20563f]">
+
+                                Smart Groceries
+
+                            </h3>
+
+
+                            <p class="text-xs text-gray-500 mt-2 leading-5">
+
+                                Manage ingredients and keep your grocery list organized.
+
+                            </p>
+
+
+                            <div class="action-link text-xs mt-6
+                                        flex items-center gap-2">
+
+                                Manage groceries
+
+                                <span class="action-arrow">
+
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                    <!-- =================================================
+                         PERSONAL TRAINER
+                    ================================================== -->
+
+                    <a href="/trainer"
+                       class="action-card trainer-card p-6 group">
+
+
+                        <div class="action-content">
+
+
+                            <div class="flex items-start justify-between">
+
+                                <div class="action-icon">
+
+                                    <i class="fa-solid fa-dumbbell"></i>
+
+                                </div>
+
+
+                                <span class="text-[#4d7952] text-sm
+                                             opacity-60
+                                             group-hover:opacity-100
+                                             transition">
+
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                                </span>
+
+                            </div>
+
+
+                            <h3 class="font-semibold text-lg mt-6 text-[#20563f]">
+
+                                Personal Trainer
+
+                            </h3>
+
+
+                            <p class="text-xs text-gray-500 mt-2 leading-5">
+
+                                Connect with personal trainers and work toward your fitness goals.
+
+                            </p>
+
+
+                            <div class="action-link text-xs mt-6
+                                        flex items-center gap-2">
+
+                                Start training
+
+                                <span class="action-arrow">
+
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 PROFILE SUMMARY
+            ====================================================== -->
+
+            <section class="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-4">
+
+
+                <div class="profile-card rounded-[22px] p-5 lg:col-span-2">
+
+                    <div class="flex items-center justify-between">
+
+
+                        <div class="flex items-center gap-4">
+
+
+                            <div class="profile-avatar w-14 h-14 rounded-full
+                                        flex items-center justify-center">
+
+                                <i class="fa-solid fa-user text-xl"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <p class="text-xs text-gray-500">
+                                    Your profile
+                                </p>
+
+
+                                <h3 class="serif text-xl font-semibold text-[#20563f]">
+
+                                    {{ user }}
+
+                                </h3>
+
+
+                                <p class="text-xs text-gray-500 mt-1">
+
+                                    Complete your wellness profile
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <a href="/profile"
+                           class="secondary-button rounded-full px-5 py-2 text-xs font-semibold">
+
+                            Edit Profile
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DAILY MESSAGE -->
+
+                <div class="profile-card rounded-[22px] p-5">
+
+                    <div class="flex items-center gap-3">
+
+
+                        <div class="action-icon w-11 h-11">
+
+                            <i class="fa-solid fa-heart-pulse"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <p class="text-xs text-gray-500">
+                                Today's reminder
+                            </p>
+
+                            <p class="font-semibold text-[#20563f] text-sm">
+                                Eat well. Move well. Live well.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+
+            <footer class="text-center py-7">
+
+                <p class="text-[10px] text-white/70">
+
+                    NOURIVA • Good Food • Better Life ♥
+
+                    <span class="mx-2">•</span>
+
+                    {{ user }}
+
+                </p>
+
+            </footer>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         FLOATING BUTTON
+    ====================================================== -->
+
+    <a href="/recipe_generator"
+       class="floating-button fixed bottom-7 right-7
+              w-14 h-14 rounded-2xl
+              flex items-center justify-center
+              z-50">
+
+        <i class="fa-solid fa-plus text-xl"></i>
+
+    </a>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        function toggleSidebar() {
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+            sidebar.classList.toggle("open");
+        }
+
+
+        document.addEventListener("click", function(event) {
+
+            const sidebar =
+                document.getElementById("sidebar");
+
+
+            if (
+                window.innerWidth <= 900 &&
+                sidebar.classList.contains("open") &&
+                !sidebar.contains(event.target)
+            ) {
+
+                sidebar.classList.remove("open");
+
+            }
+
+        });
+
+    </script>
+
+
+</div>
+
+</body>
+
+</html>

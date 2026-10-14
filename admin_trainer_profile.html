@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trainer Profile • Admin Panel</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #101a30, #18243b);
+            color: #ffffff;
+            padding-bottom: 50px;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            height: 74px;
+            background: rgba(38, 49, 72, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10%;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .brand-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff6b16, #ff3d00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-icon i {
+            color: white;
+        }
+
+        .brand span {
+            color: white;
+        }
+
+        .brand span:last-child {
+            color: #ff9a3d;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .back-link {
+            color: #ff9a3d;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: #ffb86b;
+        }
+
+        .logout {
+            background: #d62939;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .logout:hover {
+            background: #ed3c4c;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 72%;
+            max-width: 950px;
+            margin: 45px auto;
+        }
+
+        .page-title {
+            margin-bottom: 28px;
+        }
+
+        .page-title h1 {
+            font-size: 40px;
+            color: #ff9a3d;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #aeb6c7;
+            font-size: 15px;
+        }
+
+        /* PROFILE CARD */
+
+        .profile-card {
+            background: rgba(38, 49, 72, 0.88);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .profile-header {
+            padding: 35px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 112, 30, 0.13),
+                rgba(38, 49, 72, 0.2)
+            );
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* PHOTO / LETTER */
+
+        .trainer-avatar {
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff791f;
+            box-shadow: 0 10px 30px rgba(255, 101, 20, 0.25);
+        }
+
+        .trainer-letter {
+            width: 115px;
+            height: 115px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff7a18, #ff4b0b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            font-weight: 700;
+            color: white;
+            border: 4px solid rgba(255,255,255,0.12);
+            box-shadow: 0 10px 30px rgba(255, 101, 20, 0.25);
+        }
+
+        .trainer-heading h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .trainer-heading p {
+            color: #ff9a3d;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 13px;
+            border-radius: 20px;
+            background: rgba(60, 190, 110, 0.15);
+            color: #70e39b;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* DETAILS */
+
+        .details {
+            padding: 32px;
+        }
+
+        .section-title {
+            color: #ff9a3d;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .detail-box {
+            background: rgba(20, 29, 47, 0.65);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .detail-label {
+            color: #8f99ad;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            color: #f1f3f7;
+            font-size: 15px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        /* BIO */
+
+        .bio-section {
+            margin-top: 25px;
+        }
+
+        .bio-box {
+            background: rgba(20, 29, 47, 0.65);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 20px;
+            color: #c8ced9;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* FOOTER BUTTON */
+
+        .bottom-actions {
+            margin-top: 28px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: #ff7317;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .back-button:hover {
+            background: #ff8b3d;
+        }
+
+        @media (max-width: 750px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .container {
+                width: 90%;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-actions {
+                gap: 10px;
+            }
+
+            .back-link {
+                display: none;
+            }
+
+            .page-title h1 {
+                font-size: 32px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <span>Admin</span>
+            <span>Panel</span>
+
+        </div>
+
+        <div class="nav-actions">
+
+            <a href="/admin_trainers_list" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Trainers
+            </a>
+
+            <a href="/logout" class="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+        <div class="page-title">
+
+            <h1>Trainer Profile</h1>
+
+            <p>View complete trainer information</p>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <!-- PROFILE HEADER -->
+
+            <div class="profile-header">
+
+                {% if trainer.photo %}
+
+                    <img
+                        src="{{ url_for('static', filename='uploads/' ~ trainer.photo) }}"
+                        alt="{{ trainer.name }}"
+                        class="trainer-avatar">
+
+                {% else %}
+
+                    <div class="trainer-letter">
+                        {{ (trainer.name or 'T')[0]|upper }}
+                    </div>
+
+                {% endif %}
+
+
+                <div class="trainer-heading">
+
+                    <h2>{{ trainer.name }}</h2>
+
+                    <p>
+                        <i class="fa-solid fa-dumbbell"></i>
+                        {{ trainer.specialization or 'Fitness Trainer' }}
+                    </p>
+
+                    <span class="status">
+                        {{ trainer.status|upper }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- DETAILS -->
+
+            <div class="details">
+
+                <h3 class="section-title">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Trainer Information
+                </h3>
+
+
+                <div class="details-grid">
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            <i class="fa-solid fa-envelope"></i>
+                            Email
+                        </div>
+
+                        <div class="detail-value">
+                            {{ trainer.email or 'Not provided' }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            <i class="fa-solid fa-phone"></i>
+                            Phone
+                        </div>
+
+                        <div class="detail-value">
+                            {{ trainer.phone or 'Not provided' }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            <i class="fa-solid fa-dumbbell"></i>
+                            Specialization
+                        </div>
+
+                        <div class="detail-value">
+                            {{ trainer.specialization or 'Not provided' }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            <i class="fa-solid fa-clock"></i>
+                            Experience
+                        </div>
+
+                        <div class="detail-value">
+                            {% if trainer.experience %}
+                                {{ trainer.experience }} years
+                            {% else %}
+                                Not provided
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            <i class="fa-solid fa-certificate"></i>
+                            Certificate
+                        </div>
+
+                        <div class="detail-value">
+                            {{ trainer.certificate_name or 'Not provided' }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <div class="detail-label">
+                            <i class="fa-solid fa-user-check"></i>
+                            Account Status
+                        </div>
+
+                        <div class="detail-value">
+                            {{ trainer.status|capitalize }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BIO -->
+
+                <div class="bio-section">
+
+                    <h3 class="section-title">
+                        <i class="fa-solid fa-align-left"></i>
+                        About Trainer
+                    </h3>
+
+                    <div class="bio-box">
+
+                        {{ trainer.bio or 'No bio has been provided by this trainer.' }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- BACK BUTTON -->
+
+                <div class="bottom-actions">
+
+                    <a href="/admin_trainers_list" class="back-button">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+
+                        Back to Trainers
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

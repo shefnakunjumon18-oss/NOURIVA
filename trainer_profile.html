@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NOURIVA • Trainer Profile</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+
+            margin: 0;
+
+            font-family: 'Inter', sans-serif;
+
+            min-height: 100vh;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at 80% 10%,
+                    rgba(34,197,94,0.12),
+                    transparent 25%
+                ),
+                linear-gradient(
+                    135deg,
+                    #031b13,
+                    #06271b,
+                    #03140e
+                );
+
+        }
+
+
+        .profile-card {
+
+            width: 100%;
+
+            max-width: 850px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.07),
+                    rgba(255,255,255,0.025)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.10);
+
+            border-radius: 30px;
+
+            padding: 45px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.30);
+
+            backdrop-filter: blur(20px);
+
+        }
+
+
+        .profile-photo {
+
+            width: 130px;
+
+            height: 130px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border:
+                4px solid rgba(52,211,153,0.35);
+
+            box-shadow:
+                0 15px 40px rgba(34,197,94,0.20);
+
+        }
+
+
+        .profile-letter {
+
+            width: 130px;
+
+            height: 130px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #22c55e,
+                    #10b981
+                );
+
+            font-size: 52px;
+
+            font-weight: 800;
+
+            border:
+                4px solid rgba(52,211,153,0.35);
+
+            box-shadow:
+                0 15px 40px rgba(34,197,94,0.25);
+
+        }
+
+
+        .info-card {
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid rgba(255,255,255,0.07);
+
+            border-radius: 17px;
+
+            padding: 17px;
+
+        }
+
+
+        .label {
+
+            color:
+                rgba(255,255,255,0.40);
+
+            font-size: 10px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.08em;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .value {
+
+            color:
+                rgba(255,255,255,0.92);
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+        }
+
+
+        .btn {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 12px 20px;
+
+            border-radius: 13px;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition: all 0.3s ease;
+
+        }
+
+
+        .edit-btn {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #22c55e,
+                    #10b981
+                );
+
+            color: white;
+
+        }
+
+
+        .edit-btn:hover {
+
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 30px rgba(34,197,94,0.25);
+
+        }
+
+
+        .back-btn {
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            color:
+                rgba(255,255,255,0.80);
+
+        }
+
+
+        .back-btn:hover {
+
+            background:
+                rgba(52,211,153,0.10);
+
+            color:
+                #6ee7b7;
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="min-h-screen flex items-center justify-center p-6">
+
+
+    <div class="profile-card">
+
+
+        <!-- HEADER -->
+
+        <div class="flex flex-col md:flex-row items-center gap-7 mb-9">
+
+
+            <!-- PHOTO -->
+
+            {% if trainer.photo %}
+
+                <img
+                    src="{{ url_for('static', filename='uploads/' ~ trainer.photo) }}"
+                    alt="{{ trainer.name }}"
+                    class="profile-photo">
+
+            {% else %}
+
+                <div class="profile-letter">
+
+                    {{ (trainer.name or 'T')[0]|upper }}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- NAME -->
+
+            <div class="text-center md:text-left">
+
+                <p class="text-emerald-400 text-xs font-bold uppercase tracking-[0.25em] mb-2">
+
+                    NOURIVA Trainer
+
+                </p>
+
+
+                <h1 class="text-4xl font-extrabold">
+
+                    {{ trainer.name }}
+
+                </h1>
+
+
+                <p class="text-white/45 mt-2">
+
+                    {{ trainer.specialization or 'Professional Fitness Trainer' }}
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- DETAILS -->
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+            <div class="info-card">
+
+                <div class="label">
+
+                    <i class="fa-solid fa-envelope mr-1"></i>
+
+                    Email
+
+                </div>
+
+                <div class="value">
+
+                    {{ trainer.email or 'Not provided' }}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+
+                    <i class="fa-solid fa-phone mr-1"></i>
+
+                    Phone
+
+                </div>
+
+                <div class="value">
+
+                    {{ trainer.phone or 'Not provided' }}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+
+                    <i class="fa-solid fa-dumbbell mr-1"></i>
+
+                    Specialization
+
+                </div>
+
+                <div class="value">
+
+                    {{ trainer.specialization or 'Not provided' }}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <div class="label">
+
+                    <i class="fa-solid fa-clock mr-1"></i>
+
+                    Experience
+
+                </div>
+
+                <div class="value">
+
+                    {% if trainer.experience %}
+
+                        {{ trainer.experience }} years
+
+                    {% else %}
+
+                        Not provided
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card md:col-span-2">
+
+                <div class="label">
+
+                    <i class="fa-solid fa-certificate mr-1"></i>
+
+                    Certificate
+
+                </div>
+
+                <div class="value">
+
+                    {{ trainer.certificate_name or 'Not provided' }}
+
+                </div>
+
+            </div>
+
+
+            <div class="info-card md:col-span-2">
+
+                <div class="label">
+
+                    <i class="fa-solid fa-user-pen mr-1"></i>
+
+                    About Trainer
+
+                </div>
+
+                <div class="value leading-7">
+
+                    {{ trainer.bio or 'No trainer bio has been added yet.' }}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- BUTTONS -->
+
+        <div class="flex flex-col sm:flex-row gap-3 mt-8">
+
+
+            <a href="/trainer_edit_profile"
+               class="btn edit-btn">
+
+                <i class="fa-solid fa-pen"></i>
+
+                Edit Profile
+
+            </a>
+
+
+            <a href="/trainer_dashboard"
+               class="btn back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,979 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOURIVA | My Bookings</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        :root {
+            --green: #16c784;
+            --light-green: #8cf0b7;
+            --background: #061711;
+            --card: #10281f;
+            --border: #244a37;
+            --muted: #92ac9d;
+            --text: #f0fff5;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(ellipse at 90% 0%, #123b29 0%, transparent 40%), var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .page {
+            max-width: 1200px;
+            margin: auto;
+            padding: 35px 28px 60px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 35px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            color: #042315;
+            background: var(--green);
+            font-size: 20px;
+        }
+
+        .brand-name {
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+
+        .brand-subtitle {
+            display: block;
+            color: var(--light-green);
+            font-size: 9px;
+            letter-spacing: 2px;
+            margin-top: 4px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 11px 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--light-green);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .back-btn:hover {
+            background: #153a29;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 32px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: linear-gradient(115deg, #123d2a, #0d251b 70%);
+        }
+
+        .hero::after {
+            content: "\f274";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 45px;
+            top: 10px;
+            font-size: 125px;
+            color: rgba(87, 224, 147, .07);
+            transform: rotate(-10deg);
+        }
+
+        .eyebrow {
+            color: var(--light-green);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(28px, 4vw, 40px);
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            color: #b0cbb9;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 570px;
+            margin: 12px 0 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .section-heading h2 {
+            font-size: 19px;
+            margin: 0;
+        }
+
+        .section-label {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .booking-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .booking-card {
+            position: relative;
+            overflow: hidden;
+            padding: 24px;
+            background: linear-gradient(145deg, #142f24, #0c2119);
+            border: 1px solid var(--border);
+            border-radius: 21px;
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+
+        .booking-card:hover {
+            transform: translateY(-5px);
+            border-color: #39835b;
+            box-shadow: 0 16px 35px rgba(0, 0, 0, .18);
+        }
+
+        .booking-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #19d18a, transparent);
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .trainer-info {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        .trainer-icon {
+            width: 50px;
+            height: 50px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #20d88b, #0d9860);
+            color: #032417;
+            font-size: 20px;
+        }
+
+        .trainer-info h3 {
+            margin: 0 0 6px;
+            font-size: 17px;
+            overflow-wrap: anywhere;
+        }
+
+        .booking-number {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            padding: 8px 11px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 800;
+            background: #42371e;
+            color: #ffdc81;
+        }
+
+        .status.approved {
+            background: #124c30;
+            color: #7df2b1;
+        }
+
+        .status.rejected,
+        .status.cancelled {
+            background: #4a2527;
+            color: #ffaaaa;
+        }
+
+        .session-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 18px;
+            padding: 9px 12px;
+            border-radius: 10px;
+            background: #193b2b;
+            border: 1px solid #2c553e;
+            color: #a8f3c7;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 11px;
+        }
+
+        .detail-box {
+            min-width: 0;
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .035);
+            border: 1px solid rgba(126, 190, 150, .12);
+        }
+
+        .detail-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--muted);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            margin-bottom: 9px;
+        }
+
+        .detail-label i { color: #58d99a; }
+
+        .detail-value {
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .message-box {
+            margin-top: 15px;
+            padding: 15px;
+            background: #0a2017;
+            border: 1px solid #203f30;
+            border-radius: 12px;
+        }
+
+        .message-title {
+            color: #8feab6;
+            font-size: 11px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .message-text {
+            color: #c3d9ca;
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .result-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 16px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #103b27;
+            border: 1px solid #246342;
+        }
+
+        .result-box.rejected-box,
+        .result-box.cancelled-box {
+            background: #351f20;
+            border-color: #633637;
+        }
+
+        .result-icon {
+            font-size: 17px;
+            color: #79e9a9;
+            margin-top: 2px;
+        }
+
+        .rejected-box .result-icon,
+        .cancelled-box .result-icon {
+            color: #ffaaaa;
+        }
+
+        .result-content strong {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .result-content p {
+            color: #c3d9ca;
+            font-size: 12px;
+            line-height: 1.7;
+            margin: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .meeting-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+            color: #83f0b1;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .meeting-link:hover { text-decoration: underline; }
+
+        .cancel-btn {
+            margin-top: 15px;
+            padding: 11px 16px;
+            background: #4a2527;
+            color: #ffaaaa;
+            border: 1px solid #633637;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .cancel-btn:hover {
+            background: #633033;
+            transform: translateY(-1px);
+        }
+
+        /* Expandable reschedule section */
+        .reschedule-box {
+            margin-top: 16px;
+            padding: 13px;
+            background: linear-gradient(145deg, #102f23, #0a2017);
+            border: 1px solid #286345;
+            border-radius: 15px;
+        }
+
+        .reschedule-toggle {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 13px 15px;
+            color: #8cf0b7;
+            background: linear-gradient(110deg, #164a32, #103322);
+            border: 1px solid #347a51;
+            border-radius: 11px;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .25s;
+            text-align: left;
+        }
+
+        .reschedule-toggle:hover {
+            background: linear-gradient(110deg, #1c6944, #16452e);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 199, 132, .12);
+        }
+
+        .toggle-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-icon {
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            background: rgba(22, 199, 132, .15);
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .chevron {
+            transition: transform .25s;
+        }
+
+        .reschedule-toggle[aria-expanded="true"] .chevron {
+            transform: rotate(180deg);
+        }
+
+        .reschedule-form-content {
+            display: none;
+            padding: 15px 3px 3px;
+        }
+
+        .reschedule-form-content.open {
+            display: block;
+            animation: rescheduleReveal .3s ease;
+        }
+
+        @keyframes rescheduleReveal {
+            from {
+                opacity: 0;
+                transform: translateY(-7px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reschedule-note {
+            color: var(--muted);
+            font-size: 11px;
+            line-height: 1.7;
+            margin: 0 0 12px;
+        }
+
+        .reschedule-box label {
+            display: block;
+            margin: 12px 0 6px;
+            color: #b0cbb9;
+            font-size: 12px;
+        }
+
+        .reschedule-box input {
+            width: 100%;
+            padding: 11px;
+            background: #10281f;
+            color: #f0fff5;
+            border: 1px solid #315640;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        .reschedule-box input:focus {
+            outline: none;
+            border-color: #16c784;
+            box-shadow: 0 0 0 3px rgba(22, 199, 132, .12);
+        }
+
+        .reschedule-btn {
+            width: 100%;
+            margin-top: 14px;
+            padding: 12px 15px;
+            background: linear-gradient(110deg, #16c784, #57e6a0);
+            color: #042315;
+            border: none;
+            border-radius: 10px;
+            font-weight: 800;
+            font-family: inherit;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .reschedule-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(22, 199, 132, .18);
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+            padding: 55px 20px;
+            text-align: center;
+            background: #10281f;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+        }
+
+        .empty-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            display: grid;
+            place-items: center;
+            border-radius: 22px;
+            background: #19432e;
+            color: #71e9a6;
+            font-size: 26px;
+        }
+
+        .empty h3 { margin: 0 0 10px; }
+
+        .empty p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .browse-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 12px;
+            padding: 12px 18px;
+            background: var(--green);
+            color: #042315;
+            text-decoration: none;
+            border-radius: 11px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 35px;
+            color: #6f8e7c;
+            font-size: 11px;
+        }
+
+        @media (max-width: 760px) {
+            .page { padding: 22px 15px 40px; }
+            .booking-grid { grid-template-columns: 1fr; }
+            .hero { padding: 25px 20px; }
+            .hero::after { right: 12px; font-size: 85px; }
+            .booking-card { padding: 18px; }
+            .card-top { flex-wrap: wrap; }
+        }
+
+        @media (max-width: 390px) {
+            .details-grid { grid-template-columns: 1fr; }
+            .brand-name { font-size: 17px; }
+            .back-btn { padding: 10px; font-size: 11px; }
+        }
+    </style>
+</head>
+
+<body>
+<main class="page">
+
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-icon">
+                <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div>
+                <div class="brand-name">NOURIVA</div>
+                <span class="brand-subtitle">HEALTH · FOOD · FITNESS</span>
+            </div>
+        </div>
+
+        <a href="/dashboard" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Dashboard
+        </a>
+    </header>
+
+    <section class="hero">
+        <div class="eyebrow">YOUR FITNESS JOURNEY</div>
+        <h1>My Bookings</h1>
+        <p>
+            Your training sessions, all in one place.
+            Track your requests and find your confirmed session details.
+        </p>
+    </section>
+
+    <div class="section-heading">
+        <h2>
+            <i class="fa-solid fa-calendar-check" style="color:#54dfa0;margin-right:9px;"></i>
+            Your Sessions
+        </h2>
+        <span class="section-label">Personal Trainer · Booking History</span>
+    </div>
+
+    <div class="booking-grid">
+
+        {% if bookings %}
+            {% for booking in bookings %}
+
+            <article class="booking-card">
+
+                <div class="card-top">
+                    <div class="trainer-info">
+                        <div class="trainer-icon">
+                            <i class="fa-solid fa-dumbbell"></i>
+                        </div>
+
+                        <div>
+                            <h3>{{ booking["trainer_name"] }}</h3>
+                            <div class="booking-number">
+                                Booking #{{ booking["id"] }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="status {% if booking['status'] == 'Approved' %}approved{% elif booking['status'] == 'Rejected' %}rejected{% elif booking['status'] == 'Cancelled' %}cancelled{% endif %}">
+                        {% if booking["status"] == "Approved" %}
+                            <i class="fa-solid fa-circle-check"></i>
+                        {% elif booking["status"] == "Rejected" %}
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        {% elif booking["status"] == "Cancelled" %}
+                            <i class="fa-solid fa-ban"></i>
+                        {% else %}
+                            <i class="fa-solid fa-clock"></i>
+                        {% endif %}
+                        {{ booking["status"] }}
+                    </span>
+                </div>
+
+                <div class="session-type">
+                    {% if booking["session_type"] == "Online" %}
+                        <i class="fa-solid fa-video"></i> Online Session
+                    {% else %}
+                        <i class="fa-solid fa-location-dot"></i> Offline Session
+                    {% endif %}
+                </div>
+
+                <div class="details-grid">
+
+                    <div class="detail-box">
+                        <div class="detail-label">
+                            <i class="fa-regular fa-calendar"></i> Session Date
+                        </div>
+                        <div class="detail-value">
+                            {{ booking["session_date"] }}
+                        </div>
+                    </div>
+
+                    <div class="detail-box">
+                        <div class="detail-label">
+                            <i class="fa-regular fa-clock"></i> Start Time
+                        </div>
+                        <div class="detail-value">
+                            {% set time_parts = booking["start_time"].split(":") %}
+                            {% set hour24 = time_parts[0]|int %}
+                            {% set minute = time_parts[1] %}
+                            {% set period = "AM" if hour24 < 12 else "PM" %}
+                            {% set hour12 = hour24 % 12 %}
+                            {% if hour12 == 0 %}
+                                {% set hour12 = 12 %}
+                            {% endif %}
+                            {{ "%02d"|format(hour12) }}:{{ minute }} {{ period }}
+                        </div>
+                    </div>
+
+                    <div class="detail-box">
+                        <div class="detail-label">
+                            <i class="fa-solid fa-hourglass-half"></i> Duration
+                        </div>
+                        <div class="detail-value">
+                            {{ booking["duration"] }} minutes
+                        </div>
+                    </div>
+
+                    <div class="detail-box">
+                        <div class="detail-label">
+                            <i class="fa-solid fa-hashtag"></i> Booking ID
+                        </div>
+                        <div class="detail-value">
+                            #{{ booking["id"] }}
+                        </div>
+                    </div>
+
+                </div>
+
+                {% if booking["message"] %}
+                <div class="message-box">
+                    <div class="message-title">
+                        <i class="fa-regular fa-message"></i>
+                        YOUR MESSAGE
+                    </div>
+                    <div class="message-text">
+                        {{ booking["message"] }}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if booking["status"] == "Approved" %}
+
+                <div class="result-box">
+                    <i class="fa-solid fa-circle-check result-icon"></i>
+                    <div class="result-content">
+                        <strong>Session Confirmed!</strong>
+                        <p>Your trainer has approved this booking.</p>
+
+                        {% if booking["session_type"] == "Online" and booking["meeting_link"] %}
+                        <a class="meeting-link"
+                           href="{{ booking['meeting_link'] }}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <i class="fa-solid fa-video"></i>
+                            Join Online Session
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+                        {% elif booking["session_type"] == "Offline" and booking["location"] %}
+                        <p style="margin-top:8px;">
+                            <strong>Confirmed location:</strong>
+                            {{ booking["location"] }}
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% elif booking["status"] == "Rejected" %}
+
+                <div class="result-box rejected-box">
+                    <i class="fa-solid fa-circle-xmark result-icon"></i>
+                    <div class="result-content">
+                        <strong>Booking Not Accepted</strong>
+                        <p>Your trainer has rejected this request.</p>
+
+                        {% if booking["rejection_reason"] %}
+                        <p style="margin-top:8px;">
+                            <strong>Reason:</strong>
+                            {{ booking["rejection_reason"] }}
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% elif booking["status"] == "Cancelled" %}
+
+                <div class="result-box cancelled-box">
+                    <i class="fa-solid fa-ban result-icon"></i>
+                    <div class="result-content">
+                        <strong>Booking Cancelled</strong>
+                        <p>This session has been cancelled successfully.</p>
+                    </div>
+                </div>
+
+                {% else %}
+
+                <div class="result-box">
+                    <i class="fa-solid fa-hourglass-half result-icon"></i>
+                    <div class="result-content">
+                        <strong>Awaiting Trainer Approval</strong>
+                        <p>Your request has been sent. Check back here for an update.</p>
+                    </div>
+                </div>
+
+                {% endif %}
+
+                <!-- Reschedule request status -->
+                {% if booking["reschedule_status"] == "Pending" %}
+
+                <div class="result-box">
+                    <i class="fa-solid fa-calendar-days result-icon"></i>
+                    <div class="result-content">
+                        <strong>Reschedule Request Pending</strong>
+                        <p>Your trainer is reviewing your requested schedule.</p>
+
+                        <p style="margin-top:8px;">
+                            <strong>Requested date:</strong>
+                            {{ booking["requested_date"] }}
+                        </p>
+
+                        <p style="margin-top:5px;">
+                            <strong>Requested time:</strong>
+                            {% if booking["requested_time"] %}
+                                {% set requested_parts = booking["requested_time"].split(":") %}
+                                {% set requested_hour24 = requested_parts[0]|int %}
+                                {% set requested_minute = requested_parts[1] %}
+                                {% set requested_period = "AM" if requested_hour24 < 12 else "PM" %}
+                                {% set requested_hour12 = requested_hour24 % 12 %}
+                                {% if requested_hour12 == 0 %}
+                                    {% set requested_hour12 = 12 %}
+                                {% endif %}
+                                {{ "%02d"|format(requested_hour12) }}:{{ requested_minute }} {{ requested_period }}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                {% elif booking["reschedule_status"] == "Rejected" %}
+
+                <div class="result-box rejected-box">
+                    <i class="fa-solid fa-calendar-xmark result-icon"></i>
+                    <div class="result-content">
+                        <strong>Reschedule Request Rejected</strong>
+                        <p>Your original booking time remains unchanged. You may submit a new request.</p>
+                    </div>
+                </div>
+
+                {% elif booking["reschedule_status"] == "Approved" %}
+
+                <div class="result-box">
+                    <i class="fa-solid fa-calendar-check result-icon"></i>
+                    <div class="result-content">
+                        <strong>Reschedule Request Approved</strong>
+                        <p>Your trainer approved your new session schedule.</p>
+                    </div>
+                </div>
+
+                {% endif %}
+
+                <!-- Expandable reschedule form -->
+                {% if booking["status"] == "Approved"
+                      and booking["reschedule_status"] != "Pending" %}
+
+                <div class="reschedule-box">
+
+                    <button type="button"
+                            class="reschedule-toggle"
+                            aria-expanded="false"
+                            onclick="toggleReschedule(this)">
+
+                        <span class="toggle-left">
+                            <span class="toggle-icon">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </span>
+                            <span>Reschedule Session</span>
+                        </span>
+
+                        <i class="fa-solid fa-chevron-down chevron"></i>
+                    </button>
+
+                    <div class="reschedule-form-content">
+
+                        <p class="reschedule-note">
+                            Rescheduling is allowed only at least 2 hours before
+                            your original session. Your trainer must approve the
+                            new date and time.
+                        </p>
+
+                        <form method="POST"
+                              action="{{ url_for('reschedule_booking', booking_id=booking['id']) }}"
+                              onsubmit="return confirm('Send this reschedule request to your trainer?');">
+
+                            <label for="requested_date_{{ booking['id'] }}">
+                                <i class="fa-regular fa-calendar"></i>
+                                New Date
+                            </label>
+
+                            <input type="date"
+                                   id="requested_date_{{ booking['id'] }}"
+                                   name="requested_date"
+                                   min="{{ today }}"
+                                   required>
+
+                            <label for="requested_time_{{ booking['id'] }}">
+                                <i class="fa-regular fa-clock"></i>
+                                New Time
+                            </label>
+
+                            <input type="time"
+                                   id="requested_time_{{ booking['id'] }}"
+                                   name="requested_time"
+                                   required>
+
+                            <button type="submit" class="reschedule-btn">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                Send Reschedule Request
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+                {% endif %}
+
+                {% if booking["status"] in ["Pending", "Approved"] %}
+                <form method="POST"
+                      action="{{ url_for('cancel_booking', booking_id=booking['id']) }}"
+                      onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+
+                    <button type="submit" class="cancel-btn">
+                        <i class="fa-solid fa-xmark"></i>
+                        Cancel Booking
+                    </button>
+                </form>
+                {% endif %}
+
+                {% if booking["location"] and booking["session_type"] == "Online" %}
+                <div class="message-box">
+                    <div class="message-title">
+                        <i class="fa-solid fa-note-sticky"></i>
+                        SESSION PREFERENCE
+                    </div>
+                    <div class="message-text">
+                        {{ booking["location"] }}
+                    </div>
+                </div>
+                {% endif %}
+
+            </article>
+
+            {% endfor %}
+
+        {% else %}
+
+        <div class="empty">
+            <div class="empty-icon">
+                <i class="fa-regular fa-calendar-xmark"></i>
+            </div>
+            <h3>No Bookings Yet</h3>
+            <p>
+                Your fitness journey starts with one session.
+                Browse available trainers and book a session when you're ready.
+            </p>
+            <a href="/trainer" class="browse-link">
+                <i class="fa-solid fa-dumbbell"></i>
+                Explore Trainers
+            </a>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="footer-note">
+        NOURIVA · Small steps, stronger you.
+    </div>
+
+</main>
+
+<script>
+    function toggleReschedule(button) {
+        const content = button.nextElementSibling;
+        const isOpen = content.classList.toggle("open");
+
+        button.setAttribute("aria-expanded", isOpen);
+    }
+</script>
+
+</body>
+</html>
